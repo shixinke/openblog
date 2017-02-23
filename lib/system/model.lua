@@ -5,6 +5,8 @@ local mysql = require "resty.mysql"
 local mt = { __index = _M }
 local upper = string.upper
 local lower = string.lower
+local substr = string.sub
+local filter_sql = ndk.set_var.set_quote_sql_str
 
 
 function _M.connect(self, db)
@@ -49,6 +51,9 @@ function _M.exec(self, sql)
     local res, err, errcode, sqlstate = db:query(sql)
     if not res then
         return nil, err, errcode, sqlstate
+    end
+    if self.remains ~= true then
+        self._condition = {fields = {}, where = {}, group = {}, order = {}, limit = nil }
     end
     self:set_keepalive(db)
     return res
@@ -131,9 +136,12 @@ function _M.build_query_sql(self, tab)
     end
     local sql = 'SELECT '
     if func.is_empty_table(self._condition.fields) ~= true then
+        local field_len = func.table_length(self._condition.fields)
+        local field_index = 0
         for k,_ in pairs(self._condition.fields) do
+            field_index = field_index + 1
             sql = sql..'`'..k..'`'
-            if next(self._condition.fields) then
+            if field_index < field_len then
                 sql = sql..','
             end
         end
@@ -143,18 +151,23 @@ function _M.build_query_sql(self, tab)
     sql = sql..' FROM '..tab..' '..self:parse_where()
     if func.is_empty_table(self._condition.group) ~= true then
         sql = sql..' GROUP BY '
+        local group_len = func.table_length(self._condition.group)
+        local group_index = 0
         for k,_ in pairs(self._condition.group) do
             sql = sql..'`'..k..'`'
-            if next(self._condition.group) then
+            if group_index < group_len then
                 sql = sql..','
             end
         end
     end
     if func.is_empty_table(self._condition.order) ~= true then
         sql = sql..' ORDER BY '
+        local order_len = func.table_length(self._condition.order)
+        local index = 0;
         for k,v in pairs(self._condition.order) do
+            index = index + 1
             sql = sql..'`'..k..'` '..v
-            if next(self._condition.order) then
+            if index < order_len then
                 sql = sql..','
             end
         end
@@ -171,36 +184,48 @@ function _M.parse_where(self)
     for k, v in pairs(self._condition.where) do
         v[1] = upper(v[1])
         if v[1] == '!ISNULL' then
-            where[#where+1] = '!ISNULL('..k..')'
+            where[#where+1] = '!ISNULL(`'..k..'`)'
         elseif v[1] == 'ISNULL' or v[2] == nil then
-            where[#where+1] = 'ISNULL('..k..')';
+            where[#where+1] = 'ISNULL(`'..k..'`)';
         elseif v[1] == 'STRING' then
             where[#where+1] = v[2]
         elseif v[1] == 'LIKE' then
-            where[#where+1] = v[1]..' LIKE "%'..v[2]..'%"'
+            where[#where+1] = '`'..k..'` LIKE "'..v[2]..'"'
         elseif v[1] == 'IN' or v[1] == 'NOT IN' then
             if type(v[2]) ~= 'table' then
                 v[2] = func.explode(',', v[2])
             end
             local count = #v[2]
             local ranges = ''
-            for i, v in pairs(v[2]) do
-                ranges = '"'..ranges..'"'
+            for i, val in pairs(v[2]) do
+                if type(val) == 'string' then
+                    val = '"'..val..'"'
+                end
+                ranges = ranges..val
                 if i ~= count then
                     ranges = ranges..','
                 end
             end
-            where[#where+1] = k..' '..v[1]..' ('..ranges..')'
+            where[#where+1] = '`'..k..'` '..v[1]..' ('..ranges..')'
         elseif v[1] == 'BETWEEN' then
             if type(v[2]) ~= 'table' then
                 v[2] = func.explode(',', v[2])
             end
             if v[2][2] then
-                where[#where+1] = k..' BETWEEN "'..v[2][1]..'" AND "'..v[2][2]..'"'
+                if type(v[2][1]) == 'string' then
+                    v[2][1] = ' "'..v[2][1]..'"'
+                end
+                if type(v[2][2]) == 'string' then
+                    v[2][2] = ' "'..v[2][2]..'"'
+                end
+                where[#where+1] = '`'..k..'` BETWEEN '..v[2][1]..' AND '..v[2][2]
             end
         else
             if type(v[2]) ~= 'table' then
-                where[#where+1] = k..'  '..v[1]..' "'..v[2]..'"'
+                if type(v[2]) == 'string' then
+                    v[2] = ' "'..v[2]..'"'
+                end
+                where[#where+1] = '`'..k..'`  '..v[1]..v[2]
             end
         end
     end
@@ -229,9 +254,9 @@ function _M.order(self, field, direction)
         return self
     end
     if type(field) == 'table' then
-        self._condition.order[field[1]] = field[2] or 'ASC'
+        self._condition.order[field[1]] = field[2] and upper(field[2]) or 'ASC'
     else
-        self._condition.order[field] = direction or 'ASC'
+        self._condition.order[field] = direction and upper(direction) or 'ASC'
     end
     return self
 end
@@ -290,7 +315,12 @@ function _M.insert(self, tab, data)
     local n = 0
     for k, v in pairs(data) do
         fields = fields..'`'..k..'`'
-        values = values..'"'..v..'"'
+        if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+            v = v
+        else
+            v = '"'..v..'"'
+        end
+        values = values..v
         n = n+1
         if n< len then
             fields = fields..','
@@ -306,6 +336,54 @@ function _M.insert(self, tab, data)
     end
 end
 
+function _M.insertAll(self, tab, datalist)
+    self:table(tab)
+    if data == nil or self.table_name == nil then
+        return false, 'the data is nil or table name is nil'
+    end
+    local data = func.clear_table(data)
+    local sql = 'INSERT INTO '..self.table_name..'('
+    local fields = ''
+    local values = ''
+    local n = 0
+    local rows = func.table_length(datalist)
+    local cols = func.table_length(datalist[1])
+    for i, v in pairs(datalist[1]) do
+        fields = fields..'`'..k..'`'
+        if n< cols then
+            fields = fields..','
+        end
+    end
+
+    for i, row in ipairs(datalist) do
+        local n = 0
+        values = values..'('
+        for k, v in pairs(row) do
+            if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+                v = v
+            else
+                v = '"'..v..'"'
+            end
+            values = values..v
+            n = n+1
+            if n< cols then
+                values = values..','
+            end
+        end
+        values = values..')'
+        if i< rows then
+            values = values..','
+        end
+    end
+    sql = sql..fields..')VALUES '..values
+    local res, err, errcode, sqlstate = self:exec(sql)
+    if res then
+        return res.affected_rows
+    else
+        return nil, err, errcode, sqlstate
+    end
+end
+
 function _M.update(self, tab, data, where)
     self:table(tab)
     self:where(where)
@@ -313,11 +391,26 @@ function _M.update(self, tab, data, where)
         return false, 'the data is nil or table name is nil'
     end
     local data = func.clear_table(data)
+    local data_len = func.table_length(data)
     local sql = 'UPDATE '..self.table_name..' SET '
+    local data_index = 0
     for k, v in pairs(data) do
-        sql = sql..'`'..k..'`='..'"'..v..'"'
-        if next(data) then
+        data_index = data_index + 1
+        if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+            v = v
+        else
+            v = '"'..v..'"'
+        end
+        sql = sql..'`'..k..'`='..v
+        if data_index < data_len then
             sql = sql..','
+        end
+    end
+    if func.is_empty_table(self._condition.where) then
+        if self.pk and data[self.pk] then
+            local cond = {}
+            cond[self.pk] = data[self.pk]
+            self:where(cond)
         end
     end
     local where = self:parse_where()
@@ -331,6 +424,24 @@ function _M.update(self, tab, data, where)
     else
         return nil, err, errcode, sqlstate
     end
+end
+
+function _M.incr(self, field, num, where)
+    if where then
+        self:where(where)
+    end
+    local data = {}
+    data[field] = '`'..field..'+'..num..'`';
+    return self:update(self.table_name, data)
+end
+
+function _M.decr(self, field, num, where)
+    if where then
+        self:where(where)
+    end
+    local data = {}
+    data[field] = '`'..field..'-'..num..'`';
+    return self:update(self.table_name, data)
 end
 
 function _M.delete(self, tab, where)
@@ -367,9 +478,10 @@ function _M.new(self, opts)
     opts.pool_size = opts.pool_size or config.database.pool_size
     self.config = opts
     self.table_name = self.table_name or opts.table_name
-    self.db = nil
-    self.pk = nil
+    self.db = self.db or nil
+    --self.pk = self.pk or nil
     self._condition = {fields = {}, where = {}, group = {}, order = {}, limit = nil }
+    self.remains = false
     self.sql = nil
     return setmetatable(self, mt)
 end

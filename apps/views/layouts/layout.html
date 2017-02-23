@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-    <title>{{title}}</title>
+    <title>{% if title then %}{{title}}{% else %}{{config.site_title}}{% end %}</title>
+    <meta name="keywords" content="{% if keywords then %}{{keywords}}{% else %}{{config.site_keywords}}{% end %}">
+    <meta name="description" content="{% if description then %}{{description}}{% else %}{{config.site_description}}{% end %}">
     <link rel="shortcut icon" href="/static/img/favicon.ico"/>
-    <link rel="bookmark" href="/static/img/favicon.ico"/>
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/vmaig.css">
     <link rel="stylesheet" href="/static/css/vmaig_comments.css">
     <link rel="stylesheet" href="/static/css/vmaig_auth.css">
     <link rel="stylesheet" href="/static/jquery/jquery.Jcrop.min.css">
 
-
-
     {% if blocks.css then %}
-    <aside>
-        {*blocks.css*}
-    </aside>
+    {*blocks.css*}
     {% end %}
 </head>
 <body id="vmaig">
@@ -37,7 +34,7 @@
 </div>
 
 
-<!-- common javascript start -->
+<!-- common script start -->
 <script src="/static/jquery/jquery-2.1.3.min.js"></script>
 <script src="/static/jquery/jquery.cookie.js"></script>
 <script src="/static/jquery/jquery.form.js"></script>
@@ -46,13 +43,11 @@
 <script type="text/javascript" src="/static/js/vmaig.js"></script>
 <!-- common script end -->
 
-<!-- single css start -->
+<!-- single script start -->
 {% if blocks.js then %}
-<aside>
-    {*blocks.js*}
-</aside>
+{*blocks.js*}
 {% end %}
-<!-- single css end -->
+<!-- single script end -->
 
 
 </body>

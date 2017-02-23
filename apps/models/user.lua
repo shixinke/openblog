@@ -21,13 +21,7 @@ function _M.checklogin(self, account, password)
     end
 end
 
-function _M.add(self, data)
-    if data == nil then
-        return false
-    end
-    data.create_time = ngx.time()
-    return self:insert(self.table_name, data)
-end
+
 
 function _M.search(self, condition, offset, limit)
     self:where(condition)
@@ -36,6 +30,32 @@ function _M.search(self, condition, offset, limit)
     local res = self:findAll()
     return {count = count, data = res}
 end
+
+function _M.detail(self, uid)
+    return self:where({uid = uid}):find()
+end
+
+function _M.add(self, data)
+    if data == nil then
+        return false
+    end
+    data.create_time = func.datetime()
+    return self:insert(self.table_name, data)
+end
+
+
+function _M.edit(self, data)
+    if data[self.pk] == nil then
+        return nil, '请选择用户'
+    end
+    self:where(self.pk, '=', data[self.pk])
+    return self:update(self.table_name)
+end
+
+function _M.remove(self, uid)
+    return self:where({uid = uid}):delete()
+end
+
 
 func.extends_model(_M)
 

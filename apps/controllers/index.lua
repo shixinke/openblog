@@ -2,20 +2,15 @@ local _M = {
     _VERSION = '0.01'
 }
 
-function _M.new()
-
+function _M.init(self)
+    self.withoutLayout = true
 end
 
 function _M.index(self)
-    self:display()
+    ngx.say(self.config.site_title)
+    --self:assign('title', self.config.site_title)
+    --self:display()
 end
 
-function _M.hello(self)
-
-end
-
-function _M.lists(self)
-   ngx.say('bybyb')
-end
 
 return _M

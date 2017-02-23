@@ -1,5 +1,6 @@
 local _M = {
-    _VERSION = '0.01'
+    _VERSION = '0.01',
+    config = {}
 }
 
 local ngx_req = ngx.req
@@ -19,8 +20,16 @@ function json(code, message, data)
     return cjson.encode(tab)
 end
 
+function _M.init_config(self)
+    local keys = {'site_name', 'site_title', 'site_subtitle', 'site_keywords', 'site_description', 'default_theme'}
+    local conf = func.get_items(keys)
+    self.config = conf
+end
+
 function _M.init_view(self)
     self.view = view.new(self)
+    self:init_config()
+    self.view:assign('config', self.config)
 end
 
 function _M.assign(self, name, value)
