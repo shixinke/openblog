@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2017-02-23 17:09:14
+Date: 2017-02-24 18:00:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,7 @@ CREATE TABLE `blog_category` (
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
   `items` int(12) NOT NULL DEFAULT '0' COMMENT '文章数',
   `options` varchar(300) NOT NULL DEFAULT '[]' COMMENT '选项(用于显示的选项)',
-  `create_time` int(12) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`category_id`),
   KEY `idx_pid` (`parent_id`),
   KEY `idx_cname` (`category_name`,`status`),
@@ -117,6 +117,29 @@ INSERT INTO `blog_config` VALUES ('SITE', '站点副标题', 'site_subtitle', '�
 INSERT INTO `blog_config` VALUES ('SITE', '站点标题', 'site_title', '诗心博客', 'STRING');
 
 -- ----------------------------
+-- Table structure for blog_link
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_link`;
+CREATE TABLE `blog_link` (
+  `link_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '链接ID',
+  `website_name` varchar(50) NOT NULL DEFAULT '' COMMENT '站点名称',
+  `link_name` varchar(50) NOT NULL COMMENT '链接显示名称',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接的地址',
+  `logo` varchar(255) NOT NULL DEFAULT '' COMMENT 'logo地址',
+  `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '审核状态(0表示未审核，1表示已审核)',
+  `contact` varchar(50) NOT NULL DEFAULT '' COMMENT '联系人',
+  `email` varchar(100) NOT NULL DEFAULT '' COMMENT '联系邮箱',
+  `meta` varchar(200) NOT NULL DEFAULT '{}' COMMENT '其他信息(如微信，微博，手机号等)',
+  `create_time` datetime NOT NULL COMMENT '添加时间',
+  PRIMARY KEY (`link_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='友情链接信息表';
+
+-- ----------------------------
+-- Records of blog_link
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for blog_module
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_module`;
@@ -126,14 +149,14 @@ CREATE TABLE `blog_module` (
   `alias` varchar(100) NOT NULL DEFAULT '' COMMENT '模块别名',
   `filename` varchar(50) NOT NULL DEFAULT '' COMMENT '模块文件名',
   `content` text NOT NULL COMMENT '模块内容',
-  `sidebar_id` int(11) NOT NULL DEFAULT '0' COMMENT '位置ID',
+  `position` varchar(30) NOT NULL DEFAULT '0' COMMENT '位置ID',
   `html_id` varchar(50) NOT NULL DEFAULT '' COMMENT 'html元素ID',
-  `type` varchar(5) NOT NULL DEFAULT '' COMMENT '类型',
+  `type` varchar(5) NOT NULL DEFAULT 'HTML' COMMENT '类型(html代表普通html类型;data表示数据类型，需要使用到关联数据库表的数据)',
   `max_items` int(11) NOT NULL DEFAULT '0' COMMENT '最大行数',
-  `source` varchar(50) NOT NULL DEFAULT '' COMMENT '来源',
   `show_title` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示标题',
+  `sort` smallint(6) NOT NULL DEFAULT '0' COMMENT '排序',
   `meta` longtext NOT NULL COMMENT '其他元素',
-  `status` enum('ENABLED','DISABLED') DEFAULT 'ENABLED' COMMENT '是否启用',
+  `status` enum('ENABLED','DISABLED') NOT NULL DEFAULT 'ENABLED' COMMENT '是否启用',
   PRIMARY KEY (`module_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='模块插件表';
 
@@ -158,7 +181,7 @@ CREATE TABLE `blog_posts` (
   `comments` int(12) NOT NULL DEFAULT '0' COMMENT '评论数',
   `options` varchar(200) NOT NULL DEFAULT '[]' COMMENT '其他选项',
   `author` varchar(200) NOT NULL DEFAULT '' COMMENT '作者',
-  `create_time` int(12) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`posts_id`),
   UNIQUE KEY `idx_alias` (`alias`,`type`),
   KEY `idx_title` (`title`,`type`),
@@ -167,6 +190,27 @@ CREATE TABLE `blog_posts` (
 
 -- ----------------------------
 -- Records of blog_posts
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for blog_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_tag`;
+CREATE TABLE `blog_tag` (
+  `tag_id` int(12) NOT NULL COMMENT '标题ID',
+  `tag_name` varchar(50) NOT NULL COMMENT '标签名称',
+  `tag_alias` varchar(30) NOT NULL DEFAULT '' COMMENT '标签别名',
+  `sort` int(8) NOT NULL DEFAULT '0' COMMENT '排序值',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
+  `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示',
+  `items` int(11) NOT NULL DEFAULT '0' COMMENT '打标签的次数',
+  `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`tag_id`),
+  UNIQUE KEY `idx_tname` (`tag_name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签表';
+
+-- ----------------------------
+-- Records of blog_tag
 -- ----------------------------
 
 -- ----------------------------
@@ -184,27 +228,6 @@ CREATE TABLE `blog_tag_relation` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for blog_tags
--- ----------------------------
-DROP TABLE IF EXISTS `blog_tags`;
-CREATE TABLE `blog_tags` (
-  `tag_id` int(12) NOT NULL COMMENT '标题ID',
-  `tag_name` varchar(50) NOT NULL COMMENT '标签名称',
-  `tag_alias` varchar(30) DEFAULT NULL COMMENT '标签别名',
-  `sort` int(8) NOT NULL DEFAULT '0' COMMENT '排序值',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示',
-  `items` int(11) NOT NULL DEFAULT '0' COMMENT '打标签的次数',
-  `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`tag_id`),
-  UNIQUE KEY `idx_tname` (`tag_name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标签表';
-
--- ----------------------------
--- Records of blog_tags
--- ----------------------------
-
--- ----------------------------
 -- Table structure for blog_user
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_user`;
@@ -216,16 +239,15 @@ CREATE TABLE `blog_user` (
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `avatar` varchar(300) DEFAULT NULL COMMENT '头像',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  `create_time` int(20) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `idx_account` (`account`),
   UNIQUE KEY `idx_email` (`email`),
   UNIQUE KEY `idx_nickname` (`nickname`) USING BTREE,
   KEY `idx_status` (`status`),
   KEY `idx_ctime` (`create_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户名';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户名';
 
 -- ----------------------------
 -- Records of blog_user
 -- ----------------------------
-INSERT INTO `blog_user` VALUES ('1', 'shixinke', 'ac9feb835e08c15611f12213c4014f0a', '', '', null, '1', '1475222129');
