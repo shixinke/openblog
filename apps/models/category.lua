@@ -12,6 +12,14 @@ function _M.search(self, condition, offset, limit)
     return {count = count, data = res}
 end
 
+function _M.lists(self)
+    self:field('category_id,parent_id,category_name,alias')
+    self:where({status = 1})
+    self:order('parent_id', 'ASC')
+    self:order('sort', 'DESC')
+    return self:findAll()
+end
+
 function _M.detail(self, id)
     return self:where({category_id = id}):find()
 end

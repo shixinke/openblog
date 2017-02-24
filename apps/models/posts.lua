@@ -37,6 +37,12 @@ function _M.remove(self, id)
     return self:where({posts_id = id}):delete()
 end
 
+function _M.archive(self)
+    local sql = 'SELECT DATE_FORMAT(create_time, "%Y%m") AS archive,count(*) AS total FROM '..self.table_name..' GROUP BY archive ORDER BY archive DESC'
+    local data = self:query(sql)
+    return data
+end
+
 
 func.extends_model(_M)
 

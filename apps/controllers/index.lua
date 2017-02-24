@@ -3,13 +3,12 @@ local _M = {
 }
 
 function _M.init(self)
-    self.withoutLayout = true
+    --self.withoutLayout = true
 end
 
 function _M.index(self)
-    ngx.say(self.config.site_title)
-    --self:assign('title', self.config.site_title)
-    --self:display()
+    self:assign('title', self.config.site_title)
+    self:display()
 end
 
 

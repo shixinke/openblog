@@ -12,6 +12,12 @@ function _M.search(self, condition, offset, limit)
     return {count = count, data = res}
 end
 
+function _M.lists(self)
+    self:where({status = 'ENABLED'})
+    self:order('sort', 'DESC')
+    return self:findAll()
+end
+
 function _M.detail(self, id)
     return self:where({module_id = id}):find()
 end
