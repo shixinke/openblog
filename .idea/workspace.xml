@@ -2,21 +2,396 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3680c889-d3d4-40d8-80fd-69ad002ce7a8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/models/link.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/archive/handler.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/category/handler.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/link/handler.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/plugin.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/tag/handler.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/plugins/topic/handler.lua" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/system/hook.lua" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/apps/controllers/tags.lua" afterPath="$PROJECT_DIR$/apps/controllers/tag.lua" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/bootstrap.lua" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/common/func.lua" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/config/config.lua" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/init.lua" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/include/foot.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/include/head.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/layouts/layout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/passport/lockscreen.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/passport/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/user/add.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/user/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/admin/user/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/all.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/article.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/base.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/blog/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/category.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/category/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/category/posts.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/column.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/forgetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/all_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/carousel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/category_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/column_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/header.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/home_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/nav.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/pagination.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/search_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/include/tag_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/index/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/index/posts.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/layouts/layout.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/news.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/news_detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/posts/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/register.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/resetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/tag.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/user_changepassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/user_changetx.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/user_notification.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/hotest_posts.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/links.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/tags_cloud.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/apps/views/widgets/wymusic.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/Dockerfile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/Dockerfile_cn" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap-theme.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap-theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/bootstrap/js/npm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/css/vmaig.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/closeX.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar-black-border.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar-text-buttons.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar-white-small.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar3.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar4-hover.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/controlbar4.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/fullexpand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/geckodimmer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/icon.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/loader.white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/Outlines.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/beveled.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/drop-shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/glossy-dark.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/outer-glow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/rounded-black.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/outlines/rounded-white.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/resize.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/scrollarrows.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/zoomin.cur" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/graphics/zoomout.cur" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/highslide-with-html.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/highslide-with-html.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/highslide/highslide.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/img/article/default.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/img/bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/img/carousel/default.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/img/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/jquery/jquery-2.1.3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/jquery/jquery.Jcrop.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/jquery/jquery.Jcrop.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/jquery/jquery.cookie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/jquery/jquery.form.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/js/d3.layout.cloud.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/js/vmaig.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/lib/d3/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/lib/d3/d3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/LGPL-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/MIT-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/_theme_template.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/config.rb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCore.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreDefault.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreDjango.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreEclipse.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreEmacs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreFadeToGrey.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreMDUltra.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreMidnight.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shCoreRDark.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeDefault.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeDjango.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeEclipse.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeEmacs.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeFadeToGrey.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeMDUltra.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeMidnight.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/compass/shThemeRDark.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shAutoloader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushAS3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushAppleScript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushBash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushCSharp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushColdFusion.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushCpp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushCss.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushDelphi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushDiff.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushErlang.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushGroovy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushJScript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushJava.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushJavaFX.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushPerl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushPhp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushPlain.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushPowerShell.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushPython.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushRuby.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushSass.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushScala.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushSql.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushVb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shBrushXml.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/scripts/shLegacy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/src/shAutoloader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/src/shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/src/shLegacy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCore.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreDjango.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreEclipse.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreEmacs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreFadeToGrey.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreMDUltra.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreMidnight.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shCoreRDark.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeDjango.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeEclipse.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeEmacs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeFadeToGrey.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeMDUltra.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeMidnight.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/styles/shThemeRDark.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/brushes/sass.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/brushes_tests.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/001_basic.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/002_brushes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/003_script_tag.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/004_url_parsing.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/005_no_gutter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/006_pad_line_numbers.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/007_collapse.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/007_collapse_interaction.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/008_first_line.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/009_class_name.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/010_highlight.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/011_smart_tabs.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/012_server_side.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/013_html_script.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/cases/014_legacy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/commonjs_tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/js/jquery-1.4.2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/js/qunit.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/js/qunit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/syntaxhighlighter_tests.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/theme_tests.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/webrick.rb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/syntaxhighlighter/tests/webrick.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/langs/readme.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/advlist/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/anchor/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/autolink/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/autoresize/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/autosave/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/bbcode/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/charmap/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/code/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/colorpicker/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/contextmenu/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/directionality/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-cool.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-cry.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-embarassed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-foot-in-mouth.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-frown.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-innocent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-kiss.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-laughing.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-money-mouth.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-sealed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-smile.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-surprised.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-tongue-out.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-undecided.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-wink.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/img/smiley-yell.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/emoticons/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/example/dialog.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/example/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/example_dependency/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/fullpage/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/fullscreen/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/hr/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/image/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/importcss/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/insertdatetime/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/layer/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/legacyoutput/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/link/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/lists/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/media/moxieplayer.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/media/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/nonbreaking/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/noneditable/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/pagebreak/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/paste/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/preview/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/print/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/save/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/searchreplace/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/fonts/sh4tinymce.dev.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/fonts/sh4tinymce.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/fonts/sh4tinymce.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/fonts/sh4tinymce.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/fonts/sh4tinymce.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/langs/en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/langs/fr_FR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/sh4tinymce/style/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/spellchecker/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/tabfocus/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/table/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/template/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/textcolor/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/textpattern/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/visualblocks/css/visualblocks.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/visualblocks/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/visualchars/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/plugins/wordcount/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/content.inline.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/content.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce-small.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce-small.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce-small.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce-small.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/fonts/tinymce.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/img/anchor.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/img/loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/img/object.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/img/trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/skin.ie7.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/skins/lightgray/skin.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/themes/modern/theme.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/static/tinymce/tinymce.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/all.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/article.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/base.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/category.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/column.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/forgetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/all_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/carousel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/category_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/column_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/home_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/nav.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/pagination.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/search_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/include/tag_post.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/news.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/news_detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/register.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/resetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/tag.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/user_changepassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/user_changetx.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/user_notification.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/hotest_posts.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/links.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/tags_cloud.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/templates/blog/widgets/wymusic.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/blog/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/manage.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/nginx.conf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/requirements.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/supervisord.conf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/templates/admin/base.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/forms.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/static/css/vmaig_auth.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/static/tx/default.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/changepassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/changetx.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/forgetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/notification.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/register.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/templates/vmaig_auth/resetpassword.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_auth/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/settings.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/settings_docker.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/wsgi.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_blog/wsgi_docker.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/static/css/vmaig_comments.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/templates/vmaig_comments/latest_comments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/templates/vmaig_comments/vmaig_comments.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_comments/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vmaig_blog-master/vmaig_system/views.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/openblog.iml" afterPath="$PROJECT_DIR$/.idea/openblog.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/controllers/index.lua" afterPath="$PROJECT_DIR$/apps/controllers/index.lua" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/models/category.lua" afterPath="$PROJECT_DIR$/apps/models/category.lua" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/models/module.lua" afterPath="$PROJECT_DIR$/apps/models/module.lua" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/models/posts.lua" afterPath="$PROJECT_DIR$/apps/models/posts.lua" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/models/tag.lua" afterPath="$PROJECT_DIR$/apps/models/tag.lua" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/nginx.conf" afterPath="$PROJECT_DIR$/conf/nginx.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/system/controller.lua" afterPath="$PROJECT_DIR$/lib/system/controller.lua" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/system/dispatcher.lua" afterPath="$PROJECT_DIR$/lib/system/dispatcher.lua" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/system/model.lua" afterPath="$PROJECT_DIR$/lib/system/model.lua" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/system/router.lua" afterPath="$PROJECT_DIR$/lib/system/router.lua" />
     </list>
     <ignored path="thinklua-blog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +413,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plugin.lua" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plugin.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/plugins/plugin.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="39" column="74" lean-forward="true" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+            <state relative-caret-position="392">
+              <caret line="39" column="74" lean-forward="false" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nginx.conf" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/conf/nginx.conf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -61,7 +456,7 @@
       <file leaf-file-name="handler.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/plugins/category/handler.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
+            <state relative-caret-position="1040">
               <caret line="40" column="28" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="9" />
               <folding />
             </state>
@@ -71,7 +466,7 @@
       <file leaf-file-name="handler.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/plugins/tag/handler.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="546">
               <caret line="21" column="100" lean-forward="false" selection-start-line="21" selection-start-column="100" selection-end-line="21" selection-end-column="100" />
               <folding />
             </state>
@@ -91,8 +486,8 @@
       <file leaf-file-name="link.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/models/link.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="858">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -101,8 +496,8 @@
       <file leaf-file-name="module.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/models/module.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="8" column="26" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="9" />
+            <state relative-caret-position="208">
+              <caret line="8" column="26" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -111,28 +506,8 @@
       <file leaf-file-name="tag.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/models/tag.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
+            <state relative-caret-position="546">
               <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="category.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/models/category.lua">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-451">
-              <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="handler.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/plugins/topic/handler.lua">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -156,7 +531,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/apps/controllers/category.lua" />
         <option value="$PROJECT_DIR$/apps/views/category/index.html" />
         <option value="$PROJECT_DIR$/apps/views/posts/detail.html" />
         <option value="$PROJECT_DIR$/apps/controllers/posts.lua" />
@@ -181,7 +555,6 @@
         <option value="$PROJECT_DIR$/apps/controllers/admin/user.lua" />
         <option value="$PROJECT_DIR$/apps/views/admin/user/index.html" />
         <option value="$PROJECT_DIR$/lib/resty/session.lua" />
-        <option value="$PROJECT_DIR$/conf/nginx.conf" />
         <option value="$PROJECT_DIR$/apps/config/config.lua" />
         <option value="$PROJECT_DIR$/lib/system/dispatcher.lua" />
         <option value="$PROJECT_DIR$/lib/system/controller.lua" />
@@ -207,6 +580,8 @@
         <option value="$PROJECT_DIR$/apps/plugins/tag/handler.lua" />
         <option value="$PROJECT_DIR$/apps/plugins/link/handler.lua" />
         <option value="$PROJECT_DIR$/apps/plugins/plugin.lua" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/conf/nginx.conf" />
       </list>
     </option>
   </component>
@@ -260,10 +635,6 @@
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -275,21 +646,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
+              <option name="myItemId" value="conf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -304,182 +661,14 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="topic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tag" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="link" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="category" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="archive" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openblog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -489,6 +678,18 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#com.sylvanaar.idea.Lua.run.LuaConfigurationType" factoryName="Lua Script">
@@ -650,6 +851,17 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
       <method />
     </configuration>
@@ -789,6 +1001,13 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
     <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
       <config-file value="" />
       <node-interpreter value="project" />
@@ -875,7 +1094,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -930,15 +1149,16 @@
       <updated>1475135947724</updated>
       <workItem from="1475135953258" duration="32416000" />
       <workItem from="1487817038364" duration="28855000" />
+      <workItem from="1516250521666" duration="392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61271000" />
+    <option name="totallyTimeSpent" value="61663000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1037" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -951,10 +1171,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3304721" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25214592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.171875" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.171875" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -990,14 +1210,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_PLUGINS_DIR$/IDLua/stdlibrary/table.lua" />
-    <entry file="file://$PROJECT_DIR$/apps/views/admin/passport/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="84" column="133" lean-forward="false" selection-start-line="84" selection-start-column="133" selection-end-line="84" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/admin/js/pages/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2489">
@@ -1017,7 +1229,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,7 +1236,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,7 +1243,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7826">
           <caret line="301" column="85" lean-forward="false" selection-start-line="301" selection-start-column="85" selection-end-line="301" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,7 +1267,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4862">
           <caret line="187" column="23" lean-forward="false" selection-start-line="187" selection-start-column="23" selection-end-line="187" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1066,7 +1274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1102,23 +1309,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/nginx.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/openresty/nginx/conf/nginx.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="172" column="25" lean-forward="false" selection-start-line="172" selection-start-column="25" selection-end-line="172" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../github/thinklua/lib/system/model.lua">
+    <entry file="file://$PROJECT_DIR$/../thinklua/lib/system/model.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="7" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
@@ -1146,7 +1344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
           <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1154,7 +1351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="7" column="113" lean-forward="false" selection-start-line="7" selection-start-column="113" selection-end-line="7" selection-end-column="113" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,14 +1458,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/system/hook.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/system/hook.lua" />
     <entry file="file://$PROJECT_DIR$/lib/system/app.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -1278,14 +1467,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/system/plugin.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/system/plugin.lua" />
     <entry file="file://$PROJECT_DIR$/apps/models/posts.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
@@ -1294,25 +1476,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/config/config.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-286">
-          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/plugins/topic/handler.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="9" />
+          <caret line="3" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/models/category.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-451">
+        <state relative-caret-position="442">
           <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
           <folding />
         </state>
@@ -1328,7 +1502,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/plugins/category/handler.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
+        <state relative-caret-position="1040">
           <caret line="40" column="28" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="9" />
           <folding />
         </state>
@@ -1336,7 +1510,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/models/tag.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
+        <state relative-caret-position="546">
           <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
           <folding />
         </state>
@@ -1344,23 +1518,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/models/module.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="8" column="26" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="9" />
+        <state relative-caret-position="208">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/models/link.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="858">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/plugins/tag/handler.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="546">
           <caret line="21" column="100" lean-forward="false" selection-start-line="21" selection-start-column="100" selection-end-line="21" selection-end-column="100" />
           <folding />
         </state>
@@ -1376,8 +1550,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/plugins/plugin.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="39" column="74" lean-forward="true" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+        <state relative-caret-position="392">
+          <caret line="39" column="74" lean-forward="false" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/views/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/config/config.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/nginx.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
           <folding />
         </state>
       </provider>

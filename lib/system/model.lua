@@ -24,7 +24,7 @@ function _M.set_keepalive(self, db)
 end
 
 function _M.query(self, sql)
-    local sql, err = sql or self:build_query_sql()
+    local sql, err = sql  or self:build_query_sql()
     if sql == nil then
         return nil, err
     end
@@ -336,54 +336,6 @@ function _M.insert(self, tab, data)
     end
 end
 
-function _M.insertAll(self, tab, datalist)
-    self:table(tab)
-    if data == nil or self.table_name == nil then
-        return false, 'the data is nil or table name is nil'
-    end
-    local data = func.clear_table(data)
-    local sql = 'INSERT INTO '..self.table_name..'('
-    local fields = ''
-    local values = ''
-    local n = 0
-    local rows = func.table_length(datalist)
-    local cols = func.table_length(datalist[1])
-    for i, v in pairs(datalist[1]) do
-        fields = fields..'`'..k..'`'
-        if n< cols then
-            fields = fields..','
-        end
-    end
-
-    for i, row in ipairs(datalist) do
-        local n = 0
-        values = values..'('
-        for k, v in pairs(row) do
-            if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
-                v = v
-            else
-                v = '"'..v..'"'
-            end
-            values = values..v
-            n = n+1
-            if n< cols then
-                values = values..','
-            end
-        end
-        values = values..')'
-        if i< rows then
-            values = values..','
-        end
-    end
-    sql = sql..fields..')VALUES '..values
-    local res, err, errcode, sqlstate = self:exec(sql)
-    if res then
-        return res.affected_rows
-    else
-        return nil, err, errcode, sqlstate
-    end
-end
-
 function _M.update(self, tab, data, where)
     self:table(tab)
     self:where(where)
@@ -424,24 +376,6 @@ function _M.update(self, tab, data, where)
     else
         return nil, err, errcode, sqlstate
     end
-end
-
-function _M.incr(self, field, num, where)
-    if where then
-        self:where(where)
-    end
-    local data = {}
-    data[field] = '`'..field..'+'..num..'`';
-    return self:update(self.table_name, data)
-end
-
-function _M.decr(self, field, num, where)
-    if where then
-        self:where(where)
-    end
-    local data = {}
-    data[field] = '`'..field..'-'..num..'`';
-    return self:update(self.table_name, data)
 end
 
 function _M.delete(self, tab, where)
