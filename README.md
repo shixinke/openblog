@@ -1,4 +1,4 @@
-# oepnblog 基于openresty的开源博客系统
+# openblog 基于openresty的开源博客系统
 
 ------
 
