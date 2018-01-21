@@ -1,3 +1,3 @@
 config = require 'conf.config'
-json = require 'cjson.safe'
+cjson = require 'cjson.safe'
 func = require 'system.func'

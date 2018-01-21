@@ -108,7 +108,9 @@ function _M.dispatch(url_tab)
         if m_controller.init then
             m_controller.init(m_controller)
         end
-        m_controller:init_view(m_controller)
+        if not m_controller.disabled_view then
+            m_controller:init_view(m_controller)
+        end
         m_controller.layer = tab.layer
         m_controller.controller = tab.controller
         m_controller.action = tab.action

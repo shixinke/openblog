@@ -7,7 +7,6 @@ function _M.init(self)
 end
 
 function _M.index(self)
-    self:assign('title', self.config.site_title)
     self:display()
 end
 

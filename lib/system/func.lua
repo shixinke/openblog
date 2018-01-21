@@ -7,12 +7,14 @@ local base_model = require 'system.model'
 local regex = ngx.re
 local strlen = string.len
 local substr = string.sub
+local date = os.date
+local time = os.time
 
 
 function _M.trim(str)
     local m, err = regex.match(str, "[^s]+.+[^s]+", 'ijso')
     if m then
-        return m[0]
+        return m[1]
     else
         return str, err
     end
@@ -189,6 +191,16 @@ function _M.show_error(code, err)
         ngx.log(ngx.ERR, err)
         ngx.redirect(config.pages.server_error)
     end
+end
+
+function _M.password(password)
+    local salt = config.security.password_salt or 'shixinke'
+    return ngx.md5(password..salt)
+end
+
+function _M.datetime(timestamp)
+    local t = timestamp and timestamp or time()
+    return date('%Y-%m-%d %H:%M:%S', t)
 end
 
 return _M

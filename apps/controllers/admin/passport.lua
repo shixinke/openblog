@@ -2,20 +2,14 @@ local _M = {
     _VERSION = '0.01'
 }
 
-local session = require 'resty.session'
+local session = require 'system.session'
 local user_model = require 'models.user'
 local user = user_model:new()
 
 local md5 = ngx.md5
 
 function _M.init(self)
-    self.withoutLayout = true
-end
-
-
-function _M.login(self)
-    self:assign('title', '管理登录')
-    self:display()
+    self.disabled_view = true
 end
 
 function _M.checklogin(self)
@@ -34,8 +28,7 @@ function _M.checklogin(self)
         if res then
             local user_info = res
             user_info.password = nil
-            local sess = session.start()
-            sess.data.uid = res.uid
+            local sess = session.get_session(true)
             sess.data.user_info = user_info
             sess:save()
             self.json(200, '登录成功')
@@ -50,6 +43,7 @@ end
 function _M.register(self)
     if self:is_post() then
         local data = {}
+
         data.account = self:post('account')
         if data.account == nil or data.account == '' then
             self.json(4003, '请输入账号')
