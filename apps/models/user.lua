@@ -17,7 +17,7 @@ function _M.checklogin(self, account, password)
             return nil, '密码错误'
         end
     else
-        return false, '该账号不存在'..self.sql
+        return false, '该账号不存在'
     end
 end
 

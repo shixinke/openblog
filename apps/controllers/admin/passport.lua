@@ -29,8 +29,10 @@ function _M.checklogin(self)
             local user_info = res
             user_info.password = nil
             local sess = session.get_session(true)
-            sess.data.user_info = user_info
-            sess:save()
+            if sess then
+                sess.data.user_info = user_info
+                sess:save()
+            end
             self.json(200, '登录成功')
         else
             self.json(5002, err)
@@ -53,9 +55,12 @@ function _M.register(self)
             self.json(4003, '请输入密码')
         end
         data.password = func.password(password)
-        local confirm_password = self:post('confirm_password')
+        local confirm_password = self:post('confirmPassword')
+        if confirm_password == nil or confirm_password == '' then
+            self.json(4003, '请输入确认密码')
+        end
         if confirm_password ~= password then
-            self.json(4003, '两次输入密码不一致,password:'..password..',confirm:'..confirm_password)
+            self.json(4003, '两次输入密码不一致')
         end
         local res, err, errcode, sqlstate = user:add(data)
         if res then

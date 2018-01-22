@@ -49,6 +49,7 @@ function _M.exec(self, sql)
     end
 
     local res, err, errcode, sqlstate = db:query(sql)
+    func.log_debug(self.sql)
     if not res then
         return nil, err, errcode, sqlstate
     end

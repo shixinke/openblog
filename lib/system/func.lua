@@ -9,6 +9,8 @@ local strlen = string.len
 local substr = string.sub
 local date = os.date
 local time = os.time
+local log = ngx.log
+local LOG_DEBUG = ngx.DEBUG
 
 
 function _M.trim(str)
@@ -201,6 +203,12 @@ end
 function _M.datetime(timestamp)
     local t = timestamp and timestamp or time()
     return date('%Y-%m-%d %H:%M:%S', t)
+end
+
+function _M.log_debug(message)
+    if debug then
+        log(LOG_DEBUG, message)
+    end
 end
 
 return _M

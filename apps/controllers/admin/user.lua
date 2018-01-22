@@ -25,6 +25,7 @@ function _M.index(self)
     self:assign('title', '管理登录')
     self:assign('data', data)
     self:assign('condition', condition)
+
     self:display()
 end
 

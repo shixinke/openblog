@@ -5,7 +5,13 @@ local concat       = table.concat
 local hmac         = ngx.hmac_sha1
 local time         = ngx.time
 local http_time    = ngx.http_time
+local set_header   = ngx.req.set_header
+local clear_header = ngx.req.clear_header
+local ceil         = math.ceil
+local max          = math.max
 local find         = string.find
+local gsub         = string.gsub
+local sub          = string.sub
 local type         = type
 local pcall        = pcall
 local tonumber     = tonumber
@@ -37,8 +43,7 @@ local function setcookie(session, value, expires)
     if ngx.headers_sent then return nil, "Attempt to set session cookie after sending out response headers." end
     local c = session.cookie
     local i = 3
-    local n = session.name .. "="
-    local k = { n, value or "" }
+    local k = {}
     local d = c.domain
     local x = c.samesite
     if expires then
@@ -71,29 +76,75 @@ local function setcookie(session, value, expires)
     if c.httponly then
         k[i] = "; HttpOnly"
     end
-    k = concat(k)
+    local v = value or ""
+    local l
+    if expires and c.chunks then
+        l = c.chunks
+    else
+        l = max(ceil(#v / 4000), 1)
+    end
     local s = header["Set-Cookie"]
-    local t = type(s)
-    if t == "table" then
-        local f = false
-        local z = #s
-        for i=1, z do
-            if find(s[i], n, 1, true) == 1 then
-                s[i] = k
-                f = true
-                break
+    for j=1, l do
+        local n = { session.name }
+        if j > 1 then
+            n[2] = "_"
+            n[3] = j
+            n[4] = "="
+        else
+            n[2] = "="
+        end
+        local n = concat(n)
+        k[1] = n
+        if expires then
+            k[2] = ""
+        else
+            local sp = j * 4000 - 3999
+            if j < l then
+                k[2] = sub(v, sp, sp + 3999) .. "0"
+            else
+                k[2] = sub(v, sp)
             end
         end
-        if not f then
-            s[z+1] = k
+        local y = concat(k)
+        local t = type(s)
+        if t == "table" then
+            local f = false
+            local z = #s
+            for i=1, z do
+                if find(s[i], n, 1, true) == 1 then
+                    s[i] = y
+                    f = true
+                    break
+                end
+            end
+            if not f then
+                s[z+1] = y
+            end
+        elseif t == "string" and find(s, n, 1, true) ~= 1  then
+            s = { s, y }
+        else
+            s = y
         end
-    elseif t == "string" and find(s, n, 1, true) ~= 1  then
-        s = { s, k }
-    else
-        s = k
     end
     header["Set-Cookie"] = s
     return true
+end
+
+local function getcookie(session, i)
+    local name = session.name
+    local n = { "cookie_", name }
+    if i then
+        n[3] = "_"
+        n[4] = i
+    else
+        i = 1
+    end
+    session.cookie.chunks = i
+    local c = var[concat(n)]
+    if not c then return nil end
+    local l = #c
+    if l < 4001 then return c end
+    return concat{ sub(c, 1, 4000), getcookie(session, i + 1) or "" }
 end
 
 local function save(session, close)
@@ -120,34 +171,39 @@ local function regenerate(session, flush)
     end
 end
 
-local defaults = {
-    name       = var.session_name       or "session",
-    identifier = var.session_identifier or "random",
-    storage    = var.session_storage    or "cookie",
-    serializer = var.session_serializer or "json",
-    encoder    = var.session_encoder    or "base64",
-    cipher     = var.session_cipher     or "aes",
-    cookie = {
-        persistent = enabled(var.session_cookie_persistent or false),
-        renew      = tonumber(var.session_cookie_renew)    or 600,
-        lifetime   = tonumber(var.session_cookie_lifetime) or 3600,
-        path       = var.session_cookie_path               or "/",
-        domain     = var.session_cookie_domain,
-        samesite   = var.session_cookie_samesite           or "Lax",
-        secure     = enabled(var.session_cookie_secure),
-        httponly   = enabled(var.session_cookie_httponly   or true),
-        delimiter  = var.session_cookie_delimiter          or "|"
-    }, check = {
-        ssi    = enabled(var.session_check_ssi    or false),
-        ua     = enabled(var.session_check_ua     or true),
-        scheme = enabled(var.session_check_scheme or true),
-        addr   = enabled(var.session_check_addr   or false)
+local secret = random(32, true) or random(32)
+local defaults
+
+local function init()
+    defaults = {
+        name       = var.session_name       or "session",
+        identifier = var.session_identifier or "random",
+        storage    = var.session_storage    or "cookie",
+        serializer = var.session_serializer or "json",
+        encoder    = var.session_encoder    or "base64",
+        cipher     = var.session_cipher     or "aes",
+        cookie = {
+            persistent = enabled(var.session_cookie_persistent or false),
+            renew      = tonumber(var.session_cookie_renew)    or 600,
+            lifetime   = tonumber(var.session_cookie_lifetime) or 3600,
+            path       = var.session_cookie_path               or "/",
+            domain     = var.session_cookie_domain,
+            samesite   = var.session_cookie_samesite           or "Lax",
+            secure     = enabled(var.session_cookie_secure),
+            httponly   = enabled(var.session_cookie_httponly   or true),
+            delimiter  = var.session_cookie_delimiter          or "|"
+        }, check = {
+            ssi    = enabled(var.session_check_ssi    or false),
+            ua     = enabled(var.session_check_ua     or true),
+            scheme = enabled(var.session_check_scheme or true),
+            addr   = enabled(var.session_check_addr   or false)
+        }
     }
-}
-defaults.secret = var.session_secret or random(32, true) or random(32)
+    defaults.secret = var.session_secret or secret
+end
 
 local session = {
-    _VERSION = "2.14"
+    _VERSION = "2.19"
 }
 
 session.__index = session
@@ -155,6 +211,9 @@ session.__index = session
 function session.new(opts)
     if getmetatable(opts) == session then
         return opts
+    end
+    if not defaults then
+        init()
     end
     local z = defaults
     local y = type(opts) == "table" and opts or z
@@ -245,7 +304,7 @@ function session.open(opts)
         scheme
     }
     self.opened = true
-    local cookie = var["cookie_" .. self.name]
+    local cookie = getcookie(self)
     if cookie then
         local i, e, d, h = self.storage:open(cookie, self.cookie.lifetime)
         if i and e and e > time() and d and h then
@@ -311,6 +370,53 @@ function session:destroy()
     self.started   = nil
     self.destroyed = true
     return setcookie(self, "", true)
+end
+
+function session:hide()
+    local cookies = var.http_cookie
+    if not cookies then
+        return
+    end
+    local r = {}
+    local n = self.name
+    local i = 1
+    local j = 0
+    local s = find(cookies, ";", 1, true)
+    while s do
+        local c = sub(cookies, i, s - 1)
+        local b = find(c, "=", 1, true)
+        if b then
+            local key = gsub(sub(c, 1, b - 1), "^%s+", "")
+            if key ~= n and key ~= "" then
+                local z = #n
+                if sub(key, z + 1, z + 1) ~= "_" or not tonumber(sub(key, z + 2)) then
+                    j = j + 1
+                    r[j] = c
+                end
+            end
+        end
+        i = s + 1
+        s = find(cookies, ";", i, true)
+    end
+    local c = sub(cookies, i)
+    if c and c ~= "" then
+        local b = find(c, "=", 1, true)
+        if b then
+            local key = gsub(sub(c, 1, b - 1), "^%s+", "")
+            if key ~= n and key ~= "" then
+                local z = #n
+                if sub(key, z + 1, z + 1) ~= "_" or not tonumber(sub(key, z + 2)) then
+                    j = j + 1
+                    r[j] = c
+                end
+            end
+        end
+    end
+    if j == 0 then
+        clear_header("Cookie")
+    else
+        set_header("Cookie", concat(r, "; ", 1, j))
+    end
 end
 
 return session
