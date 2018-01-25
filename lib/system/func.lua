@@ -174,7 +174,7 @@ function _M.implode(delimiter, tab)
     return str
 end
 
-function _M.show_404(msg)
+function _M.show_404(msg, req)
     if debug then
         local html = '<meta charset="utf-8"><div style="position: relative;padding: 15px 15px 15px 55px;margin-bottom: 20px;font-size: 14px;background-color: #fafafa;border: solid 1px #d8d8d8;border-radius: 3px;">'..msg..'</div>'
         ngx.say(html)
