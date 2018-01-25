@@ -15,8 +15,8 @@ function _M.get_session(is_set)
 end
 
 -- 设置session的封闭(依赖于lua-resty-session)
-function _M.set(key, value)
-    local sess = session.start({secret = config.security.session.secret})
+function _M.set(self, key, value)
+    local sess = self.get_session(true)
     if sess.data[key] then
         if type(value) == 'table' then
             for k, v in pairs(value) do
@@ -32,13 +32,18 @@ function _M.set(key, value)
 end
 
 -- 获取session信息
-function _M.get(key)
-    local sess = session.open({secret = config.security.session.secret})
+function _M.get(self, key)
+    local sess = self.get_session(false)
     local data = sess.data or {}
     if key then
         return data[key]
     end
     return data
+end
+
+function _M.destroy(self)
+    local sess = self.get_session(true)
+    sess:destroy()
 end
 
 return _M

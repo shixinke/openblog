@@ -28,11 +28,7 @@ function _M.checklogin(self)
         if res then
             local user_info = res
             user_info.password = nil
-            local sess = session.get_session(true)
-            if sess then
-                sess.data.user_info = user_info
-                sess:save()
-            end
+            session:set('login_user', user_info)
             self.json(200, '登录成功')
         else
             self.json(5002, err)
@@ -73,10 +69,13 @@ function _M.register(self)
     end
 end
 
+function _M.userinfo(self)
+    self:check_login()
+end
+
 function _M.logout(self)
-    local sess = session.start()
-    sess:destroy()
-    self.json(200, '退出成功', {url = '/admin/passport/login'})
+    session:destroy()
+    self.json(200, '退出成功')
 end
 
 return _M
