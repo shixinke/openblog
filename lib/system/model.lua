@@ -6,6 +6,7 @@ local mt = { __index = _M }
 local upper = string.upper
 local lower = string.lower
 local substr = string.sub
+local strlen = string.len
 local filter_sql = ndk.set_var.set_quote_sql_str
 
 
@@ -134,6 +135,12 @@ function _M.build_query_sql(self, tab)
     local tab = tab or self.table_name
     if tab == nil then
         return nil, 'the table name is nil'
+    end
+    if self.config.table_prefix then
+        local length = strlen(self.config.table_prefix)
+        if length > 0 and substr(tab, 1, length) ~= self.config.table_prefix then
+            tab = self.config.table_prefix..tab
+        end
     end
     local sql = 'SELECT '
     if func.is_empty_table(self._condition.fields) ~= true then
@@ -411,6 +418,7 @@ function _M.new(self, opts)
     opts.timeout = opts.timeout or config.database.timeout
     opts.max_idle_timeout = opts.max_idle_timeout or config.database.max_idle_timeout
     opts.pool_size = opts.pool_size or config.database.pool_size
+    opts.table_prefix = opts.table_prefix or config.database.table_prefix
     self.config = opts
     self.table_name = self.table_name or opts.table_name
     self.db = self.db or nil

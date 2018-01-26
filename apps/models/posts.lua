@@ -12,6 +12,14 @@ function _M.search(self, condition, offset, limit)
     return {count = count, data = res}
 end
 
+function _M.total(self)
+    return self:where({type = 1}):count()
+end
+
+function _M.views(self)
+    local sql = 'SELECT SUM(views) AS views FROM '..self.get
+end
+
 function _M.detail(self, id)
     return self:where({posts_id = id}):find()
 end

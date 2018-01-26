@@ -1,4 +1,5 @@
 local config = {
+    version = '0.0.1',
     debug = true,                               -- 是否开启debug模式
     database = {                                -- 数据库配置
         host = '127.0.0.1',
@@ -6,6 +7,7 @@ local config = {
         user = 'root',
         password = '',
         database = 'thinklua_blogdb',
+        table_prefix = 'blog_',
         charset = 'utf8',
         timeout = 1000,
         max_idle_timeout = 6000,
@@ -52,6 +54,13 @@ local config = {
         charset = 'UTF-8',                       -- 页面编码
         not_found = '/404.html',                 -- 404页面地址
         server_error = '/server_busy.html'       -- 50x页面地址
+    },
+    sys = {
+        -- 硬盘挂载目录
+        disk = {
+            system = '',
+            data = '/'
+        }
     }
 
 }

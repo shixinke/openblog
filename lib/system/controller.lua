@@ -103,15 +103,13 @@ function _M.jsonp(code, message, data, callback)
 end
 
 function _M.check_login(self)
-    local user_info = self.login_info()
+    local user_info = self.get_login_info()
     if not user_info then
         self.json(5006, '用户未登录')
-    else
-        self.json(200, '用户已登录', user_info)
     end
 end
 
-function _M.login_info()
+function _M.get_login_info()
     local user_info = session:get('login_user')
     if not user_info or type(user_info) ~= 'table' or  not user_info['uid'] or user_info['uid'] < 1 then
         return nil

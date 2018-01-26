@@ -70,7 +70,12 @@ function _M.register(self)
 end
 
 function _M.userinfo(self)
-    self:check_login()
+    local user_info = self:get_login_info()
+    if user_info then
+        self.json(200, '用户已登录', user_info)
+    else
+        self.json(5006, '用户未登录')
+    end
 end
 
 function _M.logout(self)
