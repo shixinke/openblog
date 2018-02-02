@@ -14,7 +14,7 @@ local str_sub = string.sub
 local DOT_BYTE = str_byte(':', 1)
 local STAR_BYTE = str_byte('*', 1)
 
-function list_rules(rules)
+local function list_rules(rules)
     local tab = {get = {}, post = {}}
     for _, v in pairs(rules) do
         if v.method == 'get' then
@@ -65,7 +65,7 @@ function _M.route(self)
                     if is_regex then
                         local m, err = regex.match(uri, v.pattern)
                         if m then
-                            m[0] = nil
+                            m[1] = nil
                             for i, val in pairs(m) do
                                 v.url = regex.sub(v.url, '\\$'..i, val)
                             end

@@ -1,7 +1,7 @@
 local _M = {
     _VERSION = '0.01',
-    table_name = 'blog_posts',
-    pk = 'posts_id'
+    table_name = 'blog_tag',
+    pk = 'tag_id'
 }
 
 function _M.search(self, condition, offset, limit)

@@ -38,6 +38,9 @@ function _M.exec(self, sql)
     if not db then
         return nil, err
     end
+    if not sql then
+        return nil, 'the sql is empty'
+    end
 
     local ok, err, errcode, sqlstate = self:connect(db)
     if not ok then
@@ -50,7 +53,6 @@ function _M.exec(self, sql)
     end
 
     local res, err, errcode, sqlstate = db:query(sql)
-    func.log_debug(self.sql)
     if not res then
         return nil, err, errcode, sqlstate
     end
@@ -131,7 +133,7 @@ function _M.where(self, field, condition, value)
     return self
 end
 
-function _M.build_query_sql(self, tab)
+function _M.get_table_name(self, tab)
     local tab = tab or self.table_name
     if tab == nil then
         return nil, 'the table name is nil'
@@ -141,6 +143,14 @@ function _M.build_query_sql(self, tab)
         if length > 0 and substr(tab, 1, length) ~= self.config.table_prefix then
             tab = self.config.table_prefix..tab
         end
+    end
+    return tab
+end
+
+function _M.build_query_sql(self, tab)
+    local tab = self:get_table_name(tab)
+    if tab == nil then
+        return nil, 'the table name is nil'
     end
     local sql = 'SELECT '
     if func.is_empty_table(self._condition.fields) ~= true then
@@ -281,7 +291,11 @@ end
 function _M.count(self, tab, where)
     self:where(where)
     self:table(tab)
-    local sql = 'SELECT COUNT(*) AS total FROM '..self.table_name..' '..self:parse_where()..' LIMIT 1'
+    local tab = self:get_table_name(tab)
+    if not tab then
+        return nil, 'the table name is empty'
+    end
+    local sql = 'SELECT COUNT(*) AS total FROM '..tab..' '..self:parse_where()..' LIMIT 1'
     local res, err, errcode, sqlstate = self:query(sql)
     if res then
         return res[1]['total']
@@ -312,11 +326,12 @@ end
 
 function _M.insert(self, tab, data)
     self:table(tab)
-    if data == nil or self.table_name == nil then
+    local tab = self:get_table_name(tab)
+    if data == nil or tab == nil then
         return false, 'the data is nil or table name is nil'
     end
     local data = func.clear_table(data)
-    local sql = 'INSERT INTO '..self.table_name..'('
+    local sql = 'INSERT INTO '..tab..'('
     local fields = ''
     local values = ''
     local len = func.table_length(data)
@@ -347,12 +362,13 @@ end
 function _M.update(self, tab, data, where)
     self:table(tab)
     self:where(where)
-    if data == nil or self.table_name == nil then
+    local tab = self:get_table_name(tab)
+    if data == nil or tab == nil then
         return false, 'the data is nil or table name is nil'
     end
     local data = func.clear_table(data)
     local data_len = func.table_length(data)
-    local sql = 'UPDATE '..self.table_name..' SET '
+    local sql = 'UPDATE '..tab..' SET '
     local data_index = 0
     for k, v in pairs(data) do
         data_index = data_index + 1
@@ -389,7 +405,11 @@ end
 function _M.delete(self, tab, where)
     self:table(tab)
     self:where(where)
-    local sql = 'DELETE FROM '..self.table_name
+    local tab = self:get_table_name(tab)
+    if not tab then
+        return nil, 'the table name is empty'
+    end
+    local sql = 'DELETE FROM '..tab
     local where = self:parse_where()
     if where == '' then
         return nil, 'the condition cannot be nil in delete operation'

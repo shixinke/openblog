@@ -4,6 +4,9 @@ local _M = {
     pk = 'posts_id'
 }
 
+local tonumber = tonumber
+local ngx_null = ngx.null
+
 function _M.search(self, condition, offset, limit)
     self:where(condition)
     local count, err = self:count()
@@ -17,7 +20,13 @@ function _M.total(self)
 end
 
 function _M.views(self)
-    local sql = 'SELECT SUM(views) AS views FROM '..self.get
+    local sql = 'SELECT SUM(views) AS views FROM '..self:get_table_name()
+    local result, err = self:query(sql)
+    if result and result[1] and result[1]['views'] and result[1]['views'] ~= ngx_null  then
+        return tonumber(result[1]['views'])
+    else
+        return 0
+    end
 end
 
 function _M.detail(self, id)

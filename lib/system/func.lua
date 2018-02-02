@@ -11,6 +11,9 @@ local date = os.date
 local time = os.time
 local log = ngx.log
 local LOG_DEBUG = ngx.DEBUG
+local LOG_ERR = ngx.ERR
+local tonumber = tonumber
+local math_floor = math.floor
 
 
 function _M.trim(str)
@@ -205,10 +208,99 @@ function _M.datetime(timestamp)
     return date('%Y-%m-%d %H:%M:%S', t)
 end
 
-function _M.log_debug(message)
+function _M.time(datetime)
+    if datetime then
+        local year = substr(datetime, 1, 4)
+        local month = substr(datetime, 6, 7)
+        local day = substr(datetime, 9, 10)
+        local hour = substr(datetime, 12, 13)
+        local minute = substr(datetime, 15, 16)
+        local second = substr(datetime, 18, 19)
+        return time({year = year, month = month, day = day, hour = hour, min = minute, sec = second})
+    else
+        return time()
+    end
+end
+
+function _M.pretty_time(timestamp, part)
+    local now = time()
+    local diff = now - timestamp
+    local str = ""
+    local min = 60
+    local hour = 60*min
+    local day = 24 * hour
+    local mon = 30 * day
+    local year = 12 * mon
+    if min > diff then
+        str = diff.."秒";
+    elseif min <= diff and hour > diff then
+        str = math_floor(diff /  60) .."分";
+        if part then
+            local secs = diff % min
+            if secs > 0 then
+                str = str..secs..'秒'
+            end
+        end
+    elseif hour <= diff and day > diff then
+        str = math_floor(diff / hour) .."时";
+        if part then
+            local mins = math_floor(diff % hour / min)
+            local secs = diff % min
+            if secs > 0 then
+                str = str..mins..'分'..secs..'秒'
+            elseif mins > 0 then
+                str = str..mins..'分'
+            end
+        end
+    elseif day <= diff and mon > diff then
+        str = math_floor(diff / day) .."天"
+        if part then
+            local mins = math_floor(diff % hour / min)
+            local hours = math_floor(diff % day / hour)
+            if mins > 0 then
+                str = str..hours..'时'..mins..'分'
+            elseif hours > 0 then
+                str = str..hours..'时'
+            end
+        end
+    elseif mon <= diff and year > diff then
+        str = math_floor(diff / mon) .. "月";
+        if part then
+            local hours = math_floor(diff % day / hour)
+            local days = math_floor(diff % mon / day)
+            if hours > 0 then
+                str = str..days..'天'..hours..'时'
+            elseif days > 0 then
+                str = str..days..'天'
+            end
+        end
+    else
+        str = math_floor(diff / year) .. "年";
+        if part then
+            local days = math_floor(diff % mon /day)
+            local mons = math_floor(diff % year / mon )
+            if days > 0 then
+                str = str..days..'月'..days..'天'
+            elseif mons > 0 then
+                str = str..mons..'天'
+            end
+        end
+    end
+    return str;
+end
+
+function _M.debug_log(message)
     if debug then
         log(LOG_DEBUG, message)
     end
+end
+
+function _M.error_log(message)
+    log(LOG_ERR, message)
+end
+
+function _M.log(level, message)
+    log(level, message)
 end
 
 return _M

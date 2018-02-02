@@ -8,7 +8,11 @@ local header = ngx.header
 local ok = ngx.HTTP_OK
 local session = require 'system.session'
 
-function json(code, message, data)
+local function get_method()
+    return string.lower(ngx_req.get_method())
+end
+
+local function json(code, message, data)
     local tab = {}
     if type(code) == 'table' then
         tab = code
@@ -49,10 +53,6 @@ function _M.post(self, name)
     else
         return data
     end
-end
-
-local function get_method()
-    return string.lower(ngx_req.get_method())
 end
 
 function _M.is_get()

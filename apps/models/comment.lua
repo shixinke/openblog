@@ -12,6 +12,14 @@ function _M.search(self, condition, offset, limit)
     return {count = count, data = res}
 end
 
+function _M.total(self, posts_id)
+    if posts_id then
+        return self:where({posts_id = posts_id}):count()
+    else
+        return self:count()
+    end
+end
+
 function _M.detail(self, id)
     return self:where({comment_id = id}):find()
 end

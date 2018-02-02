@@ -58,7 +58,7 @@ local config = {
     sys = {
         -- 硬盘挂载目录
         disk = {
-            system = '',
+            system = '/',
             data = '/'
         }
     }
