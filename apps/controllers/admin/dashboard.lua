@@ -11,6 +11,8 @@ local log = ngx.log
 local LOG_ERR = ngx.ERR
 local cmd = require 'system.cmd'
 local stats = require 'service.stats'
+local region = require 'resty.ip2region.ip2region':new({dict = 'blog_dict'})
+
 
 
 local function version_format(version)
@@ -64,7 +66,7 @@ end
 
 function _M.init(self)
     self.disabled_view = true
-    --self:check_login()
+    self:check_login()
 end
 
 
@@ -73,12 +75,13 @@ function _M.stats(self)
     local total = stats.overview()
     user_info = user_info or {}
     local disk = cmd.disk()
+    local region_info = region:search(user_info.last_login_ip)
     local stats_data = {
         user = {
             nickname = user_info.nickname,
             avatar = user_info.avatar,
             lastLoginTime = user_info.last_login_time,
-            lastLoginLocation = user_info.last_login_ip,
+            lastLoginLocation = region_info and region_info['city'] or '',
             lastLoginIp = user_info.last_login_ip
         },
         sys = {

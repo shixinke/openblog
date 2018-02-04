@@ -110,7 +110,7 @@ function _M.check_login(self)
 end
 
 function _M.get_login_info()
-    local user_info = session:get('login_user')
+    local user_info = session.get('login_user')
     if not user_info or type(user_info) ~= 'table' or  not user_info['uid'] or user_info['uid'] < 1 then
         return nil
     else

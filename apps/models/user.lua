@@ -48,8 +48,7 @@ function _M.edit(self, data)
     if data[self.pk] == nil then
         return nil, '请选择用户'
     end
-    self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:where({uid = data['uid']}):update(self.table_name, data)
 end
 
 function _M.remove(self, uid)

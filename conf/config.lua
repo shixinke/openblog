@@ -5,7 +5,7 @@ local config = {
         host = '127.0.0.1',
         port = 3306,
         user = 'root',
-        password = '',
+        password = '123456',
         database = 'thinklua_blogdb',
         table_prefix = 'blog_',
         charset = 'utf8',
@@ -43,6 +43,9 @@ local config = {
     views = {
         file_suffix = '.html',
 
+    },
+    cookie = {
+        domain = '.openblog.com'
     },
     security = {                                 -- 安全相关的设置
         password_salt = 'shixinke',              -- 密码加密字符串

@@ -303,4 +303,10 @@ function _M.log(level, message)
     log(level, message)
 end
 
+function _M.get_client_ip()
+    local ip = ngx.req.get_headers()['X-Real-IP'] or ngx.var.remote_addr
+    return ip
+end
+
+
 return _M

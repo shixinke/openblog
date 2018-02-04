@@ -3,10 +3,8 @@ local _M = {
 }
 
 local session = require 'system.session'
-local user_model = require 'models.user'
-local user = user_model:new()
+local user_service = require 'service.user'
 
-local md5 = ngx.md5
 
 function _M.init(self)
     self.disabled_view = true
@@ -24,12 +22,9 @@ function _M.checklogin(self)
         end
 
         data.password = func.password(data.password)
-        local res, err = user:checklogin(data.account, data.password)
+        local res, err = user_service.checklogin(data.account, data.password)
         if res then
-            local user_info = res
-            user_info.password = nil
-            session:set('login_user', user_info)
-            self.json(200, '登录成功')
+            self.json(200, '登录成功', res)
         else
             self.json(5002, err)
         end
@@ -58,7 +53,7 @@ function _M.register(self)
         if confirm_password ~= password then
             self.json(4003, '两次输入密码不一致')
         end
-        local res, err, errcode, sqlstate = user:add(data)
+        local res, err, errcode, sqlstate = user_service.add(data)
         if res then
             self.json(200, '添加成功')
         else
@@ -67,6 +62,18 @@ function _M.register(self)
     else
         self.json(4002, '请求非法')
     end
+end
+
+function _M.reset(self)
+    local uid = 1
+    local password = func.password("123456")
+    local res, err, errcode, sqlstate = user_service.save_password(password, uid)
+    if res then
+        self.json(200, '重置成功')
+    else
+        self.json(201, '重置失败'..err)
+    end
+
 end
 
 function _M.userinfo(self)
@@ -79,7 +86,7 @@ function _M.userinfo(self)
 end
 
 function _M.logout(self)
-    session:destroy()
+    session.destroy()
     self.json(200, '退出成功')
 end
 
