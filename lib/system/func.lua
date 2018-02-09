@@ -14,6 +14,9 @@ local LOG_DEBUG = ngx.DEBUG
 local LOG_ERR = ngx.ERR
 local tonumber = tonumber
 local math_floor = math.floor
+local ngx_null = ngx.null
+local str_gmatch = string.gmatch
+local strtoupper = string.upper
 
 
 function _M.trim(str)
@@ -198,6 +201,13 @@ function _M.show_error(code, err)
     end
 end
 
+function _M.is_empty_str(str)
+    if not str or str == '' or str == ngx_null then
+        return true
+    end
+    return false
+end
+
 function _M.password(password)
     local salt = config.security.password_salt or 'shixinke'
     return ngx.md5(password..salt)
@@ -299,8 +309,64 @@ function _M.error_log(message)
     log(LOG_ERR, message)
 end
 
+function _M.ucfirst(str)
+    if _M.is_empty_str(str) then
+        return str
+    end
+
+    local len = strlen(str)
+    if len == 1 then
+        return strtoupper(str)
+    end
+    local first_char = substr(str, 1, 1)
+    return strtoupper(first_char)..substr(str, 2, strlen(str))
+end
+
 function _M.log(level, message)
     log(level, message)
+end
+
+function _M.str_camel_style(str)
+    if type(str) == 'string' and _M.is_empty_str(str) ~= true then
+        local index = 1
+        local camel_str = ""
+        for mat in str_gmatch(str, "[^_]+") do
+            if index == 1 then
+                camel_str = camel_str..mat
+            else
+                camel_str = camel_str.._M.ucfirst(mat)
+            end
+            index = index + 1
+        end
+        return camel_str
+    end
+    return str
+end
+
+function _M.table_camel_style(tab)
+    if type(tab) == 'table' then
+        local camel_tab = {}
+        for k, v in pairs(tab) do
+            camel_tab[_M.str_camel_style(k)] = v
+        end
+        return camel_tab
+    else
+        return _M.str_camel_style(tab)
+    end
+end
+
+function _M.array_camel_style(tab)
+    if type(tab) == 'table' then
+        local camel_tab = {}
+        for k, v in pairs(tab) do
+            if type(v) == 'table' then
+                camel_tab[k] = _M.table_camel_style(v)
+            end
+        end
+        return camel_tab
+    else
+        return _M.str_camel_style(tab)
+    end
 end
 
 function _M.get_client_ip()

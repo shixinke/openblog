@@ -12,9 +12,10 @@ function _M.search(self, condition, offset, limit)
     return {count = count, data = res}
 end
 
-function _M.lists(self)
-    self:field('category_id,parent_id,category_name,alias')
-    self:where({status = 1})
+function _M.lists(self, status)
+    if status then
+        self:where({status = status})
+    end
     self:order('parent_id', 'ASC')
     self:order('sort', 'DESC')
     return self:findAll()
@@ -38,7 +39,7 @@ function _M.edit(self, data)
         return nil, '请选择分类'
     end
     self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:update(self.table_name, data)
 end
 
 function _M.remove(self, id)

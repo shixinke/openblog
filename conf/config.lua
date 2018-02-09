@@ -45,7 +45,7 @@ local config = {
 
     },
     cookie = {
-        domain = '.openblog.com'
+        domain = 'localhost'
     },
     security = {                                 -- 安全相关的设置
         password_salt = 'shixinke',              -- 密码加密字符串

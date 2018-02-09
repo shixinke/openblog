@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
-Source Server Version : 50505
-Source Host           : 127.0.0.1:3306
+Source Server         : 本地服务器
+Source Server Version : 50718
+Source Host           : localhost:3306
 Source Database       : thinklua_blogdb
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2018-01-21 20:31:40
+Date: 2018-02-05 10:01:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,10 +27,11 @@ CREATE TABLE `blog_attachment` (
   `path` varchar(255) NOT NULL DEFAULT '' COMMENT '路径',
   `mime_type` varchar(50) NOT NULL DEFAULT '' COMMENT 'MIME类型',
   `downloads` int(11) NOT NULL DEFAULT '0' COMMENT '下载数量',
-  `posts_id` int(11) NOT NULL DEFAULT '0' COMMENT '关联的文章ID',
+  `relation_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '关联类型(0为通用;1为文章;2为头像)',
+  `relation_id` int(11) NOT NULL DEFAULT '0' COMMENT '关联的ID',
   `remark` text NOT NULL COMMENT '详细描述信息',
   `meta` longtext NOT NULL COMMENT '页面元数据(关键词等)',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`file_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='上传附件表';
 
@@ -54,7 +55,7 @@ CREATE TABLE `blog_category` (
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
   `items` int(12) NOT NULL DEFAULT '0' COMMENT '文章数',
   `options` varchar(300) NOT NULL DEFAULT '[]' COMMENT '选项(用于显示的选项)',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`category_id`),
   KEY `idx_pid` (`parent_id`),
   KEY `idx_cname` (`category_name`,`status`),
@@ -83,7 +84,7 @@ CREATE TABLE `blog_comment` (
   `ip` varchar(15) NOT NULL DEFAULT '' COMMENT '评论者IP',
   `user_agent` text NOT NULL COMMENT '用户浏览器等信息',
   `meta` longtext NOT NULL COMMENT '其他数据',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '评论时间',
+  `create_time` datetime DEFAULT NULL COMMENT '评论时间',
   PRIMARY KEY (`comment_id`),
   KEY `comment_pri` (`posts_id`,`root_id`,`checked`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章评论';
@@ -177,7 +178,7 @@ CREATE TABLE `blog_nav` (
   `nav_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '导航类型(1为站内导航，2为站外导航)',
   `target` varchar(20) NOT NULL DEFAULT '' COMMENT '打开类型',
   `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否展示',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`nav_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='导航菜单';
 
@@ -203,7 +204,7 @@ CREATE TABLE `blog_posts` (
   `comments` int(12) NOT NULL DEFAULT '0' COMMENT '评论数',
   `options` varchar(200) NOT NULL DEFAULT '[]' COMMENT '其他选项',
   `author` varchar(200) NOT NULL DEFAULT '' COMMENT '作者',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`posts_id`),
   UNIQUE KEY `idx_alias` (`alias`,`type`),
   KEY `idx_title` (`title`,`type`),
@@ -281,7 +282,7 @@ CREATE TABLE `blog_topic` (
   `content` text COMMENT '内容',
   `display` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否展示',
   `posts` int(11) NOT NULL DEFAULT '0' COMMENT '文章数',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`topic_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='专题';
 
@@ -315,19 +316,20 @@ CREATE TABLE `blog_user` (
   `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `avatar` varchar(300) NOT NULL DEFAULT '' COMMENT '头像',
-  `last_login_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上次登录时间',
+  `last_login_time` datetime DEFAULT NULL COMMENT '上次登录时间',
   `last_login_ip` varchar(30) NOT NULL DEFAULT '' COMMENT '上次登录IP',
   `posts` int(11) NOT NULL DEFAULT '0' COMMENT '发布文章数',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态',
-  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `idx_account` (`account`),
   UNIQUE KEY `idx_email` (`email`),
   UNIQUE KEY `idx_nickname` (`nickname`) USING BTREE,
   KEY `idx_status` (`status`),
   KEY `idx_ctime` (`create_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户名';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户名';
 
 -- ----------------------------
 -- Records of blog_user
 -- ----------------------------
+INSERT INTO `blog_user` VALUES ('1', '0', 'shixinke', 'b51f59230e26216293a94afef5d0b173', '', '', '', '2018-02-05 09:55:38', '127.0.0.1', '0', '1', '2018-01-25 19:18:37');

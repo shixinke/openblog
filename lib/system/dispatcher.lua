@@ -72,9 +72,21 @@ end
 function _M.call(url_tab)
     local ok, m_controller
     if url_tab.layer then
-        ok, m_controller = pcall(require, 'apps.controllers.'..url_tab.layer..'.'..url_tab.controller)
+        if config.debug then
+            m_controller = require('apps.controllers.'..url_tab.layer..'.'..url_tab.controller)
+            ok = true
+        else
+            ok, m_controller = pcall(require, 'apps.controllers.'..url_tab.layer..'.'..url_tab.controller)
+        end
+
     else
-        ok, m_controller = pcall(require, 'apps.controllers.'..url_tab.controller)
+        if config.debug then
+            m_controller =require('apps.controllers.'..url_tab.controller)
+            ok = true
+        else
+            ok, m_controller = pcall(require, 'apps.controllers.'..url_tab.controller)
+        end
+
     end
     if not ok or type(m_controller) ~= 'table' then
         return nil, nil

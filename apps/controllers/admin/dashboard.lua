@@ -7,10 +7,13 @@ local dict = ngx.shared.blog_dict
 local ngx_config = ngx.config
 local ngx_worker = ngx.worker
 local ngx_var = ngx.var
+local tonumber = tonumber
 local log = ngx.log
 local LOG_ERR = ngx.ERR
 local cmd = require 'system.cmd'
 local stats = require 'service.stats'
+local date = os.date
+local os_time = os.time
 local region = require 'resty.ip2region.ip2region':new({dict = 'blog_dict'})
 
 
@@ -102,6 +105,22 @@ function _M.stats(self)
         stats = {}
     }
     self.json(200, '获取成功', stats_data)
+end
+
+function _M.connections(self)
+    local data = {
+        connectionsActive = 0,
+        connectionsWaiting = 0,
+        datetime = date('%H:%M:%S', os_time())
+    }
+    if ngx_var.connections_active then
+        data.connectionsActive = tonumber(ngx_var.connections_active)
+    end
+    if ngx_var.connections_waiting then
+        data.connectionsWaiting = tonumber(ngx_var.connections_waiting)
+    end
+
+    self.json(200, "获取成功", data)
 end
 
 return _M

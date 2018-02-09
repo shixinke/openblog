@@ -362,13 +362,16 @@ end
 function _M.update(self, tab, data, where)
     self:table(tab)
     self:where(where)
-    local tab = self:get_table_name(tab)
-    if data == nil or tab == nil then
-        return false, 'the data is nil or table name is nil'
+    local tab_name = self:get_table_name(tab)
+    if data == nil then
+        return false, 'the data is nil'
+    end
+    if tab_name == nil then
+        return false, 'the  table name is nil'
     end
     local data = func.clear_table(data)
     local data_len = func.table_length(data)
-    local sql = 'UPDATE '..tab..' SET '
+    local sql = 'UPDATE '..tab_name..' SET '
     local data_index = 0
     for k, v in pairs(data) do
         data_index = data_index + 1
