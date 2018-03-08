@@ -2,11 +2,14 @@ local _M = {
     _VERSION = '0.01'
 }
 
+local ngx = ngx
+local type = type
 local debug = config.debug
 local base_model = require 'system.model'
 local regex = ngx.re
 local strlen = string.len
 local substr = string.sub
+local io_open = io.open
 local date = os.date
 local time = os.time
 local log = ngx.log
@@ -17,6 +20,7 @@ local math_floor = math.floor
 local ngx_null = ngx.null
 local str_gmatch = string.gmatch
 local strtoupper = string.upper
+local json_decode = cjson.decode
 
 
 function _M.trim(str)
@@ -196,7 +200,7 @@ function _M.show_error(code, err)
         ngx.say(html)
         ngx.exit(ngx.HTTP_OK)
     else
-        ngx.log(ngx.ERR, err)
+        ngx.log(LOG_ERR, err)
         ngx.redirect(config.pages.server_error)
     end
 end
@@ -372,6 +376,19 @@ end
 function _M.get_client_ip()
     local ip = ngx.req.get_headers()['X-Real-IP'] or ngx.var.remote_addr
     return ip
+end
+
+function _M.read_json(file)
+    local fd, err = io_open(file)
+    if not fd then
+        return nil, err
+    end
+    local content = fd:read('a*')
+    local ok, tab = pcall(json_decode, content)
+    if not ok then
+        return nil, 'parse json file failed'
+    end
+    return tab
 end
 
 
