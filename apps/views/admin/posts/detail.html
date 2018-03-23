@@ -1,0 +1,100 @@
+    {-css-}
+    <link type="text/css" rel="stylesheet" href="/static/css/comment.css">
+    {-css-}
+
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-posts-list"></i> {{title}} {% if info and info.title then %} - {{info.title}}{% end%} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="/admin/posts/index" class="btn btn-success"><i class="iconfont icon-back"></i> 帖子列表</a></li>
+                <li><a href="javascript:;" class="btn btn-success refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+        <div class="page-content">
+            {% if err and err ~= '' then %}
+            <div class="alert alert-warning">
+                <i class="iconfont icon-alert"></i> {{err}}
+            </div>
+            {% else %}
+            <input type="hidden" id="postsId" value="{{info.postsId}}">
+            <div>
+                <div id="thread-body" class="article-body">
+                    <div class="article-inner-left">
+                        <div><a href="javascript:;"><img class="img-thumbnail" src="{% if userInfo and userInfo.avatar ~= '' then %} {{userInfo.avatar}}{% end %}" /></a></div>
+                    </div>
+                    <div class="article-inner-right">
+                            <div class="thread-right-top">
+                                <div class="thread-username">
+                                    <a href="javascript:;"  class="author-user"><span>{% if userInfo and userInfo.nickname then %} {{userInfo.nickname}}{% end %}</span></a>
+                                </div>
+                                <div class="thread-content-close-1">
+                                    <a href="javascript:;"> <span class="iconfont icon-down" aria-hidden="true"></span> </a>
+                                </div>
+                            </div>
+                            <div class="thread-content">
+                                <span class="thread-content-text">{*info.summary*}</span>
+                            </div>
+                            <div class="thread-actions link-btns" data-type="1">
+                                <div class="thread-content-close-2">
+                                    <a href="javascript:;"> <span class="iconfont icon-down" aria-hidden="true"></span> </a>
+                                </div>
+                                <a href="javascript:;"><i class="iconfont icon-eye"></i>浏览数({{info.views}}}) </a>
+                                <a href="javascript:;" class="delete-thread-btn"><i class="iconfont icon-delete"></i>删除 </a>
+                                <a href="javascript:;" class="reply-btn"><i class="iconfont icon-comment"></i> 评论(<span class="text-red" id="thread-comment-count">{{info.comments}}</span>)</a>
+
+                                <a class="link-black"><i class="iconfont icon-time"></i> {{info.createTime}}</a>
+                            </div>
+                            <div class="thread-add-comment-box">
+                                <div class="add-comment-box">
+                                    <div class="add-comment-field">
+                                        <textarea class="form-control" rows="2" id="comment-content"  placeholder="写下你的评论..."></textarea>
+                                    </div>
+                                    <div class="add-comment-buttons">
+                                        <button type="button" class="btn btn-primary btn-sm" id="add-posts-comment-btn">评论</button>
+                                        <a  href="javascript:;"  class="add-comment-buttons-cancel">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-list-box" id="comment-list">
+
+                    </div>
+
+                </div>
+
+                <div class="global">
+
+                    <div class="loading-flag">
+                        <div class="spinner loading-icon-box">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                        <button id="loading-flag-button"  type="button" class="btn btn-default btn-s">加载更多</button>
+                        <div id="loading-flag-info"><small>没有更多了 ！</small></div>
+                    </div>
+                </div>
+            {% end %}
+        </div>
+
+    </div>
+    {-script-}
+    <script type="text/javascript">
+        require(['jquery', 'fn', 'pages/posts/detail'], function($, fn, page){
+            fn.refreshPage();
+            fn.chosen();
+            page.init();
+            fn.validateForm('thread-form');
+        })
+    </script>
+    {-script-}

@@ -1,31 +1,42 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>您访问的页面不在地球上</title>
-    <style type="text/css">
-        body{background:#fff;color:#8E8F96;font-family:"Microsoft YaHei","Segoe UI","Lucida Grande",Helvetica,Arial,sans-serif}
-        a{transition-property:background,color;transition-duration:.2s;transition-timing-function:ease-out;-moz-transition-timing-function:ease-out;-webkit-transition-timing-function:ease-out;-o-transition-timing-function:ease-out;text-decoration:none}
-        .newfinno-con{background:url("static/images/404.png") no-repeat;width:768px;height:424px;margin:20px auto 0px}
-        .tips{text-align:center}
-        .tips h2{font-size:20px;margin-bottom:20px}
-        .tips .m-box{width:295px;margin:auto}
-        .tips .m-text{font-size:12px;line-height:32px}
-        .tips .back-index{display:block;width:110px;height:30px;background-color:#e3453d;border-radius:10px;float:right;color:#fff;line-height:30px}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 NOT FOUND</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/theme.css" rel="stylesheet">
+    <link href="/static/css/iconfont.css" rel="stylesheet" >
 </head>
+<body >
+<div class="page-notfound" >
+    <div class="page-wrapper">
+        <h1><img src="/static/images/notfound.gif"></h1>
+        <h3 > 页面未能够找到！! !</h3>
+        <div >
+            <p>抱歉，页面好像去火星啦！ 立即跳转到<a href="/">首页</a></p>
+            <form class="form-inline m-t" role="form">
+                <div class="form-group input-group">
+                    <input type="text" name="q" class="input-key" placeholder="请输入你需要查找的内容..." />
+                    <span class="input-group-btn">
+                        <i class="iconfont icon-search"></i>
+                    </span>
+                    <div class="search-result hide">
 
-<body>
-
-<div class="newfinno-con"></div>
-
-<div class="tips">
-    <h2 class="b-text">矮油~~您访问的页面不在地球上...</h2>
-    <p class="m-box">
-        <span class="m-text">休息一下,去17素材逛逛看吧。</span>
-        <a class="back-index" href="http://www.17sucai.com/">返回首页</a>
-    </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+<script type="text/javascript" src="/static/js/libs/requirejs/2.3.2/require.min.js"></script>
+<script type="text/javascript" src="/static/js/common/config.js"></script>
+
+<script type="text/javascript">
+    require(['pages/404/notfound'], function(page){
+        page.init();
+    })
+</script>
 </body>
 </html>

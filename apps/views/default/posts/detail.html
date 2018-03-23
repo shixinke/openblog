@@ -1,0 +1,84 @@
+<div id="posts" class="posts-expand">
+    <article class="post post-type-normal" style="opacity: 1; display: block; transform: translateY(0px);">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">
+                {{info.info.title}}
+            </h1>
+
+            <div class="post-meta">
+              <span class="post-time">
+                <span class="post-meta-item-icon">
+                  <i class="iconfont icon-date"></i>
+                </span>
+                <span class="post-meta-item-text">发表于</span>
+                <time  datetime="{{info.info.createTime}}" content="{{info.info.createTime}}">
+                  {{info.info.createTime}}
+                </time>
+              </span>
+
+
+                <span class="post-category">
+                  &nbsp; | &nbsp;
+                  <span class="post-meta-item-icon">
+                    <i class="fa fa-folder-o"></i>
+                  </span>
+                  {% if info.category then %}
+                  <span class="post-meta-item-text">分类于</span>
+                  <span>
+                      <a href="{{info.category.url}}">
+                        <span>{{info.category.categoryName}}</span>
+                      </a>
+                  </span>
+                  {% end %}
+                </span>
+            </div>
+        </header>
+
+        <div class="post-body">
+            {*info.info.content*}
+        </div>
+        <footer class="post-footer">
+            <div class="post-tags">
+                {% if info.info.tags then %}
+                {% for i, v in pairs(info.info.tags) do %}
+                <a href="{{v.url}}" title="{{v.tagName}}">{{v.tagName}}</a>
+                {% end %}
+                {% end %}
+            </div>
+
+            <div class="post-nav">
+                <h4>相关文章</h4>
+                {% if info.topicRelatedList then %}
+                {% for _, t in pairs(info.topicRelatedList) do %}
+                <div class="post-nav-item">
+                    <a href="{{t.url}}" id="{{t.alias}}" title="{{t.title}}">
+                        <i class="iconfont icon-right"></i> {{t.title}}
+                    </a>
+                </div>
+                {% end %}
+                {% elseif info.categoryRelatedList then %}
+                {% for _, c in pairs(info.categoryRelatedList) do %}
+                <div class="post-nav-item">
+                    <a href="{{c.url}}" id="{{c.alias}}" title="{{c.title}}">
+                        <i class="iconfont icon-right"></i> {{c.title}}
+                    </a>
+                </div>
+                {% end %}
+                {% end %}
+            </div>
+        </footer>
+    </article>
+
+    <div class="post-spread">
+
+    </div>
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['pages/common/front'], function(common){
+        common.goTop();
+        common.showSidebar();
+    });
+</script>
+{-script-}

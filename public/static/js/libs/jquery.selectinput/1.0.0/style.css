@@ -1,0 +1,62 @@
+.select-input-wrapper {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    padding-left: 4px;
+    padding-top: 6px;
+    cursor: text;
+    text-align: left;
+    -webkit-appearance: textfield;
+    min-height:38px;
+}
+.select-input-items{float:left;}
+.input-btn-add{float:left;margin-left:10px;}
+.select-input-wrapper .input-item {
+    background-color: #cde69c;
+    border-radius: 2px;
+    border: 1px solid #a5d24a;
+    color: #638421;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-right: 15px;
+    padding: 3px;
+}
+.select-input-wrapper .input-item:hover{
+    opacity:0.8;
+}
+.select-input-wrapper .input-item  .remove {
+    cursor: pointer;
+    display:inline-block;
+    margin-left:5px;
+}
+.select-input-wrapper .input-item  .remove .remove-item-btn {
+    position:relative;
+    background:#333;
+    color:#18bc9c;
+}
+.select-input-wrapper .input-item  .remove i {
+    font-size:8px;
+    font-weight:normal;
+    display:block;
+    position:absolute;
+    top:-30px;
+    right:-15px;
+}
+.select-input-wrapper .input-item .remove:hover {
+    text-decoration: none;
+}
+.select-input-wrapper .input-item  .new-item {
+    background: transparent;
+    border: 0;
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    outline: none;
+    padding: 4px;
+    padding-left: 0;
+    width: 80px;
+}

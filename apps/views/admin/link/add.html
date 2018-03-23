@@ -1,0 +1,132 @@
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-link"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        <form id="link-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+
+            <div class="form-group">
+                <label for="ftitle" class="control-label col-xs-12 col-sm-2">网站名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="ftitle" name="websiteName" value="" title="请填写网站名称">
+                </div>
+                <div class="help-block" for="ftitle"></div>
+            </div>
+            <div class="form-group">
+                <label for="linkName" class="control-label col-xs-12 col-sm-2">显示名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="linkName" name="linkName" value="" title="请填写显示名称">
+                </div>
+                <div class="help-block" for="linkName"></div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="control-label col-xs-12 col-sm-2">链接地址:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="url" name="url" value="" title="请填写友情链接链接地址">
+                </div>
+                <div class="help-block" for="url"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="logo" class="control-label col-xs-12 col-sm-2">LOGO:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon icon-preview-box"><i class="iconfont icon-link"></i></span>
+                        <input type="text" class="form-control icon-input-value" id="logo" name="logo">
+                        <a href="javascript:;" class="input-group-addon" id="validate-logo-btn">验证LOGO</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="logo" class="control-label col-xs-12 col-sm-2">LOGO预览:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <img src="/static/images/img_error.png" id="logo-preview">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="contact" class="control-label col-xs-12 col-sm-2">联系人:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="contact" name="contact" value="" title="请填写联系人">
+                </div>
+                <div class="help-block" for="contact"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="control-label col-xs-12 col-sm-2">邮箱:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="email" name="email" value="" title="请填写邮箱">
+                </div>
+                <div class="help-block" for="email"></div>
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">是否审核:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="status"
+                                   value="1" />
+                            <span class="text-switch" data-yes="已审" data-no="未审"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">是否显示:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="display"
+                                   value="1" />
+                            <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="weight" name="weight" value="" title="请填写排序值">
+                </div>
+                <div class="help-block" for="weight"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn', 'pages/link/add'], function($, fn, page){
+        fn.refreshPage();
+        fn.chosen();
+        page.init();
+        fn.validateForm('link-form');
+    })
+</script>
+{-script-}

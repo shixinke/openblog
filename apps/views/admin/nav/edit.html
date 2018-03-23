@@ -1,0 +1,160 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.jstree/3.3.4/themes/default/style.min.css">
+{-css-}
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-menu"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        {% if err and err ~= '' then %}
+        <div class="alert alert-warning">
+            <i class="iconfont icon-alert"></i> {{err}}
+        </div>
+        {% else %}
+        <form id="nav-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+            <input type="hidden" name="navId" value="{{info.navId}}">
+            <div class="form-group">
+                <label for="position" class="control-label col-xs-12 col-sm-2">导航位置:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" id="position" name="position">
+                        {% if info.position == 1 then %}
+                        <option selected="selected" value="1">头部导航</option>
+                        <option value="2">底部导航</option>
+                        {% else %}
+                        <option value="1">头部导航</option>
+                        <option selected="selected" value="2">底部导航</option>
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="position"></div>
+            </div>
+            <div class="form-group">
+                <label for="ftitle" class="control-label col-xs-12 col-sm-2">导航名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="ftitle" name="title" value="{{info.title}}" title="请填写导航名称">
+                </div>
+                <div class="help-block" for="ftitle"></div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="control-label col-xs-12 col-sm-2">链接地址:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="url" name="url" value="{{info.url}}" title="请填写导航链接地址">
+                </div>
+                <div class="help-block" for="url"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="icon" class="control-label col-xs-12 col-sm-2">图标:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon icon-preview-box"><i class="iconfont {{info.icon}}"></i></span>
+                        <input type="text" class="form-control icon-input-value" id="icon" name="icon" value="{{info.icon}}" readonly="readonly">
+                        <a href="javascript:;" class="btn-search-icon input-group-addon">选择图标</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="navType" class="control-label col-xs-12 col-sm-2">导航类型:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" id="navType" name="navType">
+                        {% if info.navType == 1 then %}
+                        <option selected="selected" value="1">站内链接</option>
+                        <option value="2">站外链接</option>
+                        {% else %}
+                        <option value="1">站内链接</option>
+                        <option  selected="selected" value="2">站外链接</option>
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="navType"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="target" class="control-label col-xs-12 col-sm-2">打开类型:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" id="target" name="target">
+                        <option value="_blank" {% if info.target == '_blank' then %} selected="selected"{% end %}>新窗口打开</option>
+                        <option value="_self" {% if info.target == '_self' then %} selected="selected"{% end %}>本窗口打开</option>
+                        <option value="_parent" {% if info.target == '_parent' then %} selected="selected"{% end %}>父窗口打开</option>
+                        <option value="_top" {% if info.target == '_top' then %} selected="selected"{% end %}>顶部窗口打开</option>
+                    </select>
+                </div>
+                <div class="help-block" for="target"></div>
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">是否显示:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="display"
+                                   value="1" {% if info.display == 1 then %}checked ="checked"{% end %}/>
+                            <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="weight" name="weight" value="{{info.weight}}" title="请填写排序值">
+                </div>
+                <div class="help-block" for="weight"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+        {% end %}
+    </div>
+
+</div>
+{-widgets-}
+<div id="icon-list-tpl" class="hidden">
+    <div id="choose-icon">
+        <div>
+            <form onsubmit="return false;">
+                <div class="input-group input-groupp-md">
+                    <div class="input-group-addon">搜索图标</div>
+                    <input class="input-icon-search form-control" type="text" placeholder="">
+                </div>
+            </form>
+        </div>
+        <div>
+            <ul class="list-inline" id="icon-list-inline">
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+{-widgets-}
+{-script-}
+<script type="text/javascript">
+    var iconUrl = '/static/fonts/demo_fontclass.html';
+    require(['jquery', 'fn', 'pages/rule/add'], function($, fn, page){
+        fn.refreshPage();
+        fn.chosen();
+        page.init();
+        fn.validateForm('nav-form');
+    })
+</script>
+{-script-}

@@ -1,0 +1,84 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.jstree/3.3.4/themes/default/style.min.css">
+<link type="text/css" rel="stylesheet" href="/static/css/comment.css">
+{-css-}
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-comment"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+
+    <div>
+        <div id="thread-body" class="article-body">
+            <div class="article-inner-left">
+                <div><a href="javascript:;"><img class="img-thumbnail" src="${info.getAvatar()}" /></a></div>
+            </div>
+            <div class="article-inner-right">
+                <div class="thread-right-top">
+                    <div class="thread-username">
+                        <a href="javascript:;" data-uid="${info.getUserId()?c}" class="author-user"><span>${info.getNickname()}</span></a>
+                    </div>
+                    <div class="thread-content-close-1">
+                        <a href="javascript:;"> <span class="iconfont icon-down" aria-hidden="true"></span> </a>
+                    </div>
+                </div>
+                <div class="thread-content">
+                    <span class="thread-content-text">${info.getContent()}</span>
+                </div>
+                <div class="thread-actions link-btns" data-type="1">
+                    <div class="thread-content-close-2">
+                        <a href="javascript:;"> <span class="iconfont icon-down" aria-hidden="true"></span> </a>
+                    </div>
+                    <a href="javascript:;" class="delete-thread-btn"><i class="iconfont icon-delete"></i>删除 </a>
+                    <a href="javascript:;" class="reply-btn"><i class="iconfont icon-comment"></i> 回复(<span class="text-red" id="thread-comment-count">${info.getComments()}</span>)</a>
+                    <a href="javascript:;"  data-flag="<#if info.actions.like>1</#if>" class="like-btn <#if info.actions.dislike>disabled</#if>"><i class="iconfont icon-like"></i> <#if info.actions.like>取消赞<#else>赞</#if>(<span class="text-red" id="thread-like-count">${info.getLike()}</span>)</a>
+                    <a href="javascript:;" data-flag="<#if info.actions.dislike>1</#if>" class="dislike-btn <#if info.actions.like>disabled</#if>"><i class="iconfont icon-dislike"></i> <#if info.actions.dislike>取消踩<#else>踩</#if>(<span class="text-red" id="thread-dislike-count">${info.getDislike()}</span>)</a>
+                    <a href="javascript:;" class="report-btn <#if info.actions.report>disabled</#if>" ><i class="iconfont icon-report" data-flag="1"></i> 举报(<span class="text-red" id="thread-report-count">${info.getReports()}</span>)</a>
+                    <a class="link-black"><i class="iconfont icon-time"></i> ${info.getCreateTime()?string("yyyy-MM-dd HH:mm:ss")}</a>
+                </div>
+                <div class="thread-add-comment-box">
+                    <div class="add-reply-box">
+                        <input type="hidden" id="at-user-id" value="">
+                        <input type="hidden" id="at-nickname" value="">
+                        <div class="add-reply-field">
+                            <textarea class="form-control" rows="2" id="comment-content"  placeholder="写下你的评论..."></textarea>
+                        </div>
+                        <div class="add-reply-buttons">
+                            <button type="button" class="btn btn-primary btn-sm" id="add-thread-reply-btn">评论</button>
+                            <a  href="javascript:;"  class="add-reply-buttons-cancel">取消</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <#else>
+    <div class="alert alert-warning">
+        <i class="iconfont icon-alert"></i> ${error}
+    </div>
+</#if>
+</div>
+
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn'], function($, fn){
+        fn.refreshPage();
+        fn.validateForm('tag-form');
+    })
+</script>
+{-script-}

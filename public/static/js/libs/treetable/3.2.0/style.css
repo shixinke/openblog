@@ -1,0 +1,45 @@
+table.treetable span.indenter {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+
+    /* Disable text selection of nodes (for better D&D UX) */
+    user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+
+    /* Force content-box box model for indenter (Bootstrap compatibility) */
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+
+    width: 24px;
+}
+
+table.treetable span.indenter a,table.treetable span.indenter i {
+    background-position: left center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    text-decoration: none;
+    width: 24px;
+}
+
+table.treetable tr.collapsed span.indenter a {
+    background:url("32px.png") -100px -4px;
+}
+
+
+
+table.treetable tr.expanded span.indenter a {
+    background:url("32px.png") -132px -4px;
+}
+
+table.treetable tr.leaf span.indenter i{
+    display: inline-block;
+    width:24px;
+    hieght:24px;
+    background:url("32px.png") -68px -4px;
+}

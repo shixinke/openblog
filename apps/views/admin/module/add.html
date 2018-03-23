@@ -1,0 +1,142 @@
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-link"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        <form id="module-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+
+            <div class="form-group">
+                <label for="moduleName" class="control-label col-xs-12 col-sm-2">模块名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="moduleName" name="moduleName" value="" title="请填写模块名称">
+                </div>
+                <div class="help-block" for="moduleName"></div>
+            </div>
+            <div class="form-group">
+                <label for="alias" class="control-label col-xs-12 col-sm-2">模块标识:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="alias" name="alias" value="" title="请填写模块标识">
+                </div>
+                <div class="help-block" for="alias"></div>
+            </div>
+            <div class="form-group">
+                <label for="moduleType" class="control-label col-xs-12 col-sm-2">模块类型:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="moduleType" id="moduleType">
+                        <option value="2">自定义模块</option>
+                        <option value="1">系统内置模块</option>
+                    </select>
+                </div>
+                <div class="help-block" for="moduleType"></div>
+            </div>
+            <div class="form-group">
+                <label for="hook" class="control-label col-xs-12 col-sm-2">所在位置:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="hook" id="hook">
+                        {% if hooks then %}
+                        {% for name, v in pairs(hooks) do %}
+                        {% if not v.disabled then %}
+                        <option value="{{name}}">{{v.title}}</option>
+                        {% end %}
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="hook"></div>
+            </div>
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">是否显示模块名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="showTitle"
+                                   value="1" />
+                            <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type" class="control-label col-xs-12 col-sm-2">内容类型:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="type" id="type">
+                        <option value="1">静态内容</option>
+                        <option value="2">动态数据</option>
+                    </select>
+                </div>
+                <div class="help-block" for="type"></div>
+            </div>
+
+            <div class="form-group type-row type-row-1">
+                <label for="fcontent" class="control-label col-xs-12 col-sm-2">内容:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <textarea id="fcontent" name="content" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group type-row type-row-2" style="display:none">
+                <label for="filename" class="control-label col-xs-12 col-sm-2">选择模块:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="filename" id="filename">
+                        {% if components then %}
+                        {% for name, v in pairs(components) do %}
+                        <option value="{{name}}">{{v.name}}</option>
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="filename"></div>
+            </div>
+
+            <div class="form-group type-row type-row-2" style="display:none">
+                <label for="maxItems" class="control-label col-xs-12 col-sm-2">最大条目数:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="maxItems" name="maxItems" value="" title="请填写最大条目数">
+                </div>
+                <div class="help-block" for="maxItems"></div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="weight" name="weight" value="" title="请填写排序值">
+                </div>
+                <div class="help-block" for="weight"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn', 'pages/module/add'], function($, fn, page){
+        fn.refreshPage();
+        fn.chosen();
+        page.init();
+        fn.validateForm('module-form');
+    })
+</script>
+{-script-}

@@ -1,6 +1,6 @@
 local _M = {
     _VERSION = '0.01',
-    table_name = 'blog_comment'
+    table_name = 'blog_tag_relation'
 }
 
 function _M.search(self, condition, offset, limit)
@@ -25,8 +25,9 @@ end
 
 function _M.add_tags(self, posts_id, tag_ids)
     local datalist = {}
+
     for _, tag_id in pairs(tag_ids) do
-        datalist[#datalist+1] = {tag_id = tag_id, posts_id = posts_id}
+        datalist[#datalist+1] = {tag_id = tonumber(tag_id), posts_id = tonumber(posts_id)}
     end
     return self:insertAll(self.table_name, datalist)
 end

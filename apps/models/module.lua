@@ -4,17 +4,12 @@ local _M = {
     pk = 'module_id'
 }
 
-function _M.search(self, condition, offset, limit)
-    self:where(condition)
-    local count, err = self:count()
-    self:limit(offset, limit)
-    local res = self:findAll()
-    return {count = count, data = res}
-end
 
-function _M.lists(self)
-    self:where({status = 'ENABLED'})
-    self:order('sort', 'DESC')
+function _M.lists(self, status)
+    if status then
+        self:where({status = status})
+    end
+    self:order('weight', 'DESC')
     return self:findAll()
 end
 
@@ -36,7 +31,7 @@ function _M.edit(self, data)
         return nil, '请选择模块'
     end
     self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:update(self.table_name, data)
 end
 
 function _M.remove(self, id)

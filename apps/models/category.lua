@@ -17,7 +17,7 @@ function _M.lists(self, status)
         self:where({status = status})
     end
     self:order('parent_id', 'ASC')
-    self:order('sort', 'DESC')
+    self:order('weight', 'DESC')
     return self:findAll()
 end
 

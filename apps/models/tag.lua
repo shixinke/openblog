@@ -32,7 +32,6 @@ function _M.add(self, data)
     end
     data.create_time = func.datetime()
     data.status = 1
-    ngx.log(ngx.ERR, cjson.encode(data))
     return self:insert(self.table_name, data)
 end
 
@@ -41,7 +40,7 @@ function _M.edit(self, data)
         return false, '请填写数据'
     end
     if not data.tag_id then
-        return nil, '请选择要删除的标签'
+        return nil, '请选择要修改的标签'
     end
 
     return self:where({tag_id = data.tag_id}):update(self.table_name, data)

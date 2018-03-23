@@ -7,10 +7,10 @@ local user_service = require 'service.user'
 
 
 function _M.init(self)
-    self.disabled_view = true
+    self.withoutLayout = true
 end
 
-function _M.checklogin(self)
+function _M.login(self)
     if self:is_post() then
         local data = self:post()
         if data.account == nil or data.account == '' then
@@ -24,12 +24,14 @@ function _M.checklogin(self)
         data.password = func.password(data.password)
         local res, err = user_service.checklogin(data.account, data.password)
         if res then
-            self.json(200, '登录成功', res)
+            self.json(200, '登录成功', {url = '/admin/index'})
         else
             self.json(5002, err)
         end
     else
-        self.json(4002, '请求非法')
+        self:assign('register', config.pages.register)
+        self:assign('title', '管理登录')
+        self:display()
     end
 end
 
@@ -55,18 +57,20 @@ function _M.register(self)
         end
         local res, err, errcode, sqlstate = user_service.add(data)
         if res then
-            self.json(200, '添加成功')
+            self.json(200, '申请成功')
         else
-            self.json(201, '添加失败'..err)
+            self.json(201, '申请失败'..err)
         end
     else
-        self.json(4002, '请求非法')
+        self:assign('register', config.pages.register)
+        self:assign('title', '管理账号申请')
+        self:display()
     end
 end
 
 function _M.reset(self)
     local uid = 1
-    local password = func.password("123456")
+    local password = func.password("e10adc3949ba59abbe56e057f20f883e")
     local res, err, errcode, sqlstate = user_service.save_password(password, uid)
     if res then
         self.json(200, '重置成功')
@@ -76,7 +80,7 @@ function _M.reset(self)
 
 end
 
-function _M.userinfo(self)
+function _M.status(self)
     local user_info = self:get_login_info()
     if user_info then
         self.json(200, '用户已登录', user_info)
@@ -87,7 +91,11 @@ end
 
 function _M.logout(self)
     session.destroy()
-    self.json(200, '退出成功')
+    if func.is_ajax() then
+        self.json(200, '退出成功', {url = '/admin/passport/login'})
+    else
+        ngx.redirect('/admin/passport/login')
+    end
 end
 
 return _M

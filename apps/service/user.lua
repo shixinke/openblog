@@ -1,6 +1,7 @@
 local _M = {_VERSION = '0.01' }
 local user = require 'models.user':new()
 local session = require 'system.session'
+local region = require 'resty.ip2region.ip2region':new({dict = 'blog_dict'})
 
 
 function _M.checklogin(account, password)
@@ -66,8 +67,47 @@ function _M.save_password(password, uid)
     end
 end
 
+function _M.search(condition, page, pagesize)
+    local resp = {
+        list = {},
+        total = 0
+    }
+    local tab = func.page_util(page, pagesize)
+    local datalist =  user:where(condition):limit(tab.offset, tab.limit):findAll()
+    if datalist then
+        for i, v in pairs(datalist) do
+            local ip = v.last_login_ip
+            local city = ''
+            if func.is_empty_str(ip) ~= true then
+                local region_info = region:search(v.last_login_ip)
+                city = region_info and region_info['city'] or ''
+            end
+            datalist[i].region = city
+        end
+        resp.list = func.array_camel_style(datalist)
+        resp.count = user:where(condition):count()
+    end
+    return resp
+end
+
+function _M.lists()
+    return user:where({status = 1}):findAll()
+end
+
 function _M.add(data)
     return user:add(data)
+end
+
+function _M.update(data)
+    return user:edit(data)
+end
+
+function _M.delete(id)
+    return user:remove(id)
+end
+
+function _M.detail(id)
+    return user:detail(id)
 end
 
 return _M

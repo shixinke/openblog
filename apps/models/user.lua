@@ -14,21 +14,11 @@ function _M.checklogin(self, account, password)
                 return nil, '该账号已被冻结'
             end
         else
-            return nil, '密码错误'
+            return nil, '密码错误,原密码'..res.password..';输入密码：'..password
         end
     else
         return false, '该账号不存在'
     end
-end
-
-
-
-function _M.search(self, condition, offset, limit)
-    self:where(condition)
-    local count, err = self:count()
-    self:limit(offset, limit)
-    local res = self:findAll()
-    return {count = count, data = res}
 end
 
 function _M.detail(self, uid)

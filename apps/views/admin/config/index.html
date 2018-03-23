@@ -1,0 +1,400 @@
+    {-css-}
+    <link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.chosen/1.7.0/chosen.css">
+    {-css-}
+
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-setting"></i> {{title}} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="javascript:;" class="btn btn-primary btn-refresh refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+                <li><a href="/admin/config/lists" class="btn btn-success" ><i class="iconfont icon-category"></i> 列表</a></li>
+                <li><a href="javascript:;" class="btn btn-success btn-add loadpage" title="添加配置" data-url="/admin/config/add" data-width="900" data-height="600"><i class="iconfont icon-plus"></i> 添加</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+        <div class="">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#SITE" data-toggle="tab" aria-expanded="true">基础设置</a></li>
+                    <li><a href="#GLOBAL" data-toggle="tab" aria-expanded="true">全局设置</a></li>
+                    <li><a href="#PAGE" data-toggle="tab" aria-expanded="true">页面设置</a></li>
+                    <li><a href="#FUNC" data-toggle="tab" aria-expanded="true">功能设置</a></li>
+                    <li><a href="#AUTHOR" data-toggle="tab" aria-expanded="true">博主设置</a></li>
+                </ul>
+            </div>
+
+            <div class="panel-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="SITE">
+                        <div class="widget-body no-padding">
+                            <form id="site-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="/admin/config/save">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>{{dataList.site_name.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_name">
+                                            <input type="hidden" name="datatype" value="{{dataList.site_name.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.site_name.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.site_subtitle.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_subtitle">
+                                            <input type="hidden" name="datatype" value="{{dataList.site_subtitle.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.site_subtitle.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.site_title.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_title">
+                                            <input type="hidden" name="datatype" value="{{dataList.site_title.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.site_title.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.site_keywords.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_keywords">
+                                            <input type="hidden" name="datatype" value="{{dataList.site_keywords.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.site_keywords.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.site_description.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_description">
+                                            <input type="hidden" name="datatype" value="{{dataList.site_description.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <textarea class="form-control" name="value">{{dataList.site_description.value}}</textarea>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.copyright.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="copyright">
+                                            <input type="hidden" name="datatype" value="{{dataList.copyright.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <textarea class="form-control" name="value">{{dataList.copyright.value}}</textarea>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="GLOBAL">
+                        <div class="widget-body no-padding">
+                            <form id="global-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="/admin/config/save">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>{{dataList.upload_allow_types.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="upload_allow_types">
+                                            <input type="hidden" name="datatype" value="{{dataList.upload_allow_types.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.upload_allow_types.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.upload_max_size.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="upload_max_size">
+                                            <input type="hidden" name="datatype" value="{{dataList.upload_max_size.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.upload_max_size.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="PAGE">
+                        <div class="widget-body no-padding">
+                            <form id="page-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="/admin/config/save">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>{{dataList.list_page_size.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="list_page_size">
+                                            <input type="hidden" name="datatype" value="{{dataList.list_page_size.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.list_page_size.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.pagination_page_count.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="pagination_page_count">
+                                            <input type="hidden" name="datatype" value="{{dataList.pagination_page_count.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.pagination_page_count.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.search_max_count.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="search_max_count">
+                                            <input type="hidden" name="datatype" value="{{dataList.search_max_count.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.search_max_count.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.show_sub_category_posts.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="site_keywords">
+                                            <input type="hidden" name="datatype" value="{{dataList.show_sub_category_posts.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <div class="switch-box">
+                                                        <label class="switch-btn">
+                                                            <input class="checked-switch" type="checkbox" name="value"
+                                                                   value="1" {% if dataList.show_sub_category_posts.value == 1 or dataList.show_sub_category_posts.value == '1' then %}checked ="checked"{% end %}/>
+                                                            <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                                                            <span class="toggle-btn"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="FUNC">
+                        <div class="widget-body no-padding">
+                            <form id="func-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="/admin/config/save">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>{{dataList.comment_status.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="comment_status">
+                                            <input type="hidden" name="datatype" value="{{dataList.comment_status.datatype}}">
+                                            <div class="row">
+                                                <div class="switch-box">
+                                                    <label class="switch-btn">
+                                                        <input class="checked-switch" type="checkbox" name="status"
+                                                               value="1" {% if dataList.comment_status.value == 1 or dataList.comment_status.value == '1' then %}checked ="checked"{% end %}/>
+                                                        <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                                                        <span class="toggle-btn"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="AUTHOR">
+                        <div class="widget-body no-padding">
+                            <form id="author-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="/admin/config/save">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>{{dataList.author_nickname.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="author_nickname">
+                                            <input type="hidden" name="datatype" value="{{dataList.author_nickname.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.author_nickname.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.author_avatar.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="author_avatar">
+                                            <input type="hidden" name="datatype" value="{{dataList.author_avatar.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <input type="text" class="form-control" name="value" value="{{dataList.author_avatar.value}}">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.author_github.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="author_github">
+                                            <input type="hidden" name="datatype" value="{{dataList.author_github.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="iconfont icon-github"></i></div>
+                                                        <input type="text" class="form-control" name="value" value="{{dataList.author_github.value}}">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.author_weibo.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="author_weibo">
+                                            <input type="hidden" name="datatype" value="{{dataList.author_weibo.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="iconfont icon-weibo"></i></div>
+                                                        <input type="text" class="form-control" name="value" value="{{dataList.author_weibo.value}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dataList.author_email.title}}</td>
+                                        <td>
+                                            <input type="hidden" name="key" value="author_email">
+                                            <input type="hidden" name="datatype" value="{{dataList.author_email.datatype}}">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-xs-12 config-value-box">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="iconfont icon-email"></i></div>
+                                                        <input type="text" class="form-control" name="value" value="{{dataList.author_email.value}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {-script-}
+    <script type="text/javascript">
+
+        require(['fn', 'pages/config/items', 'bootstrap'], function(fn, page){
+            fn.refreshPage();
+            fn.chosen();
+            fn.loadPage();
+            page.init();
+        })
+    </script>
+    {-script-}

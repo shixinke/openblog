@@ -1,0 +1,160 @@
+    {-css-}
+    <link type="text/css" rel="stylesheet" href="/static/js/libs/webuploader/0.1.5/webuploader.css">
+    {-css-}
+
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-plus"></i> {{title}} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+
+        <div class="panel-body">
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane active" id="normal">
+                    <div class="page-content">
+                        <form id="attach-form" data-iframe="1" class="form-horizontal" method="POST" action="/admin/attachment/add" >
+                            <input type="hidden" name="relationType" value="0">
+                            <input type="hidden" name="relationId" value="0">
+                            <div class="form-group">
+                                <label for="ftitle" class="control-label col-xs-12 col-sm-2">文件说明:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control required" id="ftitle" name="title" value="" title="请填写文件说明">
+                                </div>
+                                <div class="help-block" for="ftitle"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pid" class="control-label col-xs-12 col-sm-2">附件类型:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <select name="mediaType" id="pid" class="form-control">
+                                        <option value="1">图片</option>
+                                        <option value="2">音频</option>
+                                        <option value="3">视频</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="control-label col-xs-12 col-sm-2">文件:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <div class="single-upload-box">
+                                        <a href="javascript:;" class="remove-btn file-img-delete"><i class="iconfont icon-close-circle"></i></a>
+                                        <div id="single-upload-preview"></div>
+                                        <input type="hidden" name="url" value="" id="single-upload-value">
+                                        <input type="hidden" name="fileInfoExt" value="" id="single-upload-info">
+                                        <a href="javascript:;" title="添加附件" class="single-upload-btn" id="single-upload-btn">
+                                            <i class="iconfont icon-image" style="font-size:80px;"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="remark" class="control-label col-xs-12 col-sm-2">备注:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control" id="remark" name="remark" value="" title="请填写文件备注">
+                                </div>
+                                <div class="help-block" for="remark"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input type="text" class="form-control required number min" id="weight" name="weight" value="0" placeholder="请输入排序值" title="请输入合法的排序值" data-rule-number="true" data-rule-min="0" data-msg-number="排序值只能是大于0的数字" data-msg-min="排序值只能是大于0的数字">
+                                </div>
+                                <div class="help-block" for="weight"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-12 col-sm-8">
+                                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    {-widgets-}
+    <div id="upload-before-box" style="display:none;">
+        <div class="box-header">
+            &nbsp;
+        </div>
+        <div class="box-body">
+            <div class="file-img-list">
+                <ul>
+                    <li class="file-list">
+                        <dl id="upload-queue-list">
+
+                        </dl>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="添加图片" class="add-upload-btn">
+                            <i class="iconfont icon-addpic"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="box-footer fixed-footer">
+            <div class="pull-left">
+                <a class="btn btn-success start-upload-btn"><i class="iconfont icon-upload"></i> <span>开始</span></a>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-success confirm-btn"><i class="iconfont icon-confirm"></i> 确定</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="file-item-box hidden" id="file-item-box">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+            <div class="file-img-list">
+                <ul>
+                    <li class="file-list">
+                        <dl>
+                            <dd>
+                                <img src="" class="file-img-thumb">
+                                <p class="file-img-title"><input type="text" class="form-control img-title" placeholder="图片说明"/></p>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    {-widgets-}
+    {-script-}
+    <script type="text/javascript">
+        var tab = '{{tab}}';
+        require(['jquery', 'fn', 'pages/attach/upload', 'bootstrap'], function($, fn, page){
+            fn.refreshPage();
+            fn.chosen();
+            if (tab == 'normal') {
+                fn.validateForm('attach-form');
+            } else {
+                fn.validateForm('attach-multi-form');
+            }
+            page.init();
+        })
+    </script>
+    {-script-}
+

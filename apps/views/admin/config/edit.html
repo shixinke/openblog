@@ -1,0 +1,104 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.chosen/1.7.0/chosen.css">
+{-css-}
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-edit"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        {% if err and err ~= '' then %}
+        <div class="alert alert-warning">
+            <i class="iconfont icon-alert"></i> {{err}}
+        </div>
+        {% else %}
+        <form id="config-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+            <input type="hidden" name="key" value="{{info.key}}">
+            <div class="form-group">
+                <label for="ftitle" class="control-label col-xs-12 col-sm-2">配置名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="ftitle" name="title" value="{{info.title}}" title="请填写配置名称">
+                </div>
+                <div class="help-block" for="ftitle"></div>
+            </div>
+            <div class="form-group">
+                <label for="pid" class="control-label col-xs-12 col-sm-2">配置分组:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select name="group" id="pid" class="form-control chosen-select">
+                        {% if groups then %}
+                        {% for k, v in pairs(groups) do %}
+                        {% if info.group == k then %}
+                        <option selected="selected" value="{{k}}">{{v}}</option>
+                        {% else %}
+                        <option value="{{k}}">{{v}}</option>
+                        {% end %}
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="key" class="control-label col-xs-12 col-sm-2">配置项:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="key"  value="{{info.key}}" readonly="readonly" title="请填写配置键">
+                </div>
+                <div class="help-block" for="key"></div>
+            </div>
+            <div class="form-group">
+                <label for="datatype" class="control-label col-xs-12 col-sm-2">数据类型:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select name="datatype" id="datatype" class="form-control">
+                        {% if dataTypes then %}
+                        {% for k, v in pairs(dataTypes) do %}
+                        {% if info.datatype == k then %}
+                        <option selected="selected" value="{{k}}">{{v}}</option>
+                        {% else %}
+                        <option value="{{k}}">{{v}}</option>
+                        {% end %}
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="value" class="control-label col-xs-12 col-sm-2">配置值:</label>
+                <div class="col-xs-12 col-sm-8" id="config-value-box">
+                    <textarea class="form-control" id="value" name="value">{{info.value}}</textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+        {% end %}
+    </div>
+
+</div>
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn'], function($, fn){
+        fn.refreshPage();
+        fn.chosen();
+        fn.validateForm('config-form');
+    })
+</script>
+{-script-}

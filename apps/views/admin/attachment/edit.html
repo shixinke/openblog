@@ -1,0 +1,103 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/webuploader/0.1.5/webuploader.css">
+{-css-}
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-plus"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            {% if err and err ~= '' then %}
+            <div class="alert alert-warning">
+                <i class="iconfont icon-alert"></i> {{err}}
+            </div>
+            {% else %}
+            <div class="tab-pane active" id="normal">
+                <div class="page-content">
+                    <form id="attach-form" data-iframe="1" class="form-horizontal" method="POST"  >
+                        <input type="hidden" name="fileId" value="{{info.fileId}}">
+                        <div class="form-group">
+                            <label for="ftitle" class="control-label col-xs-12 col-sm-2">文件说明:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input type="text" class="form-control required" id="ftitle" name="title" value="{{info.title}}" title="请填写文件说明">
+                            </div>
+                            <div class="help-block" for="ftitle"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pid" class="control-label col-xs-12 col-sm-2">附件类型:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <select name="mediaType" id="pid" class="form-control">
+                                    <option value="1" {% if info.mediaType == 1 then %} selected="selected" {% end %}>图片</option>
+                                    <option value="2" {% if info.mediaType == 2 then %} selected="selected" {% end %}>音频</option>
+                                    <option value="3" {% if info.mediaType == 3 then %} selected="selected" {% end %}>视频</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label col-xs-12 col-sm-2">文件:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="single-upload-box">
+
+                                    <div id="single-upload-preview">
+                                        <img src="{{info.path}}">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="control-label col-xs-12 col-sm-2">备注:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input type="text" class="form-control" id="remark" name="remark" value="{{info.remark}}" title="请填写文件备注">
+                            </div>
+                            <div class="help-block" for="remark"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                            <div class="col-xs-12 col-sm-8">
+                                <input type="text" class="form-control required number min" id="weight" name="weight" value="{{info.weight}}" placeholder="请输入排序值" title="请输入合法的排序值" data-rule-number="true" data-rule-min="0" data-msg-number="排序值只能是大于0的数字" data-msg-min="排序值只能是大于0的数字">
+                            </div>
+                            <div class="help-block" for="weight"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-12 col-sm-8">
+                                <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                                <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% end %}
+        </div>
+    </div>
+
+
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn'], function($, fn, page){
+        fn.refreshPage();
+        fn.chosen();
+        fn.validateForm('attach-form');
+    })
+</script>
+{-script-}
+

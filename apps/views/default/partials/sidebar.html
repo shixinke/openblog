@@ -1,0 +1,56 @@
+<div class="col-md-3 col-sm-3 blog-sidebar">
+    <!-- CATEGORIES START -->
+    {% if sidebar then %}
+    {% for _, row in pairs(sidebar) do %}
+    {% if row.showTitle then %}
+    <h2 class="no-top-space">{{row.title}}</h2>
+    {% end %}
+    {% if row.data then %}
+    <div class="widget-wrap">
+        <div class="widget　{% if row.id == 'tag' then %} blog-tags {% end %}" data-id="{{row.id}}">
+            {% if row.id == 'category' then %}
+            <ul class="nav sidebar-categories margin-bottom-40">
+                {% for _, line in pairs(row.data) do %}
+                <li>
+                    <a href="{{line.url}}">　<i class="iconfont icon-right"></i> {{line.categoryName}} ({{line.items}})</a>
+                    {% if line.children then %}
+                    <dl>
+                    {% for _, child in pairs(line.children) do %}
+                        <dd><a href="{{child.url}}">{{child.categoryName}} ({{child.items}})</a></dd>
+                    {% end %}
+                    </dl>
+                    {% end %}
+                </li>
+                {% end %}
+            </ul>
+            {% elseif row.id == 'tag' then %}
+            <ul class="tag-list">
+                {% for _, line in pairs(row.data) do %}
+                <li class="tag-list-item"><a class="tag-list-link" href="{{line.url}}"><i class="iconfont icon-tag"></i>{{line.tagName}}</a></li>
+                {% end %}
+            </ul>
+            {% elseif row.id == 'archive' then %}
+            <ul class="nav sidebar-categories margin-bottom-40">
+                {% for _, line in pairs(row.data) do %}
+                <li>
+                    <a href="{{line.url}}">　<i class="iconfont icon-right"></i> {{line.title}} ({{line.total}})</a>
+                </li>
+                {% end %}
+            </ul>
+            {% elseif row.id == 'topic' then %}
+            <ul class="nav sidebar-categories margin-bottom-40">
+                {% for _, line in pairs(row.data) do %}
+                <li>
+                    <a href="{{line.url}}">　<i class="iconfont icon-right"></i> {{line.topicName}} ({{line.posts}})</a>
+                </li>
+                {% end %}
+            </ul>
+            {% end %}
+        </div>
+    </div>
+    {% end %}
+    {% end %}
+    {% end %}
+
+
+</div>

@@ -1,0 +1,12 @@
+<footer id="footer" class="footer">
+    <div class="footer-inner">
+        {% if footerbar then %}
+        {% for _, f in pairs(footerbar) do %}
+        {*f.content*}
+        {% end %}
+        {% end %}
+    </div>
+</footer>
+<div id="back-to-top-btn" class="back-to-top back-to-top-on">
+    <i class="iconfont icon-go-top"></i>
+</div>

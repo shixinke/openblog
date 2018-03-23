@@ -1,0 +1,69 @@
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-link"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        <form id="module-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+
+            <div class="form-group">
+                <label for="hook" class="control-label col-xs-12 col-sm-2">所在位置:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="hook" id="hook">
+                        {% if hooks then %}
+                        {% for name, v in pairs(hooks) do %}
+                        <option value="{{name}}">{{v.title}}</option>
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="hook"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="moduleId" class="control-label col-xs-12 col-sm-2">选择模块:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <select class="form-control" name="moduleId" id="moduleId">
+                        {% if datalist then %}
+                        {% for _, v in pairs(datalist) do %}
+                        <option value="{{v.moduleId}}">{{v.moduleName}}</option>
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+                <div class="help-block" for="moduleId"></div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn'], function($, fn){
+        fn.refreshPage();
+        fn.chosen();
+        fn.validateForm('module-form');
+    })
+</script>
+{-script-}

@@ -9,7 +9,7 @@ function _M.search(self, condition, offset, limit)
     local count, err = self:count()
     self:limit(offset, limit)
     local res = self:findAll()
-    return {count = count, data = res}
+    return {total = count, list = res}
 end
 
 function _M.detail(self, file_id)
@@ -30,7 +30,7 @@ function _M.edit(self, data)
         return nil, '请选择文件'
     end
     self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:update(self.table_name, data)
 end
 
 function _M.remove(self, file_id)

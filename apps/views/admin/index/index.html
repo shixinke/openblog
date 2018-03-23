@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {(admin/partials/meta.html)}
+    <link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.iframetabs/1.0.0/style/style.css">
+</head>
+<body class="hold-transition skin-green sidebar-mini fixed" id="tabs">
+<div class="wrapper">
+
+    <header id="header" class="main-header">
+        <!-- Logo -->
+        <a href="javascript:;" class="logo">
+            <!-- 迷你模式下Logo的大小为50X50 -->
+            <span class="logo-mini"><i class="iconfont icon-meizu-mini-logo"></i></span>
+            <!-- 普通模式下Logo -->
+            <span class="logo-lg"><b><i class="iconfont icon-api"></i></b><i class="iconfont icon-black-bg-dot"></i>博客</span>
+        </a>
+        <!-- 顶部通栏样式 -->
+        <nav class="navbar navbar-static-top">
+            <!-- 边栏切换按钮-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas">
+                <i class="iconfont icon-sidebar"></i>
+            </a>
+
+            <div id="nav" class="pull-left">
+                <!--如果不想在顶部显示角标,则给ul加上disable-top-badge类即可-->
+                <ul class="nav navbar-nav">
+                    <!--
+                    <li data-index="" class="active"><a href="javascript:;"><i class="iconfont"></i></a></li>
+                    -->
+                </ul>
+            </div>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <li>
+                        <a href="" target="_blank" title="前台首页"><i class="iconfont icon-home" style="font-size:14px;"></i></a>
+                    </li>
+
+                    <!--
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="iconfont icon-notice"></i>
+                            <span class="label label-warning">2</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">最新消息</li>
+                            <li>
+                                <ul class="menu">
+                                    <li><a href="">消息1</a></li>
+                                    <li><a href="">消息2</a></li>
+                                    <li><a href="">消息3</a></li>
+                                    <li><a href="">消息4</a></li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#" target="_blank">查看更多</a></li>
+                        </ul>
+                    </li>
+                    -->
+
+                    <li>
+                        <a href="javascript:;"  title="清空缓存" id="clear-cache-btn">
+                            <i class="iconfont icon-delete"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="皮肤">
+                            <i class="iconfont icon-skin"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled clearfix skin-list">
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-blue" style="" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="skin-top-left-span skin-bg-blue"></span>
+                                            <span class="skin-top-right-span bg-light-blue"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-black"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">蓝色</p>
+
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-black" class="clearfix full-opacity-hover">
+                                        <div style="box-shadow: 0 0 2px rgba(0,0,0,0.1)" class="clearfix">
+                                            <span class="skin-top-left-span skin-bg-white"></span>
+                                            <span class="skin-top-right-span skin-bg-white"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-dark-black"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">黑色</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-purple" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-purple-active skin-top-left-span"></span>
+                                            <span class="bg-purple skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-bg-black skin-main-left-span"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">紫色</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-green" class="clearfix full-opacity-hover active">
+                                        <div>
+                                            <span class="bg-green-active skin-top-left-span"></span>
+                                            <span class="bg-green skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-bg-black skin-main-left-span"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">绿色</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-red" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-red-active skin-top-left-span"></span>
+                                            <span class="bg-red skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-bg-black skin-main-left-span"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">红色</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-yellow" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-yellow-active skin-top-left-span"></span>
+                                            <span class="bg-yellow skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-bg-black skin-main-left-span"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin">黄色</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-blue-light" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="skin-top-left-span skin-bg-blue"></span>
+                                            <span class="bg-light-blue skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px">淡蓝</p></li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-black-light" class="clearfix full-opacity-hover">
+                                        <div class="clearfix skin-shadown-black">
+                                            <span class="skin-top-left-span skin-bg-white"></span>
+                                            <span class="skin-bg-white skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px">淡黑</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-purple-light" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-purple-active skin-top-left-span"></span>
+                                            <span class="bg-purple skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px">淡紫</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-green-light" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-green-active skin-top-left-span"></span>
+                                            <span class="bg-green skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px">淡绿</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-red-light" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-red-active skin-top-left-span"></span>
+                                            <span class="bg-red skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px">淡红</p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-skin="skin-yellow-light" class="clearfix full-opacity-hover">
+                                        <div>
+                                            <span class="bg-yellow-active skin-top-left-span"></span>
+                                            <span class="bg-yellow skin-top-right-span"></span>
+                                        </div>
+                                        <div>
+                                            <span class="skin-main-left-span skin-bg-light-gray-more"></span>
+                                            <span class="skin-main-right-span skin-bg-light-gray"></span>
+                                        </div>
+                                        <i class="iconfont icon-success skin-selected"></i>
+                                    </a>
+                                    <p class="text-center no-margin" style="font-size: 12px;">淡黄</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="hidden-xs">
+                        <a href="#" data-toggle="fullscreen" title="全屏"><i class="iconfont icon-maximize"></i></a>
+                    </li>
+
+                    <!-- 账号信息下拉框 -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{% if userInfo.avatar ~= '' then %}{{userInfo.avatar}}{% else %}/static/images/avatar/1.jpg {% end %}" class="user-image" alt="{{userInfo.nickname}}">
+                            <span class="hidden-xs">{% if userInfo.nickname and userInfo.nickname ~= '' then %}{{userInfo.nickname}}{% else %}无名{% end %}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{% if userInfo.avatar ~= '' then %}{{userInfo.avatar}}{% else %}/static/images/avatar/1.jpg {% end %}" class="img-circle" alt="{{userInfo.nickname}}">
+                                <p>
+                                    {% if userInfo.nickname and userInfo.nickname ~= '' then %}{{userInfo.nickname}}{% else %}无名{% end %}
+                                    <small>{{userInfo.lastLoginTime}}</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-6 text-center">
+                                        <a href="javascript:;" class="loadpage" data-url="/admin/profile/index" title="修改个人资料" data-width="600" data-height="500"><i class="iconfont icon-profile"></i> 修改个人资料</a>
+                                    </div>
+
+                                    <div class="col-xs-6 text-center">
+                                        <a href="javascript:;" class="loadpage" data-url="/admin/profile/password"  title="修改密码" data-width="600" data-height="500"><i class="iconfont icon-password"></i> 修改密码</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+
+                                <div class="pull-right">
+                                    <a href="/admin/passport/logout" id="logout-btn" class="btn btn-danger"><i class="iconfont icon-logout"></i> 退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- search form -->
+            <form action="" method="get" class="sidebar-form" onsubmit="return false;">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索菜单">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="iconfont icon-search"></i>
+                        </button>
+                    </span>
+                    <div class="menuresult list-group sidebar-form hide">
+                    </div>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            {% if menuList then %}
+            <ul class="sidebar-menu show-submenu">
+                {% for index, child in pairs(menuList) do %}
+                {% if child.children and #child.children > 0 then %}
+                <li class="treeview">
+                    <a href="javascript:;">
+                        <i class="iconfont {{child.icon}}"></i>
+                        <span>{{child.title}}</span>
+                        <span class="pull-right-container"><i class="iconfont icon-small-down icon-arrow"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        {% for _, leaf in pairs(child.children) do %}
+                        <li class="">
+                            <a href="{{leaf.uri}}" data-id="{{leaf.id}}" class="sidebar-menu-item">
+                                <i class="iconfont {{leaf.icon}}"></i>
+                                <span>{{leaf.title}}</span>
+                            </a>
+                        </li>
+                        {% end %}
+                    </ul>
+                </li>
+                {% else %}
+                <li class="">
+                    <a href="{{child.uri}}" data-id="{{child.id}}" class="sidebar-menu-item">
+                        <i class="iconfont {{child.icon}}"></i>
+                        <span>{{child.title}}</span>
+                    </a>
+                </li>
+                {% end %}
+                {% end %}
+            </ul>
+            {% end %}
+
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" id="content-wrapper">
+        <div id="tab-head-wrapper">
+        </div>
+        <div id="tab-content-wrapper" class="tab-content-wrapper">
+        </div>
+    </div>
+
+</div>
+{(admin/partials/script.html)}
+<script type="text/javascript">
+    require(['pages/index/index'], function(index){
+        index.init();
+    })
+</script>
+</body>
+</html>

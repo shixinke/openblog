@@ -5,11 +5,11 @@ local _M = {
 local user_service = require 'service.user'
 
 function _M.init(self)
-    self.disabled_view = true
     self:check_login()
+    self.layout = 'admin/layout/layout.html'
 end
 
-function _M.save(self)
+function _M.index(self)
     if self:is_post() then
         local data = {}
 
@@ -30,12 +30,19 @@ function _M.save(self)
 
         local res, err = user_service.save_profile(data)
         if res then
-            self.json(200, '保存成功')
+            self.json(200, '保存成功', {url = '/admin/profile/index'})
         else
             self.json(201, err)
         end
     else
-        self.json(4002, '请求非法')
+        local avatarList = {}
+        for i = 1, 12 do
+            avatarList[i] = '/static/images/avatar/'..i..'.jpg'
+        end
+        self:assign('title', '个人资料')
+        self:assign('avatarList', avatarList)
+        self:assign('userInfo', self.get_login_info())
+        self:display()
     end
 end
 
@@ -56,12 +63,19 @@ function _M.password(self)
         end
         local res, err = user_service.save_password(password)
         if res then
-            self.json(200, '保存成功')
+            self.json(200, '保存成功', {url = '/admin/profile/index'})
         else
             self.json(201, err)
         end
     else
-        self.json(4002, '请求非法')
+        local avatarList = {}
+        for i = 1, 12 do
+            avatarList[i] = '/static/images/avatar/'..i..'.jpg'
+        end
+        self:assign('title', '修改个人密码')
+        self:assign('avatarList', avatarList)
+        self:assign('userInfo', self.get_login_info())
+        self:display()
     end
 end
 

@@ -2,21 +2,19 @@ local _M = {
     _VERSION = '0.01'
 }
 
-local session = require 'resty.session'
+local node = require 'service.node'
 
 function _M.init(self)
-    self.layout = 'admin/layouts/layout.html'
+    self.withoutLayout = true
+    self:check_login()
 end
 
 function _M.index(self)
-    local sess = session.open()
-    --ngx.say(func.table_length(sess.data))
-    --ngx.say(sess.data.uid)
+    local menuList = node.tree()
+    self:assign('title', '管理后台控制台')
+    self:assign('userInfo', self:get_login_info())
+    self:assign('menuList', menuList)
     self:display()
-end
-
-function _M.detail(self)
-
 end
 
 return _M

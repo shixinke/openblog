@@ -4,33 +4,26 @@ local _M = {
 
 local category = require 'service.category'
 
-local function parse_request(obj)
+local function parse_request(obj, action)
     local params = {}
     local posts = obj:post()
     posts = posts and posts or {}
     params = posts
-    if func.is_empty_str(posts.categoryName) ~= true  then
-        params.categoryName = nil
-        params.category_name = posts.categoryName
-    else
+    if func.is_empty_str(posts.categoryName)  then
         obj.json(5001, "请输入分类名称")
     end
-    if func.is_empty_str(posts.alias) ~= true  then
-        params.alias = posts.alias
-    else
+
+    params.category_name = posts.categoryName
+    params.categoryName = nil
+    if func.is_empty_str(posts.alias)   then
         obj.json(5002, "请输入分类别名")
     end
-    local options = {}
-    if func.is_empty_str(posts.icon) ~= true  then
-        options.icon = posts.icon
-        posts.icon = nil
-    end
-    if func.is_empty_str(posts.sort) ~= true  then
-        local ok, num = pcall(tonumber, posts.sort)
+    if func.is_empty_str(posts.weight) ~= true  then
+        local ok, num = pcall(tonumber, posts.weight)
         if not ok then
-            params.sort = 0
+            params.weight = 0
         else
-            params.sort = num
+            params.weight = num
         end
     end
     if func.is_empty_str(posts.status) ~= true  then
@@ -40,52 +33,84 @@ local function parse_request(obj)
         params.parent_id = posts.parentId
         params.parentId = nil
     end
-    params.options = cjson.encode(options)
+    if action == 'edit' then
+        local ok, categoryId = pcall(tonumber, posts.categoryId)
+        if not ok   then
+            obj.json(5002, "请选择要修改的分类")
+        end
+        params.category_id = categoryId
+        params.categoryId = nil
+    end
     return params
 end
 
 function _M.init(self)
-    self.disabled_view = true
+    self.layout = 'admin/layout/layout.html'
     self:check_login()
 end
 
-function _M.lists(self)
-
-    local category_list = category.lists()
+function _M.index(self)
+    local category_list = category.datalist()
     if category_list then
-        self.json(200, '获取成功', func.array_camel_style(category_list))
-    else
-        self.json(5003, "获取失败")
+        category_list =  func.array_camel_style(category_list)
     end
+    self:assign('title', '分类')
+    self:assign('dataList', category_list)
+    self:display()
 end
 
-function _M.add(self)
-    local params = parse_request(self)
 
-    local info, err = category.add(params)
-    if info then
-        self.json(200, '添加成功', func.table_camel_style(info))
+function _M.add(self)
+    if self:is_post() then
+        local params = parse_request(self)
+        local info, err = category.add(params)
+        if info then
+            self.json(200, '添加成功', {url = '/admin/category/index'})
+        else
+            self.json(5003, "添加失败"..err)
+        end
     else
-        self.json(5003, "添加失败"..err)
-    end
+        local menuList = category.menulist()
+        self:assign('title', '添加分类')
+        self:assign('menuList', menuList)
+        self:display()
+    end    
 end
 
 function _M.edit(self)
-    local params = parse_request(self)
-
-    local ok, categoryId = pcall(tonumber, params.categoryId)
-    if not ok then
-        self.json(5003, '请选择合法分类')
-    end
-    params.categoryId = nil
-    params.category_id = categoryId
-    params.createTime = nil
-
-    local info, err = category.update(params)
-    if info then
-        self.json(200, '修改成功', params)
+    if self:is_post() then
+        local posts = parse_request(self, 'edit')
+        local info, err = category.update(posts)
+        if info then
+            self.json(200, '修改成功', {url = '/admin/category/index'})
+        else
+            self.json(5003, "修改失败"..err)
+        end
     else
-        self.json(5003, "修改失败:"..err)
+        local info
+        local err
+        local id = self:get('id')
+        if func.is_empty_str(id) then
+            err = "请选择要编辑的分类"
+        else
+            local ok, categoryId = pcall(tonumber, id)
+            if not ok then
+                err = "请选择合法的分类项"
+            else
+                info = category.detail(categoryId)
+                if not info then
+                    err = "未查询到相应的分类信息"
+                end
+            end
+        end
+
+
+        local menuList = category.menulist()
+        self:assign('title', '编辑权限分类')
+        self:assign('menuList', menuList)
+        self:assign('info', info)
+        self:assign('error', err)
+        self:display()
     end
 end
 

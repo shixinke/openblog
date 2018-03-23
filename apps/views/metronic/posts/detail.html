@@ -1,0 +1,100 @@
+<div class="container">
+    {% if not info then %}
+    <div class="alert-error">{{err}}</div>
+    {% else %}
+    <ul class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        {% if info.category then %}
+        <li class="active"><a href="{{info.category.url}}">{{info.category.categoryName}}</a></li>
+        {% end %}
+    </ul>
+    <section id="main">
+
+        <h2 itemprop="name">
+            <a class="article-title" href="{{info.info.url}}">{{info.info.title}}</a>
+        </h2>
+
+
+        <div class="row">
+            <div class="col-md-9 col-sm-9 blog-posts">
+                <article id="{{info.info.alias}}" class="article article-type-post blog-item" itemscope="" itemprop="blogPost">
+                    <div class="article-meta">
+                    </div>
+                    <div class="article-inner">
+
+                        <header class="article-header">
+                            <ul class="blog-info">
+                                <li><i class="iconfont icon-date"></i>
+                                    <time datetime="{{info.info.createTime}}" itemprop="datePublished">{{info.info.createTime}}</time>
+                                </li>
+                                <li class="hidden-xs"><i class="iconfont icon-comment"></i>
+                                    <a href="/comment/lists/{{info.info.postsId}}">评论({{info.info.comments}})</a>
+                                </li>
+                                <li class="hidden-xs"><i class="iconfont icon-eye"></i>
+                                    <a href="">阅读({{info.info.views}})</a>
+                                </li>
+                                {% if info.info.tags then %}
+                                <li class="hidden-xs"><i class="iconfont icon-tag"></i>
+                                    {% for i, v in pairs(info.info.tags) do %}
+                                    <a href="{{v.url}}" title="{{v.tagName}}">{{v.tagName}}</a>
+                                    {% end %}
+                                </li>
+                                {% end %}
+                            </ul>
+                            {% if info.category then %}
+                            <div class="article-category">
+                                分类:
+                                <a class="article-category-link" href="{{info.category.url}}">{{info.category.categoryName}}</a>
+                            </div>
+                            {% end %}
+                            <br>
+
+
+                        </header>
+
+                        <div class="article-entry" itemprop="articleBody">
+                            {*info.info.content*}
+                        </div>
+                    </div>
+
+
+                    <nav id="article-nav">
+
+                        <h4>相关文章</h4>
+                        {% if info.topicRelatedList then %}
+                        {% for _, t in pairs(info.topicRelatedList) do %}
+                        <a href="{{t.url}}" id="{{t.alias}}" class="article-nav-link-wrap">
+                            <div class="article-nav-title">{{t.title}}</div>
+                        </a>
+                        {% end %}
+                        {% elseif info.categoryRelatedList then %}
+                        {% for _, c in pairs(info.categoryRelatedList) do %}
+                        <a href="{{c.url}}" id="{{c.alias}}" class="article-nav-link-wrap">
+                            <div class="article-nav-title">{{c.title}}</div>
+                        </a>
+                        {% end %}
+                        {% end %}
+
+                    </nav>
+
+
+                    <br>
+                </article>
+
+
+
+                <section id="comments">
+                    <div id="disqus_thread">
+                        <noscript>Please enable JavaScript to view the &lt;a href="//disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+                    </div>
+                </section>
+                <br>
+
+
+            </div>
+            {(metronic/partials/sidebar.html)}
+        </div>
+
+    </section>
+    {% end %}
+</div>

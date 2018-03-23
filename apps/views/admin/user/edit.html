@@ -1,0 +1,100 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.xpassword/1.0.0/css/xpassword.css">
+{-css-}
+<!-- RIBBON -->
+<div id="ribbon" class="page-header no-border">
+    <div class="breadcrumb pull-left">
+        <!--<h3><i class="iconfont icon-plus"></i> 添加 </a></h3>-->
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="btn-refresh refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+        </ul>
+    </div>
+</div>
+<!-- END RIBBON -->
+
+<div class="content">
+    <div class="page-content">
+        {% if err and err ~= '' then %}
+        <div class="alert alert-warning">
+            <i class="iconfont icon-alert"></i> {{err}}
+        </div>
+        {% else %}
+        <form id="user-form" data-iframe="1" role="form"  method="POST">
+            <input type="hidden" name="uid" value="{{info.uid}}">
+            <div class="box-body box-profile">
+                <div class="profile-avatar-container">
+                    <input type="hidden" id="avatar-hidden" name="avatar" value="{% if info.avatar ~= '' then %}{{info.avatar}}{% else %}/static/images/avatar/1.jpg{% end %}">
+                    <img class="profile-user-img img-responsive img-circle upload-preview" id="avatar-preview" src="{% if info.avatar ~= '' then %}{{info.avatar}}{% else %}/static/images/avatar/1.jpg{% end %}" alt="">
+                    <div class="profile-avatar-text img-circle">修改头像</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="account" class="control-label">账号:</label>
+                    <input type="text" id="account"  class="form-control required"  value="{{info.account}}" readonly="readonly" title="请输入账号">
+                    <div class="help-block" for="account"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nickname" class="control-label">昵称:</label>
+                    <input type="text" id="nickname" class="form-control required" name="nickname" value="{{info.nickname}}" title="请输入昵称">
+                    <div class="help-block" for="nickname"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="control-label">邮箱:</label>
+                    <input type="text" id="email" name="email" class="form-control"  value="{{info.email}}">
+                </div>
+
+
+                <div class="form-group">
+                    <label  class="control-label">状态:</label>
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="status"
+                                   value="1" {% if info.status == 1 then %}checked ="checked"{% end %}/>
+                            <span class="text-switch" data-yes="启用" data-no="禁用"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">提交</button>
+                    <button type="reset" class="btn btn-default">重置</button>
+                </div>
+
+            </div>
+        </form>
+        {% end %}
+    </div>
+</div>
+
+{-widgets-}
+<div id="avatar-list" style="display:none;">
+    <ul class="list-inline avatar-list-ul">
+        {% for _, val in pairs(avatarList) do %}
+        {% if val == info.avatar then %}
+        <li class="active">
+        {% else %}
+        <li>
+        {% end %}
+            <a href="javascript:;"><img src="{{val}}" class="img-circle"></a>
+            <i class="iconfont icon-selected icon-tool-selected"></i>
+        </li>
+        {% end %}
+    </ul>
+</div>
+{-widgets-}
+
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn', 'pages/user/profile', 'jquery.xpassword'], function($, fn, page){
+        fn.refreshPage();
+        page.init();
+        $('#password').xPassword({strength : true});
+        fn.validateForm('#user-form');
+    })
+</script>
+{-script-}

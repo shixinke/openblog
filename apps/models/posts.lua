@@ -12,7 +12,7 @@ function _M.search(self, condition, offset, limit)
     local count, err = self:count()
     self:limit(offset, limit)
     local res = self:findAll()
-    return {count = count, data = res}
+    return {total = count, list = res}
 end
 
 function _M.total(self)
@@ -37,7 +37,6 @@ function _M.add(self, data)
     if data == nil then
         return false, '请填写数据'
     end
-    data.create_time = func.datetime()
     return self:insert(self.table_name, data)
 end
 
@@ -47,7 +46,7 @@ function _M.edit(self, data)
         return nil, '请选择评论'
     end
     self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:update(self.table_name, data)
 end
 
 function _M.remove(self, id)
@@ -56,6 +55,12 @@ end
 
 function _M.archive(self)
     local sql = 'SELECT DATE_FORMAT(create_time, "%Y%m") AS archive,count(*) AS total FROM '..self.table_name..' GROUP BY archive ORDER BY archive DESC'
+    local data = self:query(sql)
+    return data
+end
+
+function _M.topic(self, topicId)
+    local sql = 'SELECT * FROM '..self.table_name..' AS p JOIN blog_topic_relation AS r ON p.posts_id = r.posts_id WHERE topic_id = '..topicId
     local data = self:query(sql)
     return data
 end

@@ -43,6 +43,7 @@ local function get_dict_free_space()
     return 0
 end
 
+
 local function get_data_disk(data)
     local data_disk = {}
     local data_mounted = config.sys.disk.data
@@ -68,59 +69,51 @@ local function get_system_disk(data)
 end
 
 function _M.init(self)
-    self.disabled_view = true
     self:check_login()
+    self.layout = 'admin/layout/layout.html'
+end
+
+function _M.index(self)
+    local userInfo = self.get_login_info()
+    local region_info = region:search(userInfo.lastLoginIp)
+    userInfo.lastLoginLocation = region_info and region_info['city'] or ''
+    local disk = cmd.disk()
+    local dict_capacity = get_dict_capacity()
+    local dict_free = get_dict_free_space()
+    local sysInfo = {
+        serverVersion = 'Nginx '..ngx_var.nginx_version..'( ngx_lua '..version_format(ngx_config.ngx_lua_version)..')',
+        version = 'thinklua '..config.version,
+        workCount = ngx_worker.count(),
+        dictCapacity = dict_capacity,
+        dictFreeSpace = dict_free,
+        dictUsedRate = func.percent(dict_capacity - dict_free, dict_capacity, 2),
+        memory = cmd.memory(),
+        sysDisk = get_system_disk(disk),
+        dataDisk = get_data_disk(disk),
+        uptime = func.pretty_time(func.time(cmd.uptime()), true)
+    }
+    sysInfo.memory.usedRate = func.percent(sysInfo.memory.used, sysInfo.memory.total, 2)
+    self:assign('title', '管理后台控制台')
+    self:assign('userInfo', userInfo)
+    self:assign('sysInfo', sysInfo)
+    self:display()
 end
 
 
 function _M.stats(self)
-    local user_info = self:get_login_info()
     local total = stats.overview()
-    user_info = user_info or {}
-    local disk = cmd.disk()
-    local region_info = region:search(user_info.last_login_ip)
+    local hotList = stats.hot()
+    local today = stats.daily()
     local stats_data = {
-        user = {
-            nickname = user_info.nickname,
-            avatar = user_info.avatar,
-            lastLoginTime = user_info.last_login_time,
-            lastLoginLocation = region_info and region_info['city'] or '',
-            lastLoginIp = user_info.last_login_ip
-        },
-        sys = {
-            serverVersion = 'Nginx '..ngx_var.nginx_version..'( ngx_lua '..version_format(ngx_config.ngx_lua_version)..')',
-            version = config.version,
-            workCount = ngx_worker.count(),
-            dictCapacity = get_dict_capacity(),
-            dictFreeSpace = get_dict_free_space(),
-            memory = cmd.memory(),
-            sysDisk = get_system_disk(disk),
-            dataDisk = get_data_disk(disk),
-            uptime = func.pretty_time(func.time(cmd.uptime()), true)
-        },
         total = total,
-        topics = {},
-        tags = {},
-        category = {},
-        stats = {}
+        topicList = func.array_camel_style(hotList.topicList),
+        tagList = func.array_camel_style(hotList.tagList),
+        categoryList = func.array_camel_style(hotList.categoryList),
+        postsList = func.array_camel_style(hotList.postsList),
+        today = today
     }
     self.json(200, '获取成功', stats_data)
 end
 
-function _M.connections(self)
-    local data = {
-        connectionsActive = 0,
-        connectionsWaiting = 0,
-        datetime = date('%H:%M:%S', os_time())
-    }
-    if ngx_var.connections_active then
-        data.connectionsActive = tonumber(ngx_var.connections_active)
-    end
-    if ngx_var.connections_waiting then
-        data.connectionsWaiting = tonumber(ngx_var.connections_waiting)
-    end
-
-    self.json(200, "获取成功", data)
-end
 
 return _M

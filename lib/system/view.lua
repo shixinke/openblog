@@ -7,7 +7,9 @@ local mt = {
 }
 
 local template = require 'resty.template'
-local layout = 'layouts/layout.html'
+local layout = 'layout/layout.html'
+local substr = string.sub
+local strlen = string.len
 
 function _M.new(opts)
     local opts = opts or {}
@@ -16,11 +18,17 @@ function _M.new(opts)
         opts.layout = nil
     else
         opts.layout = opts.layout or layout
+        if opts.theme then
+            if substr(opts.layout, 1, strlen(opts.theme)) ~= opts.theme then
+                opts.layout = opts.theme..'/'..opts.layout
+            end
+        end
     end
+
     return setmetatable({
         template = template,
         withoutLayout = opts.withoutLayout,
-        assign_data = {},
+        assign_data = opts.view_data and opts.view_data or {},
         caching = config.debug,
         layout = opts.layout
     }, mt)

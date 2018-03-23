@@ -6,6 +6,8 @@ local popen = io.popen
 local str_gmatch = string.gmatch
 local tab_insert = table.insert
 local tonumber = tonumber
+local substr = string.sub
+local strlen = string.len
 
 local function exec_cmd(command, multi, mode)
     local file, err = popen(command, mode)
@@ -70,7 +72,7 @@ function _M.disk()
                 blocks = arr[2],
                 used = arr[3],
                 available = arr[4],
-                rate = arr[5],
+                rate = tonumber(substr(arr[5], 1, strlen(arr[5])-1)),
                 mounted = arr[6],
                 unit = 'M'
             }

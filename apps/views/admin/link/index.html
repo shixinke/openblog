@@ -1,0 +1,129 @@
+{-css-}
+<link href="/static/js/libs/bootstrap.table/1.11.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+{-css-}
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-link"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="btn btn-primary btn-refresh refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+            <li><a href="javascript:;" class="btn btn-success btn-add loadpage" title="添加友情链接" data-url="/admin/link/add" data-width="900" data-height="600"><i class="iconfont icon-plus"></i> 添加</a></li>
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        <form class="form-inline search-form" role="form" method="post">
+            <div class="search-toolbar" id="search-toolbar">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="websiteName">网站名称</label>
+                        <input type="text" class="form-control" id="websiteName" name="websiteName" placeholder="请输入网站名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkName">显示名称</label>
+                        <input type="text" class="form-control" id="linkName" name="linkName" placeholder="请输入显示名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">链接地址</label>
+                        <input type="text" class="form-control" id="url" name="url" placeholder="请输入链接地址">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">是否审核</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value=""> &nbsp;  </option>
+                            <option value="1">已审核</option>
+                            <option value="0">未审核</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="display">是否显示</label>
+                        <select name="display" id="display" class="form-control">
+                            <option value=""> &nbsp;  </option>
+                            <option value="1">显示</option>
+                            <option value="0">隐藏</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" id="table-search-btn"> <i class="iconfont icon-search"></i> 查询</button>
+
+                </div>
+            </div>
+        </form>
+
+        <div class="data-table-box">
+            <div class="fixed-table-body">
+                <table id="table" class="table table-striped table-bordered table-hover bootstrap-table" width="100%"  data-url="/admin/link/datalist" data-toolbar="#search-toolbar" data-show-refresh="true"
+                       data-locale="cn"
+                       data-show-columns="true" data-icons-prefix="iconfont"
+                       data-id-field="tagId"
+                       data-side-pagination="server"
+                       data-pagination="true"
+                       data-page-list="[5, 10, 20, 50, 100, 200]"
+                       data-query-params="queryParams"
+                       data-response-handler="responseHandler"
+                       data-pagination-first-text="首页"
+                       data-pagination-pre-text="前页"
+                       data-pagination-next-text="后页"
+                       data-pagination-last-text="末页">
+                    <thead>
+                    <tr>
+                        <th data-checkbox="true">全选</th>
+                        <th data-field="websiteName">网站名称</th>
+                        <th data-field="linkName">显示名称</th>
+                        <th data-field="logo" data-formatter="imgFormatter">LOGO</th>
+                        <th data-field="url" data-formatter="urlFormatter">链接链接</th>
+                        <th data-field="contact">联系人</th>
+                        <th data-field="email">邮箱</th>
+                        <th data-field="weight">排序</th>
+                        <th data-field="status" data-formatter="statusFormatter">是否审核</th>
+                        <th data-field="display" data-formatter="booleanFormatter">是否显示</th>
+                        <th data-field="operate" data-class="operate-group" data-align="center" data-valign="middle" data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="table-bottom">
+            <div id="toolbar" class="toolbar pull-left">
+                <a href="javascript:;" class="btn btn-primary btn-refresh refresh-btn" ><i class="iconfont icon-refresh"></i> </a>
+                <a href="javascript:;" class="btn btn-danger btn-del-all" ><i class="iconfont icon-delete"></i> 删除</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{-script-}
+<script type="text/javascript">
+    app.module = 'link';
+    app.pk = 'linkId';
+    function positionFormatter(value, row, index) {
+        if (value == 1) {
+            return '<a class="btn btn-success btn-xs"> 头部友情链接</a>';
+        } else {
+            return '<a class="btn btn-default btn-xs"> 底部友情链接</a>';
+        }
+    }
+    function navTypeFormatter(value, row, index) {
+        if (value == 1) {
+            return '<a class="btn btn-success btn-xs"> 站内链接</a>';
+        } else {
+            return '<a class="btn btn-default btn-xs"> 站外链接</a>';
+        }
+    }
+    require(['fn', 'utils'], function(fn, utils){
+        fn.refreshPage();
+        fn.imgLoadError();
+        fn.loadPage();
+        fn.bootstrapTable();
+        fn.ajaxDel();
+    })
+</script>
+{-script-}

@@ -1,0 +1,96 @@
+
+    {-css-}
+    <link type="text/css" rel="stylesheet" href="/static/js/libs/treetable/3.2.0/style.css">
+    {-css-}
+
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-structure"></i> {{title}} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="javascript:;" class="btn btn-primary btn-refresh refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+                <li><a href="javascript:;" class="btn btn-success btn-add loadpage" data-url="/admin/category/add" title="添加分类" data-width="800" data-height="600"><i class="iconfont icon-plus"></i> 添加</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+        <div class="page-content">
+            <div class="data-table-box">
+                <div class="fixed-table-body">
+                    <table id="rule-table" class="table table-bordered table-hover tree-table action-table">
+                        <thead>
+                        <tr>
+                            <th><input id="check-all" type="checkbox"> 分类名称</th>
+                            <th>分类ID</th>
+                            <th>
+                                分类别名
+                            </th>
+                            <th>
+                                权重
+                            </th>
+
+                            <th>文章数</th>
+                            <th>是否启用</th>
+
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if dataList then %}
+                        {% for index, data in pairs(dataList) do %}
+
+                        <tr data-level="{% if data.parent == 0  then %}1{% else %}2{% end %}" data-index="{{index}}" data-sort="{{data.weight}}" data-tt-id="{{data.id}}" data-tt-parent-id="{{data.parentId}}">
+                            <td>
+                                <input value="{{data.categoryId}}" class="check-item checkbox checkbox-inline" type="checkbox">
+                                {{data.categoryName}}
+                            </td>
+                            <td>{{data.categoryId}}</td>
+                            <td>{{data.alias}}</td>
+                            <td>{{data.weight}}</td>
+                            <td>{{data.items}}</td>
+                            <td>
+                                {% if data.status == 1 then %}
+                                <a href="javascript:;" class="btn btn-info btn-xs">是</a>
+                                {% else %}
+                                <a href="javascript:;" class="btn btn-danger btn-xs">否</a>
+                                {% end %}
+                            </td>
+
+                            <td>
+                                <a href="javascript:;" class="btn btn-xs btn-primary btn-dragsort" title="排序">
+                                    <i class="iconfont icon-drag"></i>
+                                </a>
+                                <a href="javascript:;" class="btn btn-xs btn-success btn-edit loadpage" data-url="/admin/category/edit?id={{data.categoryId}}" data-width="800" data-height="600" title="编辑权限节点">
+                                    <i class="iconfont icon-edit"></i>
+                                </a>
+                                <a href="javascript:;" data-action="/admin/category/delete" data-id="{{data.categoryId}}" class="btn btn-xs btn-danger btn-del-row" title="删除">
+                                    <i class="iconfont icon-delete"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% end %}
+                        {% end %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {-script-}
+    <script type="text/javascript">
+        require(['fn', 'pages/rule/index'], function(fn, page){
+            fn.loadPage();
+            fn.refreshPage();
+            fn.treetable();
+            fn.checkUrlTab();
+            page.init();
+            fn.ajaxDel();
+        })
+    </script>
+    {-script-}

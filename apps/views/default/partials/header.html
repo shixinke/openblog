@@ -1,0 +1,64 @@
+<header id="header" class="header">
+    <div class="header-inner">
+        <div class="site-meta ">
+            <div class="custom-logo-site-title">
+                <a href="/" class="brand" rel="start" style="opacity: 1;">
+                    {% if logo then %}
+                    {% for _, l in pairs(logo) do %}
+                    {*l.content*}
+                    {% end %}
+                    {% end %}
+                </a>
+            </div>
+        </div>
+
+        <div class="site-nav-toggle">
+            <button>
+                <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+                <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+                <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+            </button>
+        </div>
+        <nav class="site-nav">
+            <ul id="menu" class="menu menu-left">
+                <li class="menu-item menu-item-sam {% if navId == 0 then %} menu-item-active {% end %}" style="opacity: 1; transform: translateY(0px);"><a href="/"><i class="iconfont icon-home"></i>首页</a></li>
+                {% if navbar then %}
+                {% for i, v in pairs(navbar) do %}
+                {% if v.data then %}
+                {% for _, row in pairs(v.data) do %}
+                <li class="menu-item menu-item-sam {% if navId == navId then %} menu-item-active {% end %}" style="opacity: 1; transform: translateY(0px);"><a href="{{row.url}}" target="{{row.target}}" data-id="{{row.navId}}"><i class="iconfont {{row.icon}}"></i> {{row.title}}</a></li>
+                {% end %}
+                {% end %}
+                {% end %}
+                {% end %}
+            </ul>
+
+
+            <div class="site-search">
+
+                <form class="site-search-form">
+                    <span class="search-icon iconfont icon-search2"></span>
+                    <input type="text" id="search-input">
+                    <div id="search-result">
+                        <ul class="search-result-list">
+                            <li><a href="//www.baidu.com/s?wd=XXX%20site%3Ablog.zzbd.org" class="search-result">百度搜索 <i class="search-keyword">XXX</i></a></li>
+                            <li><a href="//www.google.com/search?q=XXX%20site%3Ablog.zzbd.org" class="search-result">谷歌搜索 <i class="search-keyword">XXX</i></a></li>
+                            <li><a href="#" class="popup-trigger search-result">本地搜索</a></li>
+                        </ul>
+                    </div>
+                </form>
+                <div class="popup">
+                    <span class="search-icon fa fa-search"></span>
+                    <input type="text" id="local-search-input">
+                    <div id="local-search-result"></div>
+                    <span class="popup-btn-close">close</span>
+                </div>
+
+
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+

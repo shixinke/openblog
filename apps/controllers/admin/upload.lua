@@ -40,7 +40,7 @@ local function uploadfile(conf)
     local file_name
     local form = upload:new(chunk_size)
     local root_path = ngx_var.document_root
-    local file_info = {extension = '', filesize = 0, url = '', mime = '', fileId = '' }
+    local file_info = {extension = '', filesize = 0, url = '', mime = '', fileId = '', filetype = 'image' }
     local content_len = ngx_req.get_headers()['Content-length']
     local body_size = content_len and tonumber(content_len) or 0
     if not form then
@@ -125,7 +125,69 @@ function _M.avatar(self)
             path = file_info.url,
             mime_type = file_info.mime,
             relation_type = 2,
-            relation_id = uid
+            relation_id = uid,
+            remark = nickname..'的头像'
+        }
+        local file_id, err = attachment.upload(attachment_data)
+        if file_id then
+            file_info.fileId = file_id
+            self.json(200, '上传成功', file_info)
+        else
+            attachment.remove_file(file_info.url)
+            self.json(5008, '上传保存失败'..err)
+        end
+
+    else
+        self.json(5003, err)
+    end
+end
+
+function _M.posts(self)
+    local user_info = self:get_login_info()
+    local uid = user_info and user_info.uid or 0
+    local conf = {max_size = 1000000, allow_exts = {'jpg', 'png', 'gif'}, path = 'images/posts', mode = 'static' }
+    local file_info, err = uploadfile(conf)
+    if file_info then
+        local attachment_data = {
+            uid = uid,
+            size = file_info.filesize,
+            title = '文章图片',
+            path = file_info.url,
+            mime_type = file_info.mime,
+            relation_type = 1,
+            relation_id = uid,
+            remark = '文章图片'
+        }
+        local file_id, err = attachment.upload(attachment_data)
+        if file_id then
+            file_info.fileId = file_id
+            self.json(200, '上传成功', file_info)
+        else
+            attachment.remove_file(file_info.url)
+            self.json(5008, '上传保存失败'..err)
+        end
+
+    else
+        self.json(5003, err)
+    end
+end
+
+function _M.attach(self)
+    local user_info = self:get_login_info()
+    local uid = user_info and user_info.uid or 0
+    local nickname = user_info and user_info.nickname or user_info.account
+    local conf = {max_size = 1000000, allow_exts = {'jpg', 'png', 'gif'}, path = 'images/attach', mode = 'static' }
+    local file_info, err = uploadfile(conf)
+    if file_info then
+        local attachment_data = {
+            uid = uid,
+            size = file_info.filesize,
+            title = '通用图片',
+            path = file_info.url,
+            mime_type = file_info.mime,
+            relation_type = 0,
+            remark = '通用图片',
+            relation_id = 0
         }
         local file_id, err = attachment.upload(attachment_data)
         if file_id then
@@ -152,13 +214,11 @@ function _M.remove(self)
     if not file_id or file_id == '' then
         self.json(6002, '请选择删除的文件')
     end
-    if type == 'avatar' then
-        local status, err = attachment.remove(file_id, uid)
-        if status ~= true then
-            self.json(5003, err)
-        end
-        self.json(200, "文件删除成功")
+    local status, err = attachment.remove(file_id, uid)
+    if not status then
+        self.json(5003, err)
     end
+    self.json(200, "文件删除成功")
 end
 
 

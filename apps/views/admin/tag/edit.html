@@ -1,0 +1,96 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.jstree/3.3.4/themes/default/style.min.css">
+{-css-}
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-tag"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        {% if err and err ~= '' then %}
+        <div class="alert alert-warning">
+            <i class="iconfont icon-alert"></i> {{err}}
+        </div>
+        {% else %}
+        <form id="tag-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+            <input type="hidden" name="tagId" value="{{info.tagId}}">
+            <div class="form-group">
+                <label for="tagName" class="control-label col-xs-12 col-sm-2">标签名称:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="tagName" name="tagName" value="{{info.tagName}}" title="请填写标签名称">
+                </div>
+                <div class="help-block" for="tagName"></div>
+            </div>
+            <div class="form-group">
+                <label for="tagAlias" class="control-label col-xs-12 col-sm-2">标签别名:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="tagAlias" name="tagAlias" value="{{info.tagAlias}}" title="请填写标签别名">
+                </div>
+                <div class="help-block" for="tagAlias"></div>
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">状态:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="status"
+                                   value="1" {% if info.status == 1 then %}checked ="checked"{% end %}/>
+                            <span class="text-switch" data-yes="启用" data-no="禁用"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label  col-xs-12 col-sm-2">是否显示:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="switch-box">
+                        <label class="switch-btn">
+                            <input class="checked-switch" type="checkbox" name="display"
+                                   value="1" {% if info.display == 1 then %}checked ="checked"{% end %}/>
+                            <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                            <span class="toggle-btn"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                <div class="col-xs-12 col-sm-8">
+                    <input type="text" class="form-control required" id="weight" name="weight" value="{{info.weight}}" title="请填写排序值">
+                </div>
+                <div class="help-block" for="weight"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                    <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                </div>
+            </div>
+        </form>
+        {% end %}
+    </div>
+
+</div>
+{-script-}
+<script type="text/javascript">
+    require(['jquery', 'fn'], function($, fn){
+        fn.refreshPage();
+        fn.validateForm('tag-form');
+    })
+</script>
+{-script-}

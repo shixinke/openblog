@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {(admin/partials/meta.html)}
+</head>
+<body class="login-page">
+<!-- Start #login -->
+<div id="login">
+    <h3 id="head-title"><i class="iconfont icon-api" style="font-size:20px;"></i> <i class="iconfont icon-black-bg-dot" style="font-size:20px;"></i> 博客管理系统</h3>
+    <!-- Start .login-wrapper -->
+    <div class="login-wrapper">
+        <ul id="login-type-tab" class="nav nav-tabs nav-justified bn">
+
+        </ul>
+        <div id="myTabContent" class="tab-content bn">
+            <div class="tab-pane fade active in" id="log-in">
+                <div class="social-buttons text-center mt10">
+                    <h3>管理登录</h3>
+                </div>
+                <div class="seperator">
+                    <hr>
+                </div>
+                <form class="form-horizontal mt10" action="" id="login-form" role="form" method="post">
+                    <input type="hidden" name="type" id="hidden-type" value="SYSTEM">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="iconfont icon-user"></i>
+                                </div>
+                                <input type="text" name="account" id="account" class="form-control left-icon" value="" placeholder="账号" required="true" title="请输入账号">
+                            </div>
+                            <span class="help-block" for="account"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="iconfont icon-password"></i>
+                                </div>
+                                <input type="password" name="password" id="password" data-encrypt="1" class="form-control left-icon" value="" placeholder="密码" required="true" title="请输入密码">
+                            </div>
+                            <span class="help-block" for="password"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                            <!-- col-lg-12 start here -->
+                            <label class="checkbox">
+                                {% if register == 'on' then %}
+                                没有账号？请<a href="/admin/passport/register">申请账号</a>
+                                {% end %}
+                            </label>
+                        </div>
+                        <!-- col-lg-12 end here -->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4">
+                            <!-- col-lg-12 start here -->
+                            <button class="btn btn-success pull-right" type="submit">登录</button>
+                        </div>
+                        <!-- col-lg-12 end here -->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- End #.login-wrapper -->
+</div>
+<!-- End #login -->
+
+{(admin/partials/script.html)}
+
+<script type="text/javascript">
+    require(['fn'], function(login){
+        login.validateForm('#login-form');
+    })
+</script>
+</body>
+</html>

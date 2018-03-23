@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {(admin/partials/meta.html)}
+    {% if blocks.css then %}
+    {*blocks.css*}
+    {% end %}
+</head>
+
+<body class="inside-header inside-aside ">
+<div id="main" role="main">
+    <div class="tab-content tab-addtabs">
+        <div id="content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    {*view*}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if blocks.widgets then %}
+{*blocks.widgets*}
+{% end %}
+
+{% if blocks.commonjs then %}
+{*blocks.commonjs*}
+{% else %}
+{(admin/partials/script.html)}
+{% end %}
+<script type="text/javascript">
+    var app = {
+        group:"admin",
+        module:"",
+        add : "add",
+        edit : "edit",
+        del : "delete",
+        resort : "resort",
+        detail:"detail",
+        action : ["edit", "delete"],
+        pk:'id',
+        isEditPage:false,
+        isDetailPage:false,
+        isAddPage:false
+    };
+    var pageData = {};
+</script>
+{% if blocks.script then %}
+{*blocks.script*}
+{% end %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>诗心博客</title>
+  <subtitle>专注于WEB开发与文学创作</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="www.shixinke.com/"/>
+  <updated>2018-03-23T184951.000Z</updated>
+  <id>www.shixinke.com</id>
+  <author>
+    <name>shixinke</name>
+  </author>
+</feed>

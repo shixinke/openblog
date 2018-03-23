@@ -52,6 +52,10 @@ function _M.exec(self, sql)
         return err, errcode, sqlstate
     end
 
+    if config.debug then
+        ngx.log(ngx.ERR, sql)
+    end
+
     local res, err, errcode, sqlstate = db:query(sql)
     if not res then
         return nil, err, errcode, sqlstate
@@ -298,7 +302,7 @@ function _M.count(self, tab, where)
     local sql = 'SELECT COUNT(*) AS total FROM '..tab..' '..self:parse_where()..' LIMIT 1'
     local res, err, errcode, sqlstate = self:query(sql)
     if res then
-        return res[1]['total']
+        return tonumber(res[1]['total'])
     else
         return nil, err, errcode, sqlstate
     end
@@ -338,10 +342,13 @@ function _M.insert(self, tab, data)
     local n = 0
     for k, v in pairs(data) do
         fields = fields..'`'..k..'`'
-        if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
-            v = v
-        else
-            v = '"'..v..'"'
+        if type(v) ~= 'number' then
+            v = func.addslashes(v, '"')
+            if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+                v = v
+            else
+                v = '"'..v..'"'
+            end
         end
         values = values..v
         n = n+1
@@ -351,6 +358,70 @@ function _M.insert(self, tab, data)
         end
     end
     sql = sql..fields..')VALUES ('..values..')'
+    local res, err, errcode, sqlstate = self:exec(sql)
+    if res then
+        return res.insert_id and res.insert_id or res.affected_rows
+    else
+        return nil, err, errcode, sqlstate
+    end
+end
+
+function _M.insertAll(self, tab, datalist)
+    self:table(tab)
+    local tab = self:get_table_name(tab)
+    if datalist == nil or tab == nil then
+        return false, 'the data is nil or table name is nil'
+    end
+    local sql = 'INSERT INTO '..tab..'('
+    local fields = ''
+    local values = ''
+    local datalist_len = #datalist
+    if datalist_len < 1 then
+        return false, 'the data is empty'
+    end
+    local times = 0
+
+    for key, val in pairs(datalist) do
+        val = func.clear_table(val)
+        local n = 0
+        local len = func.table_length(val)
+        func.error_log(len)
+        values = values..'('
+        for k, v in pairs(val) do
+            if times < 1 then
+                fields = fields..'`'..k..'`'
+            end
+            if type(v) ~= 'number' then
+                v = func.addslashes(v, '"')
+                if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+                    v = v
+                else
+                    v = '"'..v..'"'
+                end
+            end
+
+            values = values..v
+            n = n+1
+            if n < len then
+                if times < 1 then
+                    fields = fields..','
+                end
+                values = values..','
+            end
+        end
+        func.error_log(fields)
+        values = values..')'
+        times = times + 1
+        if times < datalist_len then
+            values = values..','
+        end
+
+    end
+    local field_len = strlen(fields)
+    if substr(fields, field_len, field_len) == ',' then
+        fields = substr(fields, 1, field_len-1)
+    end
+    sql = sql..fields..')VALUES '..values..''
     local res, err, errcode, sqlstate = self:exec(sql)
     if res then
         return res.insert_id and res.insert_id or res.affected_rows
@@ -375,10 +446,13 @@ function _M.update(self, tab, data, where)
     local data_index = 0
     for k, v in pairs(data) do
         data_index = data_index + 1
-        if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
-            v = v
-        else
-            v = '"'..v..'"'
+        if type(v) ~= 'number' then
+            v = func.addslashes(v, '"')
+            if substr(v, 1, 1) == '"' and substr(v, -1, -1) == '"' then
+                v = v
+            else
+                v = '"'..v..'"'
+            end
         end
         sql = sql..'`'..k..'`='..v
         if data_index < data_len then

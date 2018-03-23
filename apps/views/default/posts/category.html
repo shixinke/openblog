@@ -1,0 +1,65 @@
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        {% if info then %}
+        <li class="active"><a href="{{info.url}}">{{info.categoryName}}</a></li>
+        {% end %}
+    </ul>
+    <div id="main">
+        <div class="row">
+            <div class="col-md-9 col-sm-9 blog-posts">
+                <section class="archives-wrap">
+                    <div class="archives">
+                        {% if datalist.list then %}
+                        {% for _, v in pairs(datalist.list) do %}
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <h2 itemprop="name">
+                                    <a class="archive-article-title" href="{{v.url}}">{{v.title}}</a>
+                                </h2>
+
+                                <ul class="blog-info">
+                                    <li>
+                                        <i class="iconfont icon-time"></i>
+                                        <time datetime="{{v.createTime}}" itemprop="datePublished">{{v.createTime}}</time>
+
+                                    </li>
+                                    <li><i class="iconfont icon-comment"></i>
+                                        <a href="{{v.url}}" class="article-comment-link">评论</a>
+                                    </li>
+                                    {% if v.tags then %}
+                                    <li>
+                                        <i class="iconfont icon-tag"></i>
+                                        {% for _, tag in pairs(v.tags) do %}
+                                        <a href="{{tag.url}}" title="{{tag.tagName}}">{{tag.tagName}}</a>,
+                                        {% end %}
+                                    </li>
+                                    {% end %}
+                                </ul>
+                                <div class="blog-item">
+                                    {*v.summary*}
+                                </div>
+                                <br>
+                                <br>
+                                <a href="{{v.url}}" class="more">阅读全文 <i class="iconfont icon-right"></i></a>
+                            </div>
+                        </div>
+                        <hr class="blog-post-sep">
+                        {% end %}
+                        {% end %}
+                    </div>
+
+                    {% if pages then %}
+                    {*pages*}
+                    {% end %}
+
+                </section>
+
+            </div>
+
+            {(metronic/partials/sidebar.html)}
+
+        </div>
+
+    </div>
+</div>

@@ -3,10 +3,12 @@ local _M = {
 }
 
 local ngx_req = ngx.req
+local ngx_var = ngx.var
 local view = require 'system.view'
 local header = ngx.header
 local ok = ngx.HTTP_OK
 local session = require 'system.session'
+local cookie = require 'resty.cookie':new()
 
 local function get_method()
     return string.lower(ngx_req.get_method())
@@ -79,10 +81,11 @@ function _M.display(self, tpl, data)
     end
     if not tpl then
         local view_suffix = (config.views.file_suffix and config.views.file_suffix ~= '') and config.views.file_suffix or '.html'
+        local theme = self.theme and self.theme..'/' or ''
         if self.layer then
-            tpl = self.layer..'/'..self.controller..'/'..self.action..view_suffix
+            tpl = self.layer..'/'..theme..self.controller..'/'..self.action..view_suffix
         else
-            tpl = self.controller..'/'..self.action..view_suffix
+            tpl = theme..self.controller..'/'..self.action..view_suffix
         end
     end
     self.view:display(tpl, data)
@@ -105,7 +108,13 @@ end
 function _M.check_login(self)
     local user_info = self.get_login_info()
     if not user_info then
-        self.json(5006, '用户未登录')
+        cookie:set('referer_page', ngx_var.uri)
+        local login_page = config.pages.login_page
+        if func.is_ajax() then
+            self.json(5006, '用户未登录', {url = login_page})
+        else
+            ngx.redirect(login_page)
+        end
     end
 end
 
@@ -114,7 +123,7 @@ function _M.get_login_info()
     if not user_info or type(user_info) ~= 'table' or  not user_info['uid'] or user_info['uid'] < 1 then
         return nil
     else
-        return user_info
+        return func.table_camel_style(user_info)
     end
 end
 

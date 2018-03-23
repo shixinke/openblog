@@ -10,6 +10,7 @@ local ngx_var = ngx.var
 local regex = ngx.re
 local str_byte = string.byte
 local str_sub = string.sub
+local str_gsub = string.gsub
 
 local DOT_BYTE = str_byte(':', 1)
 local STAR_BYTE = str_byte('*', 1)
@@ -50,7 +51,7 @@ function _M.route(self)
         local rules = self.rules[lower(ngx_req.get_method())]
         local uri = ngx.var.uri
         if config.routes.url_suffix and config.routes.url_suffix ~= '' then
-            uri = regex.sub(uri, config.routes.url_suffix, '')
+            uri = func.end_trim(uri, config.routes.url_suffix)
         end
         if rules then
             for _, v in pairs(rules) do
@@ -61,15 +62,18 @@ function _M.route(self)
                     end
                 else
                     local path_tab = func.explode('/', uri..'/')
+                    if config.routes.url_suffix and config.routes.url_suffix ~= '' then
+                        v.pattern = func.end_trim(v.pattern, config.routes.url_suffix)
+                    end
                     local is_regex = regex.find(v.pattern, "\\(", "jo")
                     if is_regex then
                         local m, err = regex.match(uri, v.pattern)
                         if m then
-                            m[1] = nil
+                            local url = v.url
                             for i, val in pairs(m) do
-                                v.url = regex.sub(v.url, '\\$'..i, val)
+                                url = str_gsub(url, '$'..i, val)
                             end
-                            local url_tab, err = func.url_parse(v.url)
+                            local url_tab, err = func.url_parse(url)
                             if url_tab then
                                 return url_tab
                             end

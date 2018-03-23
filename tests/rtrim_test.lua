@@ -1,0 +1,1 @@
+ngx.say(func.end_trim('/tags-html.html', '.html'))

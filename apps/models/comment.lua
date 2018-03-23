@@ -6,10 +6,17 @@ local _M = {
 
 function _M.search(self, condition, offset, limit)
     self:where(condition)
+    self.remains = true
     local count, err = self:count()
+    if not count then
+        count = 0
+    end
     self:limit(offset, limit)
     local res = self:findAll()
-    return {count = count, data = res}
+    if not res then
+        res = {}
+    end
+    return {total = count, list = res}
 end
 
 function _M.total(self, posts_id)
@@ -38,7 +45,7 @@ function _M.edit(self, data)
         return nil, '请选择评论'
     end
     self:where(self.pk, '=', data[self.pk])
-    return self:update(self.table_name)
+    return self:update(self.table_name, data)
 end
 
 function _M.remove(self, id)

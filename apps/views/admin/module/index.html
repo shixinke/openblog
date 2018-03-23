@@ -1,0 +1,340 @@
+{-css-}
+<link href="/static/js/libs/jquery.sortable/0.9.13/jquery.sortable.css" rel="stylesheet" type="text/css" />
+{-css-}
+
+<!-- RIBBON -->
+<div id="ribbon" class="page-header">
+    <div class="breadcrumb pull-left">
+        <h3><i class="iconfont icon-tag"></i> {{title}} </a></h3>
+    </div>
+    <div class="breadcrumb pull-right">
+        <ul class="toolbar">
+            <li><a href="javascript:;" class="btn btn-primary btn-refresh refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+            <li><a href="javascript:;" class="btn btn-success btn-add loadpage" title="添加模块" data-url="/admin/module/add" data-width="900" data-height="600"><i class="iconfont icon-plus"></i> 添加</a></li>
+        </ul>
+    </div>
+
+</div>
+<!-- END RIBBON -->
+<div class="content">
+    <div class="page-content">
+        <div class="row module-layout">
+            <div class="col-sm-6">
+                <div class="mod-layout-box border-dashed" id="sortable-container">
+                    <div class="card">
+                        <div class="card-header">
+                            内置模块
+                        </div>
+                        <div class="card-block">
+                            <ul class="sort-ul">
+                            {% if items then %}
+                            {% for _, v in pairs(items) do %}
+                            {% if v.moduleType == 1 then %}
+                                <li class="col-sm-{{v.hookInfo.width}} module-list-item-box">
+                                    <div class="card card-block no-border no-padding-lr">
+                                        <div class="btn {% if v.status == 1 then %} btn-info {% else %} btn-primary {% end %}">
+                                            {{v.moduleName}}
+                                            <div class="btn-icon-bars">
+                                                <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{v.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% end %}
+                            {% end %}
+                            {% end %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            自定义模块 <a href="javascript:;" class="card-top-right-btn loadpage" title="添加模块" data-url="/admin/module/add" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                        </div>
+                        <div class="card-block">
+                            <ul class="sort-ul">
+                            {% if items then %}
+                            {% for _, v in pairs(items) do %}
+                            {% if v.moduleType == 2 then %}
+                                <li class="col-sm-{{v.hookInfo.width}} module-list-item-box">
+                                    <div class="card card-block no-border no-padding-lr">
+                                        <div class="btn  {% if v.status == 1 then %} btn-info {% else %} btn-primary {% end %}">
+                                            {{v.moduleName}}
+                                            <div class="btn-icon-bars">
+                                                <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{v.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                <a href="javascript:;"  data-action="/admin/module/cancel" data-id="{{v.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% end %}
+                            {% end %}
+                            {% end %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mod-layout-box mod-installed-box">
+                    <div class="card">
+                        <div class="card-header">
+                            页头 <a href="javascript:;"  class="card-top-right-btn loadpage" data-url="/admin/module/select?position=header" title="选择模块" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                        </div>
+                        <div class="card-block">
+                            <div class="col-sm-12">
+                                <div class="card card-block border-dashed">
+                                    <div class="el-badge el-badge-info">顶部边栏</div>
+                                    <div class="row">
+                                        {% if groups.topbar then %}
+                                        {% for _, item in pairs(groups.topbar.items) do %}
+                                        <div class="col-sm-12 module-list-item-box">
+                                            <div class="card card-block no-border no-padding-lr">
+                                                <div class="btn btn-info">
+                                                    {{item.moduleName}}
+                                                    <div class="btn-icon-bars">
+                                                        <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                        <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% end %}
+                                        {% end %}
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="col-sm-3">
+                                    <div class="card card-block border-dashed">
+                                        <div class="el-badge el-badge-info">LOGO</div>
+                                        <div class="row">
+                                            {% if groups.logo then %}
+                                            {% for _, item in pairs(groups.logo.items) do %}
+                                            <div class="col-sm-12 module-list-item-box">
+                                                <div class="card card-block no-border no-padding-lr">
+                                                    <div class="btn btn-info">
+                                                        {{item.moduleName}}
+                                                        <div class="btn-icon-bars">
+                                                            <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                            <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% end %}
+                                            {% end %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card card-block border-dashed">
+                                        <div class="el-badge el-badge-info">导航区</div>
+                                        <div class="row">
+                                            {% if groups.navbar then %}
+                                            {% for _, item in pairs(groups.navbar.items) do %}
+                                            <div class="col-sm-12 module-list-item-box">
+                                                <div class="card card-block no-border no-padding-lr">
+                                                    <div class="btn btn-info">
+                                                        {{item.moduleName}}
+                                                        <div class="btn-icon-bars">
+                                                            <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                            <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% end %}
+                                            {% end %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card card-block border-dashed">
+                                        <div class="el-badge el-badge-info">导航边栏</div>
+                                        <div class="row">
+                                            {% if groups.searchbar then %}
+                                            {% for _, item in pairs(groups.searchbar.items) do %}
+                                            <div class="col-sm-12 module-list-item-box">
+                                                <div class="card card-block no-border no-padding-lr">
+                                                    <div class="btn btn-info">
+                                                        {{item.moduleName}}
+                                                        <div class="btn-icon-bars">
+                                                            <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                            <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% end %}
+                                            {% end %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    主体左侧　<a href="javascript:;"  class="card-top-right-btn loadpage" data-url="/admin/module/select?position=main" title="选择模块" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                                </div>
+                                <div class="card-block">
+                                    <div class="col-sm-12">
+                                        <div class="card card-block border-dashed">
+                                            <div class="el-badge el-badge-info">内容前置区</div>
+                                            <div class="row">
+                                                {% if groups.beforeContent then %}
+                                                {% for _, item in pairs(groups.beforeContent.items) do %}
+                                                <div class="col-sm-12 module-list-item-box">
+                                                    <div class="card card-block no-border no-padding-lr">
+                                                        <div class="btn btn-info">
+                                                            {{item.moduleName}}
+                                                            <div class="btn-icon-bars">
+                                                                <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                                <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% end %}
+                                                {% end %}
+                                            </div>
+                                        </div>
+                                        <div class="card card-block border-dashed">
+                                            <div class="el-badge el-badge-danger">主体内容区</div>
+                                            <div class="row">
+
+                                            </div>
+                                        </div>
+                                        <div class="card card-block border-dashed">
+                                            <div class="el-badge el-badge-info">内容后置区</div>
+                                            <div class="row">
+                                                {% if groups.afterContent then %}
+                                                {% for _, item in pairs(groups.afterContent.items) do %}
+                                                <div class="col-sm-12 module-list-item-box">
+                                                    <div class="card card-block no-border no-padding-lr">
+                                                        <div class="btn btn-info">
+                                                            {{item.moduleName}}
+                                                            <div class="btn-icon-bars">
+                                                                <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                                <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% end %}
+                                                {% end %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    主体右侧　<a href="javascript:;" class="card-top-right-btn loadpage" data-url="/admin/module/select?position=aside" title="选择模块" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                                </div>
+                                <div class="card-block">
+                                    <div class="col-sm-12">
+                                        <div class="card card-block border-dashed">
+                                            <div class="el-badge el-badge-info">右边栏</div>
+                                            <div class="row">
+                                                {% if groups.sidebar then %}
+                                                {% for _, item in pairs(groups.sidebar.items) do %}
+                                                <div class="col-sm-12 module-list-item-box">
+                                                    <div class="card card-block no-border no-padding-lr">
+                                                        <div class="btn btn-info">
+                                                            {{item.moduleName}}
+                                                            <div class="btn-icon-bars">
+                                                                <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                                <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% end %}
+                                                {% end %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            页脚　<a href="javascript:;" class="card-top-right-btn loadpage" data-url="/admin/module/select?position=footer" title="选择模块" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                        </div>
+                        <div class="card-block">
+                            <div class="col-sm-12">
+                                <div class="card card-block border-dashed">
+                                    <div class="el-badge el-badge-info">页脚区</div>
+                                    <div class="row">
+                                        {% if groups.footerbar then %}
+                                        {% for _, item in pairs(groups.footerbar.items) do %}
+                                        <div class="col-sm-12 module-list-item-box">
+                                            <div class="card card-block no-border no-padding-lr">
+                                                <div class="btn btn-info">
+                                                    {{item.moduleName}}
+                                                    <div class="btn-icon-bars">
+                                                        <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                        <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% end %}
+                                        {% end %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            自由区　<a href="javascript:;" class="card-top-right-btn loadpage" data-url="/admin/module/select?position=custom" title="选择模块" data-width="900" data-height="600"><i class="iconfont icon-plus"></i></a>
+                        </div>
+                        <div class="card-block">
+                            <div class="col-sm-12">
+                                <div class="card card-block border-dashed">
+                                    <div class="el-badge el-badge-info">自由内容区</div>
+                                    <div class="row">
+                                        {% if groups.custombar then %}
+                                        {% for _, item in pairs(groups.custombar.items) do %}
+                                        <div class="col-sm-12">
+                                            <div class="card card-block no-border no-padding-lr">
+                                                <div class="btn btn-info module-list-item-box">
+                                                    {{item.moduleName}}
+                                                    <div class="btn-icon-bars">
+                                                        <a href="javascript:;" class="loadpage" data-url="/admin/module/edit?id={{item.moduleId}}" title="编辑模块" data-width="900" data-height="600"><i class="iconfont icon-edit"></i></a>
+                                                        <a href="javascript:;"  data-url="/admin/module/cancel" data-id="{{item.moduleId}}" class="btn-del-row"><i class="iconfont icon-delete"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% end %}
+                                        {% end %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{-script-}
+<script type="text/javascript">
+    require(['fn', 'pages/module/index'], function(fn, page){
+        fn.refreshPage();
+        fn.imgLoadError();
+        fn.loadPage();
+        page.init();
+    })
+</script>
+{-script-}

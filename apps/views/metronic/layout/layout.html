@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {(metronic/partials/meta.html)}
+    {% if blocks.css then %}
+    {*blocks.css*}
+    {% end %}
+</head>
+
+<body>
+
+{% if blocks.header then %}
+{*blocks.header*}
+{% else %}
+{(metronic/partials/header.html)}
+{% end %}
+
+{*view*}
+
+{% if blocks.footer then %}
+{*blocks.footer*}
+{% else %}
+{(metronic/partials/footer.html)}
+{% end %}
+
+{% if blocks.widgets then %}
+{*blocks.widgets*}
+{% end %}
+
+{% if blocks.commonjs then %}
+{*blocks.commonjs*}
+{% else %}
+{(metronic/partials/script.html)}
+{% end %}
+
+{% if blocks.script then %}
+{*blocks.script*}
+{% end %}
+</body>
+</html>

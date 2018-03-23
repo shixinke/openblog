@@ -1,0 +1,117 @@
+{-css-}
+<link type="text/css" rel="stylesheet" href="/static/js/libs/editor.md/css/editormd.css">
+<link rel="stylesheet" href="/static/js/libs/editor.md/lib/codemirror/codemirror.min.css" />
+{-css-}
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-topic"></i> {{title}} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="/admin/topic/index" class="btn btn-success"><i class="iconfont icon-back"></i> 专题列表</a></li>
+                <li><a href="javascript:;" class="btn btn-success refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+        <div class="page-content">
+            <form id="posts-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+                <div class="col-lg-9">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label class="control-label">专题名称</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <input type="text" class="form-control" id="topicName" name="topicName" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label class="control-label">内容</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <div id="topic-content" name="content"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ftitle" class="control-label col-lg-1 col-xs-12 col-sm-2 text-left" style="text-align:left;">标题:</label>
+                        <div class="col-lg-8 col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" id="ftitle" name="title" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="keywords" class="control-label col-lg-1 col-xs-12 col-sm-2 text-left" style="text-align:left;">关键词:</label>
+                        <div class="col-lg-8 col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" id="keywords" name="keywords" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label col-lg-1 col-xs-12 col-sm-2 text-left" style="text-align:left;">描述:</label>
+                        <div class="col-lg-8 col-xs-12 col-sm-8">
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="topicAlias" class="control-label col-xs-12 col-sm-4">别名:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <input type="text" class="form-control" id="topicAlias" name="topicAlias" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label  class="control-label col-xs-12 col-sm-4">是否显示:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="switch-box">
+                                <label class="switch-btn">
+                                    <input class="checked-switch" type="checkbox" name="display"
+                                           value="1" checked ="checked"/>
+                                    <span class="text-switch" data-yes="显示" data-no="隐藏"></span>
+                                    <span class="toggle-btn"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label  class="control-label col-xs-12 col-sm-4">时间:</label>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="iconfont icon-date"></i></span>
+                                <input type="text" name="createTime" class="form-control date-picker" id="create-time">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12 col-sm-8">
+                            <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+    {-commonjs-}
+    <script type="text/javascript" src="/static/js/libs/requirejs/2.3.2/require.min.js"></script>
+    {-commonjs-}
+    {-script-}
+    <script type="text/javascript" src="/static/js/pages/topic/add.js"></script>
+    {-script-}

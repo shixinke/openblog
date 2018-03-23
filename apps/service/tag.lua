@@ -2,11 +2,12 @@ local _M = {_VERSION = '0.01' }
 local tag = require 'models.tag':new()
 
 function _M.search(params)
-    if params.name then
-        tag:where("tag_name", "LIKE", params.name)
+    local resp = {total = 0, list = {}}
+    if params.tagName then
+        tag:where("tag_name", "LIKE", params.tagName)
     end
-    if params.alias then
-        tag:where("tag_alias", "LIKE", params.alias)
+    if params.tagAlias then
+        tag:where("tag_alias", "LIKE", params.tagAlias)
     end
     if params.status then
         tag:where({status = params.status})
@@ -14,12 +15,42 @@ function _M.search(params)
     if params.display then
         tag:where({display = params.display})
     end
-    return tag:findAll()
+    resp.total = tag:count()
+    resp.count = count
+    tag.remains = true
+    resp.list = tag:order('weight', 'DESC'):findAll()
+    if resp.list then
+        resp.list = func.array_camel_style(resp.list)
+    end
+    return resp
 
 end
 
 function _M.lists()
 
+end
+
+function _M.taglist(limit)
+    tag:where({status = 1, display = 1})
+    if limit then
+        tag:limit(limit)
+    end
+    local datalist =  tag:order('weight', 'DESC'):findAll()
+    if datalist then
+        for i, v in pairs(datalist) do
+            datalist[i].url = '/tags-'..v.tag_alias..'.html'
+        end
+        datalist = func.array_camel_style(datalist)
+    end
+    return datalist
+end
+
+function _M.get_tags(tag_ids)
+    return tag:where('tag_id', 'IN', tag_ids):findAll()
+end
+
+function _M.get_by_alias(alias)
+    return tag:where({tag_alias = alias}):find()
 end
 
 function _M.query(params)
@@ -37,6 +68,10 @@ function _M.add(data)
     else
         return nil, err
     end
+end
+
+function _M.detail(id)
+    return _M.detail(id)
 end
 
 function _M.update(data)

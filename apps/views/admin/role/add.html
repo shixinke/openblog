@@ -1,0 +1,90 @@
+    {-css-}
+    <link type="text/css" rel="stylesheet" href="/static/js/libs/jquery.jstree/3.3.4/themes/default/style.min.css">
+    {-css-}
+    <!-- RIBBON -->
+    <div id="ribbon" class="page-header">
+        <div class="breadcrumb pull-left">
+            <h3><i class="iconfont icon-role1"></i> {{title}} </a></h3>
+        </div>
+        <div class="breadcrumb pull-right">
+            <ul class="toolbar">
+                <li><a href="javascript:;" class="refresh-btn"><i class="iconfont icon-refresh"></i> 刷新</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- END RIBBON -->
+    <div class="content">
+        <div class="page-content">
+            <form id="role-form" data-iframe="1" class="form-horizontal" method="POST" action="" >
+
+                <div class="form-group">
+                    <label for="ftitle" class="control-label col-xs-12 col-sm-2">角色名称:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" class="form-control required" id="ftitle" name="roleName" value="" title="请填写角色名称">
+                    </div>
+                    <div class="help-block" for="ftitle"></div>
+                </div>
+                <div class="form-group">
+                    <label for="desc" class="control-label col-xs-12 col-sm-2">角色备注:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <textarea class="form-control" id="desc" name="remark"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="control-label col-xs-12 col-sm-2">权限:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <label class="check-control-label"><input type="checkbox" value="" class="checkbox checkbox-inline" id="check-all"> <i>✓</i> 全选</label>
+                        <label class="check-control-label"><input type="checkbox" value="" class="checkbox checkbox-inline" id="expand-all"> <i>✓</i> 全部展开</label>
+                        <label><a href="javascript:;" title="重新获取" id="refresh-cache"><i class="iconfont icon-refresh"></i></a></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="control-label col-xs-12 col-sm-2">&nbsp;</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="hidden" name="rules" id="hidden-value">
+                        <div id="rule-tree" data-url="/admin/node/rules"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="control-label  col-xs-12 col-sm-2">状态:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="switch-box">
+                            <label class="switch-btn">
+                                <input class="checked-switch" type="checkbox" name="status"
+                                       value="1" checked ="checked"/>
+                                <span class="text-switch" data-yes="启用" data-no="禁用"></span>
+                                <span class="toggle-btn"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="weight" class="control-label col-xs-12 col-sm-2">排序:</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" class="form-control required" id="weight" name="weight" value="" title="请填写排序值">
+                    </div>
+                    <div class="help-block" for="weight"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-12 col-sm-8">
+                        <button type="submit" class="btn btn-success btn-embossed">确定</button>
+                        <button type="reset" class="btn btn-default btn-embossed">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {-script-}
+    <script type="text/javascript">
+        require(['jquery', 'fn', 'pages/role/add'], function($, fn, page){
+            fn.refreshPage();
+            page.init();
+            fn.validateForm('role-form');
+        })
+    </script>
+    {-script-}

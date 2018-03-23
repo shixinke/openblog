@@ -9,6 +9,7 @@ local base_model = require 'system.model'
 local regex = ngx.re
 local strlen = string.len
 local substr = string.sub
+local str_replace = string.gsub
 local io_open = io.open
 local date = os.date
 local time = os.time
@@ -21,6 +22,7 @@ local ngx_null = ngx.null
 local str_gmatch = string.gmatch
 local strtoupper = string.upper
 local json_decode = cjson.decode
+local dict = ngx.shared.blog_dict
 
 
 function _M.trim(str)
@@ -63,6 +65,25 @@ function _M.merge(tab1, tab2)
     return obj
 end
 
+function _M.start_trim(str, contains)
+    local sublen = strlen(contains)
+    local len = strlen(str)
+    if substr(str, 1, sublen) == contains then
+        return substr(str, sublen, len)
+    end
+    return str
+end
+
+function _M.end_trim(str, contains)
+    local len = strlen(str)
+    local sublen = strlen(contains)
+    local starts = len - sublen
+    if substr(str, -sublen, len) == contains then
+        return substr(str, 1, starts)
+    end
+    return str
+end
+
 function _M.in_array(ele, tab)
     if ele == nil or type(ele) == 'table' or type(tab) ~= 'table' then
         return nil
@@ -79,6 +100,9 @@ end
 
 function _M.clear_table(tab)
     local obj = {}
+    if type(tab) ~= 'table' then
+        return obj
+    end
     for k, v in pairs(tab) do
         if v then
             obj[k] = v
@@ -184,7 +208,8 @@ function _M.implode(delimiter, tab)
     return str
 end
 
-function _M.show_404(msg, req)
+function _M.show_404(msg)
+    msg = msg or ''
     if debug then
         local html = '<meta charset="utf-8"><div style="position: relative;padding: 15px 15px 15px 55px;margin-bottom: 20px;font-size: 14px;background-color: #fafafa;border: solid 1px #d8d8d8;border-radius: 3px;">'..msg..'</div>'
         ngx.say(html)
@@ -305,11 +330,17 @@ end
 
 function _M.debug_log(message)
     if debug then
-        log(LOG_DEBUG, message)
+        if type(message) == 'table' then
+            message = json_decode(message)
+        end
+        log(LOG_ERR, message)
     end
 end
 
 function _M.error_log(message)
+    if type(message) == 'table' then
+        message = json_decode(message)
+    end
     log(LOG_ERR, message)
 end
 
@@ -378,6 +409,14 @@ function _M.get_client_ip()
     return ip
 end
 
+function _M.is_ajax()
+    local header = ngx.req.get_headers()['X-Requested-With']
+    if header and header == 'XMLHttpRequest' then
+        return true
+    end
+    return false
+end
+
 function _M.read_json(file)
     local fd, err = io_open(file)
     if not fd then
@@ -391,5 +430,74 @@ function _M.read_json(file)
     return tab
 end
 
+function _M.percent(val, total, dot)
+    local rate = (val / total) * 100
+    local num = dot and tonumber(dot) or 2
+    return tonumber(string.format("%."..num.."f", rate))
+end
+
+function _M.page_util(page, pagesize)
+    local pagesize = pagesize and tonumber(pagesize)  or 0
+    local tab = {
+        offset = 0,
+        limit = pagesize
+    }
+    if page and page > 0 then
+        tab.offset = (page - 1) * pagesize
+    end
+    return tab
+end
+
+function _M.dict_set(k, v)
+    if not dict then
+        return false, 'dict not exists'
+    end
+    if type(v) == 'table' then
+        v = cjson.encode(v)
+    end
+    return dict:set(k, v)
+end
+
+function _M.dict_get(k, tab)
+    if not dict then
+        return false, 'dict not exists'
+    end
+    local val = dict:get(k)
+    if tab then
+        local ok, val = pcall(cjson.decode, val)
+        return val
+    end
+    return val
+end
+
+function _M.addslashes(html, slashes)
+    local slash = slashes and slashes or '"'
+    return str_replace(html, slash, '\\'..slash)
+end
+
+function _M.removeslashes(html, slashes)
+    local slash = slashes and slashes or '"'
+    return str_replace(html, '\\'..slash, slash)
+end
+
+function _M.var_dump(v)
+    local tab = {type = nil, value = nil }
+    tab.type = type(v)
+    tab.value = v
+    ngx.say(cjson.encode(tab))
+end
+
+function _M.array_column(arr, id)
+    if not id then
+        return arr
+    end
+    local tab = {}
+    for i, v in pairs(arr) do
+        if v[id] then
+            tab[tostring(v[id])] = v
+        end
+    end
+    return tab
+end
 
 return _M

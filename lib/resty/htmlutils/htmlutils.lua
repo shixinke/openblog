@@ -2,6 +2,7 @@ local _M = {_VERSION = '0.01' }
 local strbyte = string.byte
 local stringlen = string.len
 local stringsub = string.sub
+local strgsub = string.gsub
 local regex = ngx.re
 local tab_remove = table.remove
 local self_close_tags = {
@@ -145,6 +146,8 @@ end
 function _M.truncate(self, html, len)
     return self:sub_html(html, len)
 end
+
+
 
 
 return _M
