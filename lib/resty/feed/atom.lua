@@ -2,7 +2,7 @@
 -- @description : FEED library for openresty
 -- @author : shixinke <ishixinke@qq.com>
 -- @website : www.shixinke.com
--- @date : 2018-02-02
+-- @date : 2018-03-23
 --]]
 local _M = {
     _version = '0.01'
@@ -13,15 +13,6 @@ local date = os.date
 local time = ngx.time
 local ngx_var = ngx.var
 local io_open = io.open
-local io_write = io.write
-
-local substr = string.sub
-local str_gmatch = string.gmatch
-local strlen = string.len
-
-local internal_request = ngx.location.capture
-local http_ok = ngx.HTTP_OK
-
 
 local mt = {
     __index = _M
@@ -135,8 +126,6 @@ function _M.xml(self)
     xml = xml   ..'</feed>'
     return xml
 end
-
-
 
 function _M.create(self)
     local file = self.options.path..'/'..self.options.filename
